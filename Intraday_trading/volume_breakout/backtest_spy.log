@@ -1,0 +1,103 @@
+
+Donnees : 756 jours (2023-09-06 -> 2026-09-21), 8 jours incomplets ecartes
+In-sample : 2023-09-06 -> 2025-10-21 | Hors-echantillon : 2025-10-22 -> 2026-09-21
+
+=== 1. Grille (48 configurations testees) ===
+ or_min     stop  target_R  vol_min  n_IS  exp$_IS  PF_IS  sharpe_IS  sharpe_OOS  exp$_OOS
+     15 opposite       1.5      NaN   529    19.50   1.23       1.30       -0.65    -11.25
+     15 opposite       2.0      NaN   529    16.50   1.18       1.01       -0.78    -14.00
+     15      mid       1.5      NaN   529     9.58   1.16       0.98       -1.10    -13.18
+     15 opposite       NaN      1.2   528    17.17   1.20       0.90       -0.83    -16.56
+     15      mid       2.0      NaN   529     9.41   1.15       0.84       -0.50     -6.65
+     15 opposite       2.0      1.2   528    11.73   1.14       0.73       -1.32    -23.40
+     15 opposite       1.5      1.2   528     9.32   1.11       0.63       -1.69    -28.45
+     15 opposite       NaN      NaN   529    10.35   1.11       0.62       -0.76    -14.51
+     15 opposite       NaN      1.5   526    11.17   1.14       0.61       -0.03     -0.52
+     30 opposite       NaN      1.2   522    11.04   1.12       0.57       -0.37     -7.34
+     15 opposite       2.0      1.5   526     7.88   1.10       0.51       -0.19     -3.20
+     15 opposite       1.5      1.5   526     7.13   1.09       0.49       -0.63    -10.13
+     15      mid       NaN      NaN   529     5.66   1.08       0.40       -0.48     -7.97
+     30 opposite       2.0      1.2   522     6.14   1.07       0.37       -0.40     -7.45
+     30 opposite       NaN      1.5   515     5.47   1.06       0.29        0.16      2.99
+     30 opposite       1.5      1.2   522     4.44   1.05       0.29       -0.64    -11.40
+     30 opposite       1.5      2.0   481     4.38   1.06       0.29       -0.05     -0.71
+     15 opposite       1.5      2.0   502     3.62   1.05       0.25       -0.84    -11.77
+     15 opposite       NaN      2.0   502     4.00   1.06       0.23       -0.60     -9.28
+     30 opposite       NaN      2.0   481     3.95   1.05       0.21       -0.02     -0.31
+     30 opposite       2.0      2.0   481     2.18   1.03       0.14        0.09      1.36
+     15 opposite       2.0      2.0   502     2.10   1.03       0.13       -0.47     -7.00
+     30 opposite       2.0      1.5   515     1.85   1.02       0.11        0.35      6.12
+     30 opposite       2.0      NaN   528     1.61   1.02       0.10       -0.15     -3.07
+     30      mid       1.5      1.2   522     1.17   1.02       0.09       -0.22     -3.30
+     30 opposite       NaN      NaN   528     1.50   1.01       0.09       -0.37     -7.26
+     30 opposite       1.5      1.5   515     1.30   1.02       0.09        0.06      0.93
+     30 opposite       1.5      NaN   528     0.58   1.01       0.04       -0.37     -7.03
+     15      mid       NaN      1.2   528    -1.01   0.99      -0.07       -1.06    -19.29
+     15      mid       NaN      1.5   526    -1.15   0.99      -0.08       -0.38     -6.55
+     30      mid       NaN      1.2   522    -1.56   0.98      -0.10       -0.12     -2.22
+     15      mid       1.5      1.2   528    -1.37   0.98      -0.11       -1.95    -27.59
+     15      mid       1.5      1.5   526    -1.52   0.98      -0.12       -0.40     -5.75
+     15      mid       2.0      1.5   526    -2.58   0.97      -0.20       -0.37     -5.65
+     30      mid       NaN      NaN   528    -2.99   0.96      -0.21        0.44      7.57
+     30      mid       1.5      1.5   515    -3.93   0.95      -0.31       -0.20     -2.98
+     30      mid       2.0      2.0   481    -5.03   0.93      -0.36       -0.19     -2.74
+     30      mid       NaN      1.5   515    -5.40   0.93      -0.36       -0.15     -2.59
+     15      mid       1.5      2.0   502    -5.03   0.93      -0.40       -0.96    -12.73
+     30      mid       2.0      NaN   528    -5.05   0.94      -0.42        0.32      4.83
+     30      mid       1.5      2.0   481    -5.90   0.91      -0.46       -0.40     -5.54
+     30      mid       1.5      NaN   528    -5.24   0.93      -0.48        0.49      7.03
+     15      mid       2.0      1.2   528    -6.78   0.92      -0.52       -1.58    -23.96
+     15      mid       2.0      2.0   502    -6.93   0.90      -0.53       -0.73    -10.09
+     30      mid       2.0      1.2   522    -7.07   0.91      -0.54       -0.34     -5.39
+     30      mid       2.0      1.5   515    -7.71   0.90      -0.59       -0.17     -2.57
+     30      mid       NaN      2.0   481    -8.30   0.88      -0.60       -0.56     -8.58
+     15      mid       NaN      2.0   502    -8.40   0.88      -0.62       -1.30    -18.85
+Le meilleur Sharpe in-sample sur 48 essais est biaise a la hausse : regarde surtout si le classement tient hors-echantillon.
+
+=== 2. Meilleure config in-sample : Params(or_minutes=15, stop_mode='opposite', target_r=1.5, slippage_ticks=1.0, limit_through_ticks=1.0, volume_lookback=12, volume_ratio_min=None) ===
+IS  : n_trades=529  win_rate=0.46  exp_$=19.50  exp_R=0.08  profit_factor=1.23  total_$=10318.00  sharpe=1.30  t_stat=1.89  max_dd_$=-3765.00
+OOS : n_trades=226  win_rate=0.44  exp_$=-11.25  exp_R=0.02  profit_factor=0.91  total_$=-2543.00  sharpe=-0.65  t_stat=-0.62  max_dd_$=-5183.00
+
+=== 2bis. Meme config sans filtre volume (ORB de base) : Params(or_minutes=15, stop_mode='opposite', target_r=1.5, slippage_ticks=1.0, limit_through_ticks=1.0, volume_lookback=12, volume_ratio_min=None) ===
+IS  : n_trades=529  win_rate=0.46  exp_$=19.50  exp_R=0.08  profit_factor=1.23  total_$=10318.00  sharpe=1.30  t_stat=1.89  max_dd_$=-3765.00
+OOS : n_trades=226  win_rate=0.44  exp_$=-11.25  exp_R=0.02  profit_factor=0.91  total_$=-2543.00  sharpe=-0.65  t_stat=-0.62  max_dd_$=-5183.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=501  win_rate=0.41  exp_$=-2.62  exp_R=-0.00  profit_factor=0.97  total_$=-1314.75  sharpe=-0.16  t_stat=-0.23  max_dd_$=-6377.00
+  test a partir de 2024-09-06 : OR=15, stop=mid, target=None, vol_min=1.5
+  test a partir de 2024-12-06 : OR=30, stop=mid, target=2.0, vol_min=2.0
+  test a partir de 2025-03-06 : OR=15, stop=opposite, target=1.5, vol_min=None
+  test a partir de 2025-06-06 : OR=15, stop=opposite, target=1.5, vol_min=None
+  test a partir de 2025-09-06 : OR=15, stop=opposite, target=1.5, vol_min=None
+  test a partir de 2025-12-06 : OR=15, stop=mid, target=1.5, vol_min=None
+  test a partir de 2026-03-06 : OR=15, stop=mid, target=2.0, vol_min=None
+  test a partir de 2026-06-06 : OR=30, stop=mid, target=None, vol_min=None
+  test a partir de 2026-09-06 : OR=30, stop=mid, target=1.5, vol_min=None
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=755  win_rate=0.46  exp_$=13.01  exp_R=0.08  profit_factor=1.14  total_$=9820.00  sharpe=0.83  t_stat=1.44  max_dd_$=-5046.50
+  slippage 1 tick(s)/execution : n_trades=755  win_rate=0.46  exp_$=10.30  exp_R=0.07  profit_factor=1.11  total_$=7775.00  sharpe=0.66  t_stat=1.14  max_dd_$=-5183.00
+  slippage 2 tick(s)/execution : n_trades=755  win_rate=0.45  exp_$=8.72  exp_R=0.05  profit_factor=1.09  total_$=6586.50  sharpe=0.55  t_stat=0.96  max_dd_$=-5396.00
+  slippage 3 tick(s)/execution : n_trades=755  win_rate=0.45  exp_$=7.86  exp_R=0.05  profit_factor=1.08  total_$=5934.00  sharpe=0.50  t_stat=0.86  max_dd_$=-5481.50
+
+=== 5. Direction au hasard (meme timing, meme stop), hors-echantillon ===
+  Breakout reel : -2543$ | pile ou face : -1664$ +/- 4046$ | p-value = 0.585
+
+=== 6. Decompositions (meilleure config, toute la periode) ===
+         n  moyenne   total
+side                       
+short  373     15.1  5631.5
+long   382      5.6  2143.5
+          n  moyenne
+reason              
+stop    360   -194.6
+target  250    274.3
+time    145     63.8
+        n  moyenne   total
+date                      
+2023   80     24.5  1958.5
+2024  249      3.3   810.5
+2025  247     23.4  5788.5
+2026  179     -4.4  -782.5
+
+Trades ecrits dans trades_SPY_best.csv

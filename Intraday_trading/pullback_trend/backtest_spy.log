@@ -1,0 +1,107 @@
+
+Donnees : 756 jours (2023-09-06 -> 2026-09-21), 8 jours incomplets ecartes
+In-sample : 2023-09-06 -> 2025-10-21 | Hors-echantillon : 2025-10-22 -> 2026-09-21
+
+=== 1. Grille (54 configurations testees) ===
+ ema_slow  min_trend  stop_atr  target_atr  n_IS  exp$_IS  PF_IS  sharpe_IS  sharpe_OOS  exp$_OOS
+       34          3       1.5         1.5  1392     1.31   1.03       0.32       -1.94    -10.01
+       34          3       1.5         2.0  1322     0.33   1.01       0.06       -1.75    -10.24
+       34          3       1.0         1.5  1411    -0.16   1.00      -0.04       -1.90     -9.42
+       34          2       1.5         1.5  1415    -0.28   0.99      -0.07       -2.01    -10.53
+       34          3       0.5         1.5  1438    -0.28   0.99      -0.07       -2.26    -11.02
+       21          2       1.5         1.5  1416    -0.90   0.98      -0.21       -1.41     -7.39
+       34          2       1.5         2.0  1349    -1.15   0.98      -0.22       -1.75    -10.42
+       34          3       1.0         2.0  1350    -1.13   0.98      -0.22       -1.59     -9.00
+       21          3       1.5         1.5  1395    -1.03   0.98      -0.24       -1.82     -9.37
+       34          3       1.5         3.0  1206    -1.47   0.97      -0.24       -1.91    -13.15
+       21          5       1.5         2.0  1278    -1.30   0.97      -0.25       -1.36     -7.87
+       34          2       1.0         1.5  1429    -1.32   0.97      -0.31       -1.89     -9.62
+       34          2       0.5         1.5  1452    -1.28   0.97      -0.32       -1.98     -9.78
+       21          3       1.5         2.0  1342    -1.78   0.96      -0.34       -1.50     -8.75
+       21          2       1.5         2.0  1365    -1.77   0.96      -0.34       -1.06     -6.28
+       21          5       1.5         1.5  1338    -1.47   0.97      -0.34       -1.76     -9.07
+       34          3       0.5         2.0  1382    -1.62   0.97      -0.34       -1.87    -10.35
+       21          2       1.0         1.5  1423    -1.74   0.96      -0.41       -1.35     -6.95
+       34          2       0.5         2.0  1399    -2.10   0.96      -0.43       -1.51     -8.48
+       34          2       1.0         2.0  1370    -2.29   0.96      -0.44       -1.52     -8.78
+       34          5       1.5         1.5  1338    -1.95   0.96      -0.44       -2.03    -10.48
+       21          3       1.0         1.5  1403    -1.97   0.96      -0.46       -1.74     -8.64
+       34          5       1.5         2.0  1262    -2.51   0.95      -0.47       -1.83    -10.52
+       21          2       0.5         1.5  1446    -1.94   0.95      -0.48       -1.56     -7.70
+       34          5       1.5         3.0  1143    -3.02   0.95      -0.48       -2.18    -14.92
+       34          2       1.5         3.0  1235    -3.00   0.95      -0.48       -1.93    -13.43
+       21          5       1.0         2.0  1295    -2.46   0.95      -0.49       -1.27     -7.18
+       21          2       1.0         2.0  1377    -2.52   0.95      -0.49       -0.89     -5.14
+       21          3       1.0         2.0  1355    -2.57   0.95      -0.50       -1.34     -7.55
+       21          3       0.5         1.5  1427    -2.20   0.95      -0.54       -1.97     -9.49
+       21          5       1.0         1.5  1349    -2.40   0.95      -0.56       -1.69     -8.50
+       21          5       1.5         3.0  1182    -3.35   0.94      -0.57       -1.56    -10.42
+       21          3       1.5         3.0  1253    -3.39   0.94      -0.58       -1.70    -11.33
+       21          2       0.5         2.0  1403    -3.09   0.93      -0.64       -1.00     -5.56
+       21          3       0.5         2.0  1382    -3.12   0.93      -0.65       -1.47     -8.00
+       21          2       1.5         3.0  1283    -3.82   0.93      -0.66       -1.29     -8.68
+       34          3       1.0         3.0  1240    -4.05   0.93      -0.68       -1.89    -12.59
+       34          5       0.5         2.0  1330    -3.44   0.93      -0.70       -1.76     -9.40
+       34          5       0.5         1.5  1393    -2.94   0.93      -0.74       -2.33    -11.10
+       34          5       0.5         3.0  1232    -4.29   0.92      -0.75       -2.20    -13.64
+       21          5       0.5         2.0  1329    -3.57   0.92      -0.76       -1.26     -6.86
+       34          5       1.0         2.0  1293    -3.96   0.92      -0.76       -1.62     -8.90
+       21          5       0.5         1.5  1380    -3.10   0.93      -0.78       -1.77     -8.43
+       34          3       0.5         3.0  1286    -4.41   0.92      -0.79       -2.06    -13.26
+       34          5       1.0         1.5  1360    -3.39   0.93      -0.80       -2.06    -10.13
+       34          2       1.0         3.0  1264    -5.27   0.91      -0.86       -1.81    -12.28
+       34          2       0.5         3.0  1301    -5.00   0.91      -0.87       -1.76    -11.42
+       34          5       1.0         3.0  1181    -5.33   0.91      -0.87       -2.13    -13.94
+       21          3       1.0         3.0  1269    -5.23   0.90      -0.91       -1.56    -10.14
+       21          5       1.0         3.0  1202    -5.24   0.90      -0.91       -1.58    -10.27
+       21          2       1.0         3.0  1298    -5.31   0.90      -0.93       -1.18     -7.70
+       21          5       0.5         3.0  1246    -5.47   0.89      -1.02       -1.38     -8.56
+       21          3       0.5         3.0  1305    -5.78   0.89      -1.07       -1.57     -9.81
+       21          2       0.5         3.0  1331    -5.85   0.89      -1.09       -1.23     -7.75
+Le meilleur Sharpe in-sample sur 54 essais est biaise a la hausse : regarde surtout si le classement tient hors-echantillon.
+
+=== 2. Meilleure config in-sample : Params(ema_fast=9, ema_slow=34, min_trend_bars=3, atr_period=14, atr_stop_mult=1.5, atr_target_mult=1.5, max_trades_per_day=3, slippage_ticks=1.0) ===
+IS  : n_trades=1392  win_rate=0.56  exp_$=1.31  exp_R=0.01  profit_factor=1.03  total_$=1827.99  sharpe=0.32  t_stat=0.46  max_dd_$=-3275.23
+OOS : n_trades=595  win_rate=0.50  exp_$=-10.01  exp_R=-0.04  profit_factor=0.85  total_$=-5953.93  sharpe=-1.94  t_stat=-1.84  max_dd_$=-6315.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1282  win_rate=0.46  exp_$=-10.10  exp_R=-0.03  profit_factor=0.84  total_$=-12947.39  sharpe=-1.74  t_stat=-2.47  max_dd_$=-13165.11
+  test a partir de 2024-09-06 : ema_slow=21, min_trend=5, stop_atr=1.5, target_atr=3.0
+  test a partir de 2024-12-06 : ema_slow=21, min_trend=2, stop_atr=0.5, target_atr=1.5
+  test a partir de 2025-03-06 : ema_slow=21, min_trend=2, stop_atr=1.5, target_atr=3.0
+  test a partir de 2025-06-06 : ema_slow=34, min_trend=3, stop_atr=1.5, target_atr=1.5
+  test a partir de 2025-09-06 : ema_slow=34, min_trend=3, stop_atr=1.5, target_atr=1.5
+  test a partir de 2025-12-06 : ema_slow=34, min_trend=3, stop_atr=1.5, target_atr=2.0
+  test a partir de 2026-03-06 : ema_slow=34, min_trend=3, stop_atr=1.5, target_atr=1.5
+  test a partir de 2026-06-06 : ema_slow=21, min_trend=2, stop_atr=1.5, target_atr=1.5
+  test a partir de 2026-09-06 : ema_slow=21, min_trend=2, stop_atr=1.0, target_atr=2.0
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=1988  win_rate=0.54  exp_$=-0.70  exp_R=0.00  profit_factor=0.99  total_$=-1393.33  sharpe=-0.16  t_stat=-0.27  max_dd_$=-5723.48
+  slippage 1 tick(s)/execution : n_trades=1987  win_rate=0.54  exp_$=-2.08  exp_R=-0.01  profit_factor=0.96  total_$=-4125.94  sharpe=-0.47  t_stat=-0.81  max_dd_$=-6793.38
+  slippage 2 tick(s)/execution : n_trades=1980  win_rate=0.53  exp_$=-3.50  exp_R=-0.02  profit_factor=0.93  total_$=-6927.65  sharpe=-0.78  t_stat=-1.34  max_dd_$=-7709.08
+  slippage 3 tick(s)/execution : n_trades=1975  win_rate=0.53  exp_$=-4.94  exp_R=-0.03  profit_factor=0.91  total_$=-9761.97  sharpe=-1.08  t_stat=-1.87  max_dd_$=-10511.39
+
+=== 5. Direction au hasard (meme timing, meme stop), hors-echantillon ===
+  Pullback reel : -5954$ | pile ou face : -2873$ +/- 1980$ | p-value = 0.957
+
+=== 6. Decompositions (meilleure config, toute la periode) ===
+          n  moyenne   total
+side                        
+short   913      3.7  3345.1
+long   1074     -7.0 -7471.1
+                n  moyenne
+reason                    
+stop          337   -138.3
+target       1021     94.2
+time          138    -21.2
+trend_break   491   -103.4
+        n  moyenne   total
+date                      
+2023  214     -0.8  -173.1
+2024  656     -0.3  -170.9
+2025  652      1.4   908.7
+2026  465    -10.1 -4690.6
+
+Trades ecrits dans trades_SPY_best.csv
+Courbe ecrite dans equity_SPY_best.png

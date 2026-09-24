@@ -1,0 +1,15 @@
+2026-09-24 15:31:07,739 INFO === Passage quotidien overnight_drift (2026-09-24T09:31:07.739623-04:00) ===
+2026-09-24 15:31:08,078 INFO Position SPY deja a plat : sortie de ce matin confirmee (ou aucune position ouverte hier).
+2026-09-24 15:31:08,078 INFO [DRY-RUN] soumettrait BUY SPY x100 MOC (cloture du jour)
+2026-09-24 15:31:08,080 INFO [DRY-RUN] soumettrait SELL SPY x100 MOO (ouverture du lendemain)
+2026-09-24 15:31:08,081 INFO === Fin du passage ===
+2026-09-24 15:36:11,821 INFO === Passage quotidien overnight_drift (2026-09-24T09:36:11.821291-04:00) ===
+2026-09-24 15:36:12,144 INFO Position SPY deja a plat : sortie de ce matin confirmee (ou aucune position ouverte hier).
+2026-09-24 15:36:13,494 INFO Ordre BUY SPY x100 MOC soumis, statut=PendingSubmit
+2026-09-24 15:36:14,615 INFO Ordre SELL SPY x100 MOO (OPG) soumis, statut=PendingSubmit
+2026-09-24 15:36:14,620 INFO === Fin du passage ===
+2026-09-24 15:45:32,724 INFO === Passage quotidien overnight_drift (2026-09-24T09:45:32.724957-04:00) ===
+2026-09-24 15:45:33,042 INFO Position SPY deja a plat : sortie de ce matin confirmee (ou aucune position ouverte hier).
+2026-09-24 15:45:34,155 INFO Ordre BUY SPY x100 MOC soumis, statut=Inactive
+2026-09-24 15:45:35,294 INFO Ordre SELL SPY x100 MOO (OPG) soumis, statut=Inactive
+2026-09-24 15:45:35,296 INFO === Fin du passage ===

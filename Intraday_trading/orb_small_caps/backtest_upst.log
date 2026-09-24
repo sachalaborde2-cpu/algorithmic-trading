@@ -1,0 +1,76 @@
+
+Donnees : 758 jours (2023-09-06 -> 2026-09-23), 7 jours incomplets ecartes
+In-sample : 2023-09-06 -> 2025-10-22 | Hors-echantillon : 2025-10-23 -> 2026-09-23
+
+=== 1. Grille (24 configurations testees) ===
+ or_min     stop  target_R  n_IS  exp$_IS  PF_IS  sharpe_IS  sharpe_OOS  exp$_OOS
+     15      mid       1.0   515    -0.44   0.99      -0.07       -1.99     -7.43
+     30      mid       1.0   499    -1.47   0.96      -0.23       -2.19     -8.64
+     15 opposite       2.0   515    -2.87   0.95      -0.30       -1.56     -8.33
+     30 opposite       2.0   499    -2.85   0.94      -0.31       -1.55     -8.17
+     15 opposite       1.5   515    -3.15   0.94      -0.34       -1.67     -8.56
+     30 opposite       1.5   499    -3.07   0.94      -0.35       -1.68     -8.71
+     30      mid       2.0   499    -2.85   0.94      -0.38       -1.51     -6.86
+     30 opposite       1.0   499    -3.59   0.93      -0.43       -1.84     -9.17
+     15 opposite       1.0   515    -3.86   0.93      -0.45       -1.94     -9.54
+     30 opposite       NaN   499    -4.42   0.91      -0.49       -1.40     -7.49
+     30      mid       NaN   499    -4.29   0.91      -0.53       -1.47     -6.92
+     30      mid       1.5   499    -3.86   0.91      -0.54       -1.70     -7.52
+     15 opposite       NaN   515    -5.41   0.90      -0.57       -1.25     -6.95
+     15      mid       2.0   515    -4.58   0.91      -0.60       -1.83     -8.14
+     60      mid       1.5   444    -5.41   0.88      -0.71       -1.86     -8.18
+     15      mid       NaN   515    -6.15   0.88      -0.74       -1.65     -7.88
+     60      mid       2.0   444    -6.45   0.86      -0.82       -1.57     -7.18
+     15      mid       1.5   515    -5.86   0.88      -0.83       -2.37     -9.86
+     60 opposite       1.5   444    -7.95   0.84      -0.88       -1.56     -8.16
+     60      mid       NaN   444    -6.98   0.85      -0.88       -1.41     -6.63
+     60      mid       1.0   444    -6.80   0.84      -0.98       -2.01     -8.29
+     60 opposite       1.0   444    -9.02   0.82      -1.03       -1.74     -8.87
+     60 opposite       NaN   444    -9.53   0.81      -1.06       -1.51     -7.92
+     60 opposite       2.0   444   -10.28   0.79      -1.15       -1.53     -8.01
+Le meilleur Sharpe in-sample sur 24 essais est biaise a la hausse : regarde surtout si le classement tient hors-echantillon.
+
+=== 2. Meilleure config in-sample : Params(or_minutes=15, stop_mode='mid', target_r=1.0, slippage_ticks=1.0, limit_through_ticks=1.0) ===
+IS  : n_trades=515  win_rate=0.51  exp_$=-0.44  exp_R=-0.01  profit_factor=0.99  total_$=-228.50  sharpe=-0.07  t_stat=-0.10  max_dd_$=-3607.00
+OOS : n_trades=218  win_rate=0.45  exp_$=-7.43  exp_R=-0.08  profit_factor=0.75  total_$=-1619.00  sharpe=-1.99  t_stat=-1.89  max_dd_$=-1866.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=462  win_rate=0.45  exp_$=-9.65  exp_R=-0.07  profit_factor=0.79  total_$=-4457.75  sharpe=-1.41  t_stat=-2.00  max_dd_$=-4780.75
+  test a partir de 2024-09-06 : OR=60, stop=mid, target=None
+  test a partir de 2024-12-06 : OR=60, stop=mid, target=1.5
+  test a partir de 2025-03-06 : OR=60, stop=mid, target=1.5
+  test a partir de 2025-06-06 : OR=15, stop=mid, target=1.0
+  test a partir de 2025-09-06 : OR=15, stop=mid, target=1.0
+  test a partir de 2025-12-06 : OR=15, stop=mid, target=1.0
+  test a partir de 2026-03-06 : OR=30, stop=mid, target=1.0
+  test a partir de 2026-06-06 : OR=30, stop=mid, target=2.0
+  test a partir de 2026-09-06 : OR=15, stop=opposite, target=1.5
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=733  win_rate=0.50  exp_$=-0.76  exp_R=-0.00  profit_factor=0.98  total_$=-554.50  sharpe=-0.14  t_stat=-0.24  max_dd_$=-3143.00
+  slippage 1 tick(s)/execution : n_trades=733  win_rate=0.49  exp_$=-2.52  exp_R=-0.03  profit_factor=0.93  total_$=-1847.50  sharpe=-0.45  t_stat=-0.78  max_dd_$=-3607.00
+  slippage 2 tick(s)/execution : n_trades=733  win_rate=0.48  exp_$=-4.48  exp_R=-0.05  profit_factor=0.88  total_$=-3287.00  sharpe=-0.79  t_stat=-1.37  max_dd_$=-4200.00
+  slippage 3 tick(s)/execution : n_trades=733  win_rate=0.48  exp_$=-5.74  exp_R=-0.07  profit_factor=0.86  total_$=-4208.00  sharpe=-1.00  t_stat=-1.73  max_dd_$=-4719.50
+
+=== 5. Direction au hasard (meme timing, meme stop), hors-echantillon ===
+  ORB reel : -1619$ | pile ou face : -796$ +/- 841$ | p-value = 0.844
+
+=== 6. Decompositions (meilleure config, toute la periode) ===
+         n  moyenne   total
+side                       
+short  384     -4.6 -1772.5
+long   349     -0.2   -75.0
+            n  moyenne
+reason                
+stop      315    -79.6
+stop_gap    1    -74.0
+target    299     77.2
+time      118      1.9
+        n  moyenne   total
+date                      
+2023   76     -3.8  -289.0
+2024  243     -8.9 -2173.0
+2025  239      8.1  1942.5
+2026  175     -7.6 -1328.0
+
+Trades ecrits dans trades_UPST_best.csv

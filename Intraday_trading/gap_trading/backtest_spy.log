@@ -1,0 +1,100 @@
+
+Donnees : 756 jours (2023-09-06 -> 2026-09-21), 8 jours incomplets ecartes
+In-sample : 2023-09-07 -> 2025-10-21 | Hors-echantillon : 2025-10-22 -> 2026-09-21
+
+=== 1. Grille (48 configurations testees) ===
+mode  gap_thr  confirm  stop_atr  target_atr  n_IS  exp$_IS  PF_IS  sharpe_IS  sharpe_OOS  exp$_OOS
+fill     0.75        1       0.5         1.0    56    38.74   1.27       0.44        1.13     86.06
+fill     0.75        1       0.5         2.0    56    38.74   1.27       0.44        1.13     86.06
+fill     0.50        1       0.5         2.0   124    21.80   1.16       0.44        0.66     27.95
+fill     0.50        1       0.5         1.0   124    21.80   1.16       0.44        0.66     27.95
+fill     0.50        1       1.0         2.0   124    23.89   1.16       0.41        0.36     17.53
+fill     0.50        1       1.0         1.0   124    23.89   1.16       0.41        0.36     17.53
+fill     0.50        2       1.0         1.0   124    19.55   1.14       0.34        0.41     19.42
+fill     0.50        2       1.0         2.0   124    19.55   1.14       0.34        0.41     19.42
+fill     0.75        1       1.0         1.0    56    28.12   1.17       0.29        1.69    132.04
+fill     0.75        1       1.0         2.0    56    28.12   1.17       0.29        1.69    132.04
+  go     0.30        2       1.0         1.0   170    10.73   1.09       0.26        0.14      6.12
+fill     0.75        2       1.0         1.0    56    21.11   1.13       0.22        1.68    130.81
+fill     0.75        2       1.0         2.0    56    21.11   1.13       0.22        1.68    130.81
+fill     0.50        2       0.5         2.0   124    10.68   1.08       0.22        0.36     15.50
+fill     0.50        2       0.5         1.0   124    10.68   1.08       0.22        0.36     15.50
+fill     0.75        2       0.5         1.0    56    11.72   1.08       0.14        1.06     80.01
+fill     0.75        2       0.5         2.0    56    11.72   1.08       0.14        1.06     80.01
+  go     0.30        1       1.0         1.0   178     4.92   1.04       0.12       -0.04     -1.78
+fill     0.30        1       0.5         2.0   227     3.33   1.03       0.10        0.37     11.32
+fill     0.30        1       0.5         1.0   227     3.33   1.03       0.10        0.37     11.32
+  go     0.30        2       0.5         1.0   170     3.34   1.03       0.09       -0.83    -30.59
+fill     0.30        2       1.0         1.0   227     2.54   1.02       0.07        0.08      2.86
+fill     0.30        2       1.0         2.0   227     2.54   1.02       0.07        0.08      2.86
+fill     0.30        1       1.0         2.0   227     2.14   1.02       0.06       -0.07     -2.54
+fill     0.30        1       1.0         1.0   227     2.14   1.02       0.06       -0.07     -2.54
+  go     0.50        2       0.5         1.0    94     2.05   1.02       0.04       -1.41    -69.10
+  go     0.30        1       0.5         1.0   178     0.78   1.01       0.02       -0.88    -32.64
+  go     0.30        2       1.0         2.0   170     0.32   1.00       0.01        0.17      7.45
+fill     0.30        2       0.5         2.0   227    -1.86   0.99      -0.06        0.25      7.79
+fill     0.30        2       0.5         1.0   227    -1.86   0.99      -0.06        0.25      7.79
+  go     0.50        1       0.5         1.0    98    -3.82   0.97      -0.07       -1.69    -84.65
+  go     0.50        2       1.0         1.0    94    -5.24   0.96      -0.08       -0.74    -41.69
+  go     0.30        1       1.0         2.0   178    -3.68   0.97      -0.09        0.05      2.17
+  go     0.75        1       0.5         2.0    45   -12.77   0.91      -0.15       -3.18   -239.29
+  go     0.75        1       0.5         1.0    45   -13.77   0.90      -0.18       -3.18   -239.29
+  go     0.75        2       1.0         1.0    44   -17.82   0.88      -0.19       -1.74   -167.09
+  go     0.30        2       0.5         2.0   170    -7.07   0.94      -0.22       -0.63    -24.64
+  go     0.30        1       0.5         2.0   178    -7.82   0.94      -0.23       -0.62    -24.28
+  go     0.75        2       1.0         2.0    44   -22.03   0.85      -0.23       -1.74   -167.09
+  go     0.75        2       0.5         1.0    44   -20.30   0.86      -0.26       -2.86   -212.33
+  go     0.50        2       0.5         2.0    94   -13.81   0.89      -0.29       -0.99    -54.18
+  go     0.50        1       0.5         2.0    98   -15.22   0.89      -0.31       -1.25    -69.30
+  go     0.75        2       0.5         2.0    44   -24.50   0.83      -0.31       -2.86   -212.33
+  go     0.50        1       1.0         1.0    98   -21.62   0.86      -0.33       -1.11    -66.53
+  go     0.75        1       1.0         2.0    45   -34.44   0.80      -0.33       -2.01   -205.91
+  go     0.75        1       1.0         1.0    45   -35.44   0.79      -0.36       -2.01   -205.91
+  go     0.50        2       1.0         2.0    94   -21.10   0.85      -0.37       -0.43    -26.77
+  go     0.50        1       1.0         2.0    98   -33.02   0.79      -0.54       -0.79    -51.18
+Le meilleur Sharpe in-sample sur 48 essais est biaise a la hausse : regarde surtout si le classement tient hors-echantillon.
+
+=== 2. Meilleure config in-sample : Params(atr_period=14, gap_threshold_atr=0.75, direction='fill', confirm_bars=1, atr_stop_mult=0.5, atr_target_mult=1.0, slippage_ticks=1.0) ===
+IS  : n_trades=56  win_rate=0.43  exp_$=38.74  exp_R=0.07  profit_factor=1.27  total_$=2169.36  sharpe=0.44  t_stat=0.64  max_dd_$=-1927.18
+OOS : n_trades=26  win_rate=0.58  exp_$=86.06  exp_R=0.22  profit_factor=1.80  total_$=2237.61  sharpe=1.13  t_stat=1.08  max_dd_$=-947.07
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=117  win_rate=0.50  exp_$=-0.94  exp_R=0.01  profit_factor=0.99  total_$=-110.18  sharpe=-0.02  t_stat=-0.02  max_dd_$=-3174.79
+  test a partir de 2024-09-07 : mode=go, gap_thr=0.3, confirm=1, stop=1.0, target=1.0
+  test a partir de 2024-12-07 : mode=go, gap_thr=0.3, confirm=1, stop=1.0, target=1.0
+  test a partir de 2025-03-07 : mode=go, gap_thr=0.3, confirm=1, stop=0.5, target=1.0
+  test a partir de 2025-06-07 : mode=go, gap_thr=0.5, confirm=2, stop=0.5, target=1.0
+  test a partir de 2025-09-07 : mode=fill, gap_thr=0.5, confirm=1, stop=0.5, target=1.0
+  test a partir de 2025-12-07 : mode=fill, gap_thr=0.75, confirm=1, stop=0.5, target=1.0
+  test a partir de 2026-03-07 : mode=fill, gap_thr=0.5, confirm=1, stop=0.5, target=1.0
+  test a partir de 2026-06-07 : mode=fill, gap_thr=0.75, confirm=2, stop=1.0, target=1.0
+  test a partir de 2026-09-07 : mode=fill, gap_thr=0.75, confirm=2, stop=1.0, target=1.0
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=82  win_rate=0.48  exp_$=55.02  exp_R=0.13  profit_factor=1.41  total_$=4511.96  sharpe=0.66  t_stat=1.14  max_dd_$=-1923.18
+  slippage 1 tick(s)/execution : n_trades=82  win_rate=0.48  exp_$=53.74  exp_R=0.12  profit_factor=1.40  total_$=4406.96  sharpe=0.64  t_stat=1.11  max_dd_$=-1927.18
+  slippage 2 tick(s)/execution : n_trades=82  win_rate=0.48  exp_$=52.46  exp_R=0.12  profit_factor=1.39  total_$=4301.96  sharpe=0.63  t_stat=1.09  max_dd_$=-1931.18
+  slippage 3 tick(s)/execution : n_trades=82  win_rate=0.46  exp_$=51.18  exp_R=0.11  profit_factor=1.38  total_$=4196.96  sharpe=0.61  t_stat=1.06  max_dd_$=-1937.07
+
+=== 5. Direction au hasard (meme timing, meme stop), hors-echantillon ===
+  Gap trading reel : 2238$ | pile ou face : -513$ +/- 1699$ | p-value = 0.037
+
+=== 6. Decompositions (meilleure config, toute la periode) ===
+        n  moyenne   total
+side                      
+short  37     35.0  1293.2
+long   45     69.2  3113.8
+         n  moyenne
+reason             
+stop    29   -321.1
+target  15    723.8
+time    38     75.3
+       n  moyenne   total
+date                     
+2023   3   -178.8  -536.3
+2024  31      2.5    76.4
+2025  27    161.4  4356.8
+2026  21     24.3   510.0
+
+Trades ecrits dans trades_SPY_best.csv
+Courbe ecrite dans equity_SPY_best.png

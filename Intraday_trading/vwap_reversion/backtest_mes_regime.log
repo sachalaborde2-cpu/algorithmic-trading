@@ -1,0 +1,90 @@
+
+Donnees : 258 jours (2025-09-08 -> 2026-09-18), 9 jours incomplets ecartes
+In-sample : 2025-09-08 -> 2026-05-28 | Hors-echantillon : 2026-05-29 -> 2026-09-18
+
+=== 1. Grille (48 configurations testees, avec/sans filtre de regime) ===
+ warmup  entry_std  exit_std  stop_std  regime  n_IS  exp$_IS  PF_IS  sharpe_IS  sharpe_OOS  exp$_OOS
+     60        2.0      0.25       4.0    True    69     6.64   1.22       0.87       -1.66    -12.07
+     60        2.0      0.50       4.0    True    69     4.63   1.17       0.66       -1.75    -11.96
+     30        2.5      0.25       4.0   False    54    -0.97   0.97      -0.12        0.75      6.36
+     30        2.5      0.25       3.0   False    42    -0.94   0.93      -0.19        1.97     18.74
+     30        2.0      0.25       4.0    True    77    -1.60   0.95      -0.24       -2.87    -20.48
+     30        2.5      0.50       4.0   False    54    -2.58   0.91      -0.33        1.04      8.08
+     30        2.5      0.25       3.0    True    22    -2.33   0.83      -0.33        1.27     14.62
+     60        2.5      0.25       4.0   False    54    -2.83   0.91      -0.34        0.75      6.36
+     60        2.5      0.25       3.0   False    42    -1.76   0.88      -0.34        1.97     18.74
+     60        1.5      0.50       3.0    True    99    -1.48   0.93      -0.35       -1.45     -6.01
+     30        2.5      0.25       4.0    True    28    -4.40   0.87      -0.36        0.51      5.90
+     60        2.5      0.25       4.0    True    27    -4.85   0.86      -0.38        0.51      5.90
+     60        2.5      0.25       3.0    True    21    -2.81   0.80      -0.38        1.27     14.62
+     30        2.5      0.50       3.0   False    42    -1.88   0.86      -0.39        1.82     15.42
+     30        2.5      0.50       3.0    True    22    -2.91   0.79      -0.42        1.15     11.75
+     60        2.5      0.50       3.0    True    21    -3.34   0.77      -0.47        1.15     11.75
+     30        2.0      0.25       3.0    True    73    -2.90   0.87      -0.55       -1.10     -6.87
+     60        2.5      0.50       3.0   False    42    -2.66   0.81      -0.55        1.82     15.42
+     60        2.0      0.25       3.0    True    65    -3.29   0.87      -0.55       -0.20     -1.27
+     60        2.5      0.50       4.0   False    54    -4.41   0.86      -0.56        1.04      8.08
+     30        2.5      0.50       4.0    True    28    -7.06   0.79      -0.61        0.93      9.96
+     60        2.5      0.50       4.0    True    27    -7.55   0.79      -0.63        0.93      9.96
+     30        2.0      0.50       4.0    True    77    -4.01   0.87      -0.63       -2.97    -20.01
+     60        2.0      0.50       3.0    True    65    -3.66   0.85      -0.67       -0.30     -1.67
+     30        2.0      0.50       3.0    True    73    -3.29   0.85      -0.68       -1.31     -7.42
+     60        1.5      0.25       3.0    True    99    -3.39   0.87      -0.71       -0.43     -1.96
+     60        1.5      0.50       3.0   False   171    -2.80   0.88      -0.88       -1.13     -3.67
+     60        1.5      0.25       3.0   False   171    -3.40   0.86      -0.95       -0.64     -2.30
+     60        2.0      0.25       4.0   False   131    -5.10   0.85      -0.96       -2.84    -17.26
+     60        1.5      0.50       4.0    True   102    -5.80   0.81      -0.97       -0.72     -3.64
+     60        2.0      0.50       4.0   False   131    -4.77   0.85      -0.98       -2.34    -13.32
+     60        1.5      0.50       4.0   False   174    -5.59   0.82      -1.28       -0.95     -4.01
+     60        1.5      0.25       4.0    True   102    -8.63   0.76      -1.31       -0.68     -3.74
+     30        2.0      0.25       4.0   False   137    -7.54   0.77      -1.56       -3.04    -17.08
+     60        1.5      0.25       4.0   False   174    -8.23   0.77      -1.71       -0.77     -3.48
+     30        2.0      0.50       4.0   False   137    -8.77   0.72      -1.93       -2.84    -14.89
+     30        1.5      0.25       3.0   False   173    -6.39   0.71      -2.20       -3.04     -8.39
+     30        1.5      0.25       4.0   False   178    -9.12   0.70      -2.36       -2.25     -8.23
+     30        1.5      0.50       3.0    True   101    -8.40   0.61      -2.43       -1.69     -5.22
+     60        2.0      0.50       3.0   False   125    -8.76   0.63      -2.51       -2.30     -9.55
+     30        1.5      0.50       4.0    True   103   -12.49   0.58      -2.52       -1.25     -5.37
+     30        1.5      0.25       4.0    True   103   -13.45   0.59      -2.57       -1.41     -6.34
+     30        1.5      0.50       3.0   False   173    -7.00   0.67      -2.64       -3.25     -8.42
+     30        1.5      0.25       3.0    True   101   -10.00   0.58      -2.69       -1.56     -5.08
+     30        2.0      0.50       3.0   False   129    -8.74   0.61      -2.71       -1.95     -8.16
+     30        2.0      0.25       3.0   False   129    -9.60   0.59      -2.80       -1.81     -8.24
+     30        1.5      0.50       4.0   False   178   -10.20   0.64      -2.83       -2.55     -8.87
+     60        2.0      0.25       3.0   False   125   -10.50   0.59      -2.85       -2.19     -9.85
+Le meilleur Sharpe in-sample sur 48 essais est biaise a la hausse : regarde surtout si le classement tient hors-echantillon.
+
+=== 2. Meilleure config in-sample : Params(warmup_minutes=60, entry_std=2.0, exit_std=0.25, stop_std=4.0, slippage_ticks=1.0, limit_through_ticks=1.0, regime_filter=True, regime_days=20) ===
+IS  : n_trades=69  win_rate=0.58  exp_$=6.64  exp_R=0.18  profit_factor=1.22  total_$=458.03  sharpe=0.87  t_stat=0.73  max_dd_$=-540.21
+OOS : n_trades=34  win_rate=0.32  exp_$=-12.07  exp_R=-0.38  profit_factor=0.67  total_$=-410.40  sharpe=-1.66  t_stat=-0.93  max_dd_$=-613.52
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2  win_rate=0.50  exp_$=36.57  exp_R=0.45  profit_factor=8.06  total_$=73.14  sharpe=4.53  t_stat=0.86  max_dd_$=-10.36
+  test a partir de 2026-09-08 : entry=2.5, exit=0.25, stop=3.0, regime=False
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=103  win_rate=0.50  exp_$=2.37  exp_R=0.04  profit_factor=1.08  total_$=243.88  sharpe=0.32  t_stat=0.32  max_dd_$=-589.23
+  slippage 1 tick(s)/execution : n_trades=103  win_rate=0.50  exp_$=0.46  exp_R=-0.00  profit_factor=1.01  total_$=47.63  sharpe=0.06  t_stat=0.06  max_dd_$=-712.98
+  slippage 2 tick(s)/execution : n_trades=103  win_rate=0.50  exp_$=-1.44  exp_R=-0.04  profit_factor=0.96  total_$=-148.62  sharpe=-0.19  t_stat=-0.19  max_dd_$=-836.73
+  slippage 3 tick(s)/execution : n_trades=103  win_rate=0.50  exp_$=-3.35  exp_R=-0.07  profit_factor=0.90  total_$=-344.87  sharpe=-0.44  t_stat=-0.44  max_dd_$=-960.48
+
+=== 5. Direction au hasard (meme timing, meme stop), hors-echantillon ===
+  VWAP reel : -410$ | pile ou face : -2044$ +/- 435$ | p-value = 0.003
+
+=== 6. Decompositions (meilleure config, toute la periode) ===
+        n  moyenne  total
+side                     
+short  44     -3.8 -166.5
+long   59      3.6  214.2
+         n  moyenne
+reason             
+stop    50    -65.1
+target  49     66.6
+time     4      9.5
+       n  moyenne  total
+date                    
+2025  36      8.6  308.1
+2026  67     -3.9 -260.5
+
+Trades ecrits dans trades_MES_best.csv
+Courbe ecrite dans equity_best.png

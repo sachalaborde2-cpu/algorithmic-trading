@@ -1,0 +1,76 @@
+
+Donnees : 756 jours (2023-09-06 -> 2026-09-21), 8 jours incomplets ecartes
+In-sample : 2023-09-06 -> 2025-10-21 | Hors-echantillon : 2025-10-22 -> 2026-09-21
+
+=== 1. Grille (24 configurations testees) ===
+ warmup  entry_std  exit_std  stop_std  n_IS  exp$_IS  PF_IS  sharpe_IS  sharpe_OOS  exp$_OOS
+     30        2.0      0.25       3.0   351     2.82   1.09       0.41       -2.61    -26.15
+     60        2.0      0.25       3.0   339     2.02   1.05       0.25       -1.28    -15.32
+     30        2.0      0.50       3.0   351    -0.04   1.00      -0.01       -2.70    -25.18
+     60        2.0      0.50       3.0   339    -0.46   0.99      -0.06       -1.33    -14.78
+     60        2.0      0.50       4.0   360    -0.92   0.98      -0.09       -1.03    -15.54
+     30        2.0      0.50       4.0   396    -0.85   0.98      -0.10       -1.54    -19.93
+     30        2.5      0.50       4.0   130    -2.16   0.96      -0.15        0.50     13.00
+     60        2.0      0.25       4.0   360    -3.16   0.95      -0.29       -0.79    -12.81
+     60        2.5      0.50       4.0   121    -4.99   0.90      -0.32        0.29      7.64
+     30        2.5      0.50       3.0    86    -3.20   0.82      -0.36       -1.67    -17.65
+     30        2.0      0.25       4.0   396    -4.15   0.92      -0.46       -1.59    -22.30
+     60        2.5      0.50       3.0    81    -5.51   0.72      -0.59       -1.65    -18.28
+     30        2.5      0.25       4.0   130    -9.67   0.82      -0.65        0.80     22.31
+     60        1.5      0.50       4.0   512    -5.95   0.88      -0.75       -0.48     -6.01
+     30        1.5      0.50       4.0   521    -5.38   0.88      -0.77       -0.56     -5.83
+     30        1.5      0.50       3.0   486    -4.63   0.87      -0.84       -0.73     -6.13
+     60        2.5      0.25       4.0   121   -13.48   0.76      -0.86        0.57     16.06
+     30        1.5      0.25       3.0   486    -5.55   0.86      -0.92       -0.32     -2.94
+     60        1.5      0.25       4.0   512   -10.27   0.83      -1.13        0.02      0.33
+     30        1.5      0.25       4.0   521    -8.96   0.83      -1.15       -0.15     -1.68
+     30        2.5      0.25       3.0    86    -9.19   0.53      -1.44       -1.44    -16.30
+     60        1.5      0.25       3.0   498   -10.35   0.79      -1.50        0.60      6.45
+     60        1.5      0.50       3.0   498   -10.07   0.78      -1.58        0.24      2.33
+     60        2.5      0.25       3.0    81   -12.13   0.42      -1.91       -1.42    -16.87
+Le meilleur Sharpe in-sample sur 24 essais est biaise a la hausse : regarde surtout si le classement tient hors-echantillon.
+
+=== 2. Meilleure config in-sample : Params(warmup_minutes=30, entry_std=2.0, exit_std=0.25, stop_std=3.0, slippage_ticks=1.0, limit_through_ticks=1.0) ===
+IS  : n_trades=351  win_rate=0.27  exp_$=2.82  exp_R=0.06  profit_factor=1.09  total_$=990.04  sharpe=0.41  t_stat=0.59  max_dd_$=-2305.65
+OOS : n_trades=145  win_rate=0.16  exp_$=-26.15  exp_R=-0.51  profit_factor=0.56  total_$=-3791.53  sharpe=-2.61  t_stat=-2.48  max_dd_$=-3932.46
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=200  win_rate=0.26  exp_$=-17.70  exp_R=-0.22  profit_factor=0.69  total_$=-3539.30  sharpe=-1.47  t_stat=-2.08  max_dd_$=-4200.97
+  test a partir de 2024-09-06 : entry=2.0, exit=0.25, stop=3.0
+  test a partir de 2024-12-06 : entry=2.0, exit=0.25, stop=3.0
+  test a partir de 2025-03-06 : entry=2.5, exit=0.5, stop=4.0
+  test a partir de 2025-06-06 : entry=2.5, exit=0.5, stop=4.0
+  test a partir de 2025-09-06 : entry=2.5, exit=0.5, stop=4.0
+  test a partir de 2025-12-06 : entry=2.0, exit=0.25, stop=3.0
+  test a partir de 2026-03-06 : entry=2.0, exit=0.5, stop=3.0
+  test a partir de 2026-06-06 : entry=2.5, exit=0.25, stop=4.0
+  test a partir de 2026-09-06 : entry=2.5, exit=0.25, stop=4.0
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=496  win_rate=0.24  exp_$=-3.88  exp_R=-0.04  profit_factor=0.90  total_$=-1922.49  sharpe=-0.49  t_stat=-0.84  max_dd_$=-4092.66
+  slippage 1 tick(s)/execution : n_trades=496  win_rate=0.24  exp_$=-5.65  exp_R=-0.11  profit_factor=0.86  total_$=-2801.49  sharpe=-0.71  t_stat=-1.23  max_dd_$=-4622.74
+  slippage 2 tick(s)/execution : n_trades=496  win_rate=0.24  exp_$=-7.42  exp_R=-0.17  profit_factor=0.82  total_$=-3680.49  sharpe=-0.93  t_stat=-1.61  max_dd_$=-5178.74
+  slippage 3 tick(s)/execution : n_trades=496  win_rate=0.24  exp_$=-9.19  exp_R=-0.22  profit_factor=0.78  total_$=-4559.49  sharpe=-1.14  t_stat=-1.98  max_dd_$=-5734.74
+
+=== 5. Direction au hasard (meme timing, meme stop), hors-echantillon ===
+  VWAP reel : -3792$ | pile ou face : -16597$ +/- 1707$ | p-value = 0.003
+
+=== 6. Decompositions (meilleure config, toute la periode) ===
+         n  moyenne   total
+side                       
+short  245     -3.0  -736.3
+long   251     -8.2 -2065.2
+          n  moyenne
+reason              
+stop    372    -51.9
+target  113    142.4
+time     11     38.5
+        n  moyenne   total
+date                      
+2023   57     -1.1   -63.0
+2024  153      3.9   599.0
+2025  171     -0.1   -12.0
+2026  115    -28.9 -3325.5
+
+Trades ecrits dans trades_QQQ_best.csv
+Courbe ecrite dans equity_best.png

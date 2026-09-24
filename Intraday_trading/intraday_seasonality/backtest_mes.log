@@ -1,0 +1,50 @@
+
+Donnees MES : 258 jours (2025-09-08 -> 2026-09-18), 9 jours incomplets ecartes
+In-sample : 2025-09-08 -> 2026-05-28 | Hors-echantillon : 2026-05-29 -> 2026-09-18
+
+=== 1. Rendement moyen par tranche de 30 min (13 tranches) ===
+    tranche  mean_bp_IS  t_stat_IS  p_value_IS  mean_bp_OOS  t_stat_OOS
+09:30-10:00        2.37       1.19       0.236         0.48        0.16
+13:30-14:00        1.20       1.11       0.268        -0.45       -0.37
+14:00-14:30        0.91       0.84       0.404        -0.11       -0.07
+12:30-13:00       -0.62      -0.55       0.584        -0.11       -0.09
+11:00-11:30       -0.75      -0.50       0.619         0.29        0.13
+10:30-11:00        0.69       0.43       0.670        -0.77       -0.35
+14:30-15:00       -0.45      -0.40       0.692        -2.69       -1.53
+12:00-12:30        0.35       0.31       0.755        -0.31       -0.22
+15:00-15:30       -0.17      -0.14       0.889        -2.22       -1.23
+15:30-16:00        0.07       0.05       0.957        -2.51       -1.44
+11:30-12:00        0.05       0.04       0.970        -0.44       -0.25
+10:00-10:30       -0.05      -0.03       0.975         0.78        0.33
+13:00-13:30       -0.03      -0.03       0.975         0.43        0.24
+Avec 13 tranches testees, exiger |t-stat IS| nettement > 2 (Bonferroni : seuil ajuste ~2.89 pour un test bilateral a 5%) ET une significativite qui persiste en OOS avant de conclure a un edge.
+
+Tranche la plus significative en IS : 09:30-10:00 (direction +1 (long))
+
+=== 2. Grille stop/target ATR sur la tranche 09:30-10:00 ===
+ stop_atr  target_atr  n_IS  sharpe_IS  sharpe_OOS  exp$_IS  exp$_OOS
+      NaN         NaN   180      0.687      -0.345    3.946    -2.213
+      1.0         1.5   180      0.687      -0.345    3.946    -2.213
+      1.0         2.0   180      0.687      -0.345    3.946    -2.213
+      1.5         2.0   180      0.687      -0.345    3.946    -2.213
+      1.5         NaN   180      0.687      -0.345    3.946    -2.213
+      1.0         NaN   180      0.687      -0.345    3.946    -2.213
+
+=== 3. Meilleure config : Params(slot_minutes=30, chosen_slot=0, direction=1, atr_lookback=20, atr_stop_mult=np.float64(nan), atr_target_mult=np.float64(nan), slippage_ticks=1.0) ===
+IS  : n_trades=180  win_rate=0.56  exp_$=3.95  exp_R=0.10  profit_factor=1.12  total_$=710.25  sharpe=0.69  t_stat=0.58  max_dd_$=-782.20
+OOS : n_trades=78  win_rate=0.51  exp_$=-2.21  exp_R=nan  profit_factor=0.94  total_$=-172.60  sharpe=-0.34  t_stat=-0.19  max_dd_$=-590.95
+
+=== 4. Walk-forward (train 12 mois, test 3 mois, tranche re-choisie a chaque fenetre) ===
+Concatenation des periodes de test : n_trades=9  win_rate=0.33  exp_$=-15.45  exp_R=-0.33  profit_factor=0.52  total_$=-139.05  sharpe=-4.04  t_stat=-0.76  max_dd_$=-153.85
+  test a partir de 2026-09-08 : tranche=09:30-10:00, direction=+1, stop/target_atr=(None, None)
+
+=== 5. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s) : n_trades=258  win_rate=0.57  exp_$=4.58  exp_R=0.10  profit_factor=1.13  total_$=1182.65  sharpe=0.77  t_stat=0.78  max_dd_$=-679.70
+  slippage 1 tick(s) : n_trades=258  win_rate=0.54  exp_$=2.08  exp_R=0.10  profit_factor=1.06  total_$=537.65  sharpe=0.35  t_stat=0.35  max_dd_$=-782.20
+  slippage 2 tick(s) : n_trades=258  win_rate=0.54  exp_$=-0.42  exp_R=0.00  profit_factor=0.99  total_$=-107.35  sharpe=-0.07  t_stat=-0.07  max_dd_$=-884.70
+  slippage 3 tick(s) : n_trades=258  win_rate=0.52  exp_$=-2.92  exp_R=-0.20  profit_factor=0.92  total_$=-752.35  sharpe=-0.49  t_stat=-0.50  max_dd_$=-1069.60
+
+=== 6. Direction au hasard (meme tranche, meme timing), hors-echantillon ===
+  Saisonnalite reelle : -173$ | pile ou face : -270$ +/- 882$ | p-value = 0.465
+
+Trades ecrits dans trades_MES_best.csv
