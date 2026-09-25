@@ -28,7 +28,8 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 9 | Pairs trading | `pairs_trading/` (+ racine, screening S&P 500) | Paires actions US | Daily | Abandonné | — |
 | 10 | **Overnight drift** | `overnight_drift/` | MES, SPY, QQQ, IWM, CSPX | 5 min intraday (fenêtres close/open) | **Seul edge validé du projet** | p=0.040 (SPY), 0.070-0.113 (MES/QQQ/IWM) |
 | 11 | Overnight drift sur actions individuelles | `overnight_drift_stocks/` | AAPL, JPM, JNJ, XOM, WMT | 5 min intraday | Rejeté sur les 5 | p=0.096 (JNJ, meilleur cas) |
-| 12 | **Ichimoku Kinko Hyo** | `swing_trading/ichimoku_daily/` (à créer) | En cours de conception | Daily (swing) | En cours | — |
+| 12 | Ichimoku Kinko Hyo | `Swing_trading/ichimoku_daily/` | 20 tickers cross-asset (indices, secteurs, matières premières, obligataire, international, méga-caps) | Daily (swing) | Rejeté (Bonferroni) | p=0.030 (SPY, meilleur cas, mais seuil corrigé = 0.0025) |
+| 13 | **Momentum cross-sectionnel** | `Swing_trading/momentum_cross_sectional/` (à créer) | Mêmes 20 tickers cross-asset | Daily (swing, rebalancement périodique) | En cours de conception | — |
 
 ## Rationale des transitions
 
@@ -56,6 +57,28 @@ tendent sur des timeframes plus élevés (H4/daily), ce qui motive le choix
 d'un backtest en barres journalières plutôt qu'en 5 minutes — cohérent avec
 l'indicateur plutôt qu'un choix arbitraire.
 
+**#12 → #13** : Sur les 20 instruments cross-asset testés (indices, secteurs,
+matières premières, obligataire, international, méga-caps), un seul —
+SPY — passe le test placebo au seuil naïf de 0.05 (p=0.030), avec un Sharpe
+IS/OOS/walk-forward cohérent et une robustesse au slippage inédite dans ce
+projet. Mais la correction Bonferroni pour 20 tests en parallèle (seuil
+0.05/20 = 0.0025) rejette ce résultat sans ambiguïté : un p=0.030 isolé parmi
+20 essais indépendants a ~64 % de chances d'apparaître par pur hasard. Ce
+rejet est cohérent avec le reste du projet — un signal directionnel testé sur
+un large panier cross-asset n'a, à ce jour, jamais survécu à la correction
+multiple-testing (seul le biais structurel `overnight_drift`, testé sur 4
+instruments fortement corrélés plutôt que 20 indépendants, y est parvenu).
+Piste suivante choisie de façon autonome : le **momentum cross-sectionnel**
+(classement relatif des mêmes 20 instruments par performance passée,
+rebalancement périodique), un facteur académique établi (Jegadeesh-Titman)
+et le style CTA — déjà identifié dans `vocabulaire.md` comme "le style où un
+edge réplicable en gestion retail a historiquement le mieux persisté, car il
+repose sur la diversification plutôt que sur la vitesse d'exécution" — jamais
+testé dans ce projet, où toutes les stratégies précédentes comparaient un
+instrument à son propre passé plutôt qu'à ses pairs au même instant. Réutilise
+directement les données déjà téléchargées pour Ichimoku (mêmes 20 tickers, 10
+ans de barres journalières), donc pas de nouveau téléchargement nécessaire.
+
 ## Enseignements transversaux (mis à jour à chaque stratégie)
 
 - Sur ce projet, **11 stratégies testées, 1 seule validée** (overnight drift
@@ -71,3 +94,10 @@ l'indicateur plutôt qu'un choix arbitraire.
 - Un edge validé sur un panier large (indice/ETF) ne se transpose pas
   automatiquement à l'action individuelle (#10 vs #11) — chaque niveau de
   granularité doit être retesté indépendamment, pas supposé hérité.
+- Tester un signal directionnel sur un large panier cross-asset (20
+  instruments) rend la correction multiple-testing décisive : un résultat
+  isolé à p=0.03-0.05 (#12, SPY) est exactement le type de faux positif que
+  Bonferroni est censé filtrer, même quand toutes les autres conditions
+  (Sharpe IS/OOS/walk-forward cohérents, robustesse au slippage) semblent
+  réunies. La rigueur du protocole ne se relâche jamais face à un résultat
+  qui "a l'air bon" sur un seul instrument parmi beaucoup testés.

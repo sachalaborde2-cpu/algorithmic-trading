@@ -1,0 +1,62 @@
+
+Donnees : 2297 jours (2017-08-04 -> 2026-09-24)
+In-sample : 2017-08-04 -> 2023-12-21 | Hors-echantillon : 2023-12-22 -> 2026-09-24
+
+=== 1. Grille (4 configurations testees) ===
+signal       mode  n_IS  sharpe_IS  t_IS  sharpe_OOS  exp$_OOS
+   kbo long_short    27       0.74  1.87        0.14     31.67
+   kbo  long_only    13       0.39  0.99       -0.20     14.44
+   tkc long_short    72      -0.13 -0.33       -0.43     -5.00
+   tkc  long_only    36      -0.25 -0.62       -0.60     -9.76
+
+=== 2. Meilleure config in-sample : Params(signal='kbo', mode='long_short', tenkan_period=9, kijun_period=26, senkou_b_period=52, displacement=26, atr_period=14, slippage_ticks=1.0) ===
+IS  : n_trades=27  win_rate=0.52  exp_$=117.56  exp_R=3.85  profit_factor=2.81  total_$=3523.00  sharpe=0.74  t_stat=1.87  max_dd_$=-1645.00
+OOS : n_trades=18  win_rate=0.44  exp_$=31.67  exp_R=0.60  profit_factor=1.76  total_$=221.00  sharpe=0.14  t_stat=0.23  max_dd_$=-707.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=35  win_rate=0.51  exp_$=106.46  exp_R=3.30  profit_factor=2.44  total_$=1852.00  sharpe=0.33  t_stat=0.95  max_dd_$=-1730.00
+  test a partir de 2018-08-04 : signal=kbo, mode=long_short
+  test a partir de 2018-11-04 : signal=kbo, mode=long_short
+  test a partir de 2019-02-04 : signal=kbo, mode=long_only
+  test a partir de 2019-05-04 : signal=kbo, mode=long_only
+  test a partir de 2019-08-04 : signal=kbo, mode=long_only
+  test a partir de 2019-11-04 : signal=kbo, mode=long_only
+  test a partir de 2020-02-04 : signal=kbo, mode=long_only
+  test a partir de 2020-05-04 : signal=kbo, mode=long_only
+  test a partir de 2020-08-04 : signal=kbo, mode=long_only
+  test a partir de 2020-11-04 : signal=kbo, mode=long_only
+  test a partir de 2021-02-04 : signal=kbo, mode=long_short
+  test a partir de 2021-05-04 : signal=kbo, mode=long_short
+  test a partir de 2021-08-04 : signal=kbo, mode=long_short
+  test a partir de 2021-11-04 : signal=tkc, mode=long_short
+  test a partir de 2022-02-04 : signal=kbo, mode=long_short
+  test a partir de 2022-05-04 : signal=kbo, mode=long_short
+  test a partir de 2022-08-04 : signal=kbo, mode=long_short
+  test a partir de 2022-11-04 : signal=kbo, mode=long_short
+  test a partir de 2023-02-04 : signal=kbo, mode=long_short
+  test a partir de 2023-05-04 : signal=kbo, mode=long_only
+  test a partir de 2023-08-04 : signal=kbo, mode=long_short
+  test a partir de 2023-11-04 : signal=kbo, mode=long_short
+  test a partir de 2024-02-04 : signal=kbo, mode=long_short
+  test a partir de 2024-05-04 : signal=tkc, mode=long_short
+  test a partir de 2024-08-04 : signal=tkc, mode=long_only
+  test a partir de 2024-11-04 : signal=tkc, mode=long_short
+  test a partir de 2025-02-04 : signal=kbo, mode=long_short
+  test a partir de 2025-05-04 : signal=kbo, mode=long_only
+  test a partir de 2025-08-04 : signal=kbo, mode=long_short
+  test a partir de 2025-11-04 : signal=kbo, mode=long_only
+  test a partir de 2026-02-04 : signal=kbo, mode=long_only
+  test a partir de 2026-05-04 : signal=kbo, mode=long_only
+  test a partir de 2026-08-04 : signal=kbo, mode=long_short
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=45  win_rate=0.51  exp_$=85.18  exp_R=2.60  profit_factor=2.56  total_$=3833.00  sharpe=0.60  t_stat=1.82  max_dd_$=-1633.00
+  slippage 1 tick(s)/execution : n_trades=45  win_rate=0.49  exp_$=83.20  exp_R=2.55  profit_factor=2.50  total_$=3744.00  sharpe=0.59  t_stat=1.78  max_dd_$=-1645.00
+  slippage 2 tick(s)/execution : n_trades=45  win_rate=0.49  exp_$=81.22  exp_R=2.50  profit_factor=2.44  total_$=3655.00  sharpe=0.57  t_stat=1.73  max_dd_$=-1657.00
+  slippage 3 tick(s)/execution : n_trades=45  win_rate=0.49  exp_$=79.24  exp_R=2.46  profit_factor=2.38  total_$=3566.00  sharpe=0.56  t_stat=1.69  max_dd_$=-1669.00
+
+=== 5. Direction au hasard (meme timing de signal), hors-echantillon ===
+  reel : 221$ | pile ou face : -43$ +/- 705$ | p-value = 0.332
+
+Trades ecrits dans trades_IEF_best.csv
+Courbe ecrite dans equity_best.png

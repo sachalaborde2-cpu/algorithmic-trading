@@ -1,0 +1,65 @@
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+
+=== 1. Grille (4 configurations testees) ===
+signal       mode  n_IS  sharpe_IS  t_IS  sharpe_OOS  exp$_OOS
+   tkc long_short    67       0.35  0.93       -0.92    -63.76
+   tkc  long_only    33       0.32  0.85       -0.22     -6.42
+   kbo  long_only    16       0.17  0.44        0.14     37.88
+   kbo long_short    33       0.11  0.29       -0.36    -27.55
+
+=== 2. Meilleure config in-sample : Params(signal='tkc', mode='long_short', tenkan_period=9, kijun_period=26, senkou_b_period=52, displacement=26, atr_period=14, slippage_ticks=1.0) ===
+IS  : n_trades=67  win_rate=0.40  exp_$=25.87  exp_R=0.34  profit_factor=1.39  total_$=2161.00  sharpe=0.35  t_stat=0.93  max_dd_$=-1815.00
+OOS : n_trades=39  win_rate=0.28  exp_$=-63.76  exp_R=-0.71  profit_factor=0.57  total_$=-2914.00  sharpe=-0.92  t_stat=-1.59  max_dd_$=-4951.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=59  win_rate=0.37  exp_$=52.57  exp_R=0.93  profit_factor=1.66  total_$=-694.50  sharpe=-0.09  t_stat=-0.28  max_dd_$=-3183.50
+  test a partir de 2017-09-27 : signal=kbo, mode=long_only
+  test a partir de 2017-12-27 : signal=kbo, mode=long_only
+  test a partir de 2018-03-27 : signal=kbo, mode=long_short
+  test a partir de 2018-06-27 : signal=kbo, mode=long_only
+  test a partir de 2018-09-27 : signal=kbo, mode=long_only
+  test a partir de 2018-12-27 : signal=kbo, mode=long_short
+  test a partir de 2019-03-27 : signal=kbo, mode=long_short
+  test a partir de 2019-06-27 : signal=kbo, mode=long_short
+  test a partir de 2019-09-27 : signal=tkc, mode=long_short
+  test a partir de 2019-12-27 : signal=tkc, mode=long_only
+  test a partir de 2020-03-27 : signal=tkc, mode=long_short
+  test a partir de 2020-06-27 : signal=tkc, mode=long_short
+  test a partir de 2020-09-27 : signal=tkc, mode=long_short
+  test a partir de 2020-12-27 : signal=tkc, mode=long_short
+  test a partir de 2021-03-27 : signal=tkc, mode=long_only
+  test a partir de 2021-06-27 : signal=kbo, mode=long_only
+  test a partir de 2021-09-27 : signal=kbo, mode=long_only
+  test a partir de 2021-12-27 : signal=tkc, mode=long_only
+  test a partir de 2022-03-27 : signal=tkc, mode=long_only
+  test a partir de 2022-06-27 : signal=tkc, mode=long_short
+  test a partir de 2022-09-27 : signal=tkc, mode=long_only
+  test a partir de 2022-12-27 : signal=tkc, mode=long_only
+  test a partir de 2023-03-27 : signal=tkc, mode=long_short
+  test a partir de 2023-06-27 : signal=tkc, mode=long_only
+  test a partir de 2023-09-27 : signal=tkc, mode=long_only
+  test a partir de 2023-12-27 : signal=kbo, mode=long_only
+  test a partir de 2024-03-27 : signal=kbo, mode=long_only
+  test a partir de 2024-06-27 : signal=kbo, mode=long_only
+  test a partir de 2024-09-27 : signal=kbo, mode=long_short
+  test a partir de 2024-12-27 : signal=kbo, mode=long_short
+  test a partir de 2025-03-27 : signal=kbo, mode=long_only
+  test a partir de 2025-06-27 : signal=kbo, mode=long_only
+  test a partir de 2025-09-27 : signal=kbo, mode=long_only
+  test a partir de 2025-12-27 : signal=kbo, mode=long_only
+  test a partir de 2026-03-27 : signal=kbo, mode=long_only
+  test a partir de 2026-06-27 : signal=tkc, mode=long_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=106  win_rate=0.38  exp_$=-5.11  exp_R=-0.01  profit_factor=0.95  total_$=-542.00  sharpe=-0.06  t_stat=-0.18  max_dd_$=-5427.00
+  slippage 1 tick(s)/execution : n_trades=106  win_rate=0.36  exp_$=-7.10  exp_R=-0.05  profit_factor=0.93  total_$=-753.00  sharpe=-0.08  t_stat=-0.25  max_dd_$=-5519.00
+  slippage 2 tick(s)/execution : n_trades=106  win_rate=0.36  exp_$=-9.09  exp_R=-0.08  profit_factor=0.91  total_$=-964.00  sharpe=-0.10  t_stat=-0.32  max_dd_$=-5611.00
+  slippage 3 tick(s)/execution : n_trades=106  win_rate=0.35  exp_$=-11.08  exp_R=-0.11  profit_factor=0.89  total_$=-1175.00  sharpe=-0.13  t_stat=-0.40  max_dd_$=-5703.00
+
+=== 5. Direction au hasard (meme timing de signal), hors-echantillon ===
+  reel : -2914$ | pile ou face : -69$ +/- 1785$ | p-value = 0.950
+
+Trades ecrits dans trades_XLE_best.csv
+Courbe ecrite dans equity_best.png
