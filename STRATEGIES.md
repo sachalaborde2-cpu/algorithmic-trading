@@ -33,6 +33,7 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 14 | Overnight drift filtré par régime de tendance (Kumo Ichimoku) | `Swing_trading/overnight_drift_regime_filtered/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée) | Rejeté (le filtre n'apporte rien face à l'edge non filtré) | p=0.003 (SPY/QQQ, mais leur meilleure config est "sans filtre" — n'appuie pas l'hypothèse testée) |
 | 15 | Overnight drift sur ETF-paniers hors indices actions larges | `Swing_trading/overnight_drift_baskets/` | Secteurs SPDR (XLE, XLF, XLK, XLV, XLY, XLP), matières premières (GLD, SLV, USO), obligataire (TLT, IEF), international (EFA, EEM) — 13 ETF-paniers | Daily (swing, entrée overnight non filtrée) | Rejeté (12/13 Sharpe IS négatif ; seul GLD positif échoue le seuil Bonferroni) | p=0.013 (GLD, meilleur cas, seuil corrigé du sous-groupe = 0.00385) |
 | 16 | Overnight drift filtré par effet turn-of-month | `Swing_trading/turn_of_month/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée au calendrier) | Rejeté (config IS `tom_only` s'effondre en OOS sur les 4 indices, placebo p=0.90-0.97) | p=0.904-0.967 (4 indices primaires, tous pires que le hasard) |
+| 17 | Effet pré-jour-férié (jambe intraday, pas filtre overnight) | `Swing_trading/pre_holiday_effect/` | 20 tickers cross-asset (4 indices primaires + 16 cartographie secondaire) | Daily (swing, edge intraday open→close) | Rejeté (Sharpe IS/WF trop faibles sur le groupe primaire ; seul XLP < 0.05 mais Sharpe IS négatif et échoue Bonferroni du grid search) | p=0.020 (XLP, Sharpe IS négatif — rejeté malgré la p-value) |
 
 ## Rationale des transitions
 
@@ -278,29 +279,147 @@ même piste une 5e fois (contraire à Rule #3) — cette question est donc close
 pour ce projet : `overnight_drift` original (#10), sans filtre, reste
 la seule forme validée de cet edge.
 
-Application de Rule #3 pour #17 : plutôt qu'un nouveau filtre du même edge,
-tester un **mécanisme structurel différent, sans classement ni tendance de
-prix** (cohérent avec l'enseignement transversal : les signaux basés sur le
-niveau/rang des prix — Ichimoku #12, momentum #13 — ont échoué, alors que les
-biais structurels/calendaires sans indicateur ont été la seule piste
-prometteuse). Piste retenue : **retournement à très court terme (short-term
-reversal)** après un mouvement journalier extrême — anomalie documentée
-séparément de l'overnight drift et du momentum (mécanisme de survente/survente
-liée à la fourniture de liquidité après un choc, pas à une tendance ni à un
-classement relatif), testée sur les 20 instruments du panier existant, en
-utilisant le **rendement intraday complet** (pas seulement la jambe
-overnight) pour conserver un nombre de trades élevé (~2500 par instrument sur
-l'historique complet) et éviter le piège du petit échantillon qui a fait
-échouer #14 et #16. Auto-critique à surveiller dès la conception (Rule #4) :
-le retournement à court terme est proche, dans son mécanisme économique
-(survente liée à un choc récent), du mean-reversion déjà exclu de la classe
-"patterns intraday purs" rejetée en bloc (#2 VWAP reversion) — mais ce
-rejet portait sur des données 5 minutes intraday, pas sur un retournement
-journalier lendemain d'un choc, mécanisme distinct (liquidité institutionnelle
-vs microstructure intraday) qui mérite un test propre avant d'être écarté par
-analogie.
+Application de Rule #3 pour #17 (première proposition, corrigée ci-dessous
+par Rule #4) : plutôt qu'un nouveau filtre du même edge, tester un mécanisme
+structurel différent. Première piste envisagée : retournement à très court
+terme (short-term reversal) après un mouvement journalier extrême.
+
+**Auto-critique avant de coder (Rule #4) — piste rejetée avant implémentation** :
+cette première piste utilise un signal basé sur la **magnitude du mouvement
+de prix** de la veille (un mouvement "extrême" doit être mesuré et classé),
+ce qui contredit directement l'enseignement transversal consolidé sur ce
+projet — les signaux basés sur le niveau/rang/amplitude des prix (Ichimoku
+#12, momentum #13) ont systématiquement échoué, alors que seuls les biais
+structurels/calendaires **sans aucun indicateur de prix** (overnight drift
+#10) ont montré un edge réel. Proposer un retournement-sur-choc aurait
+reproduit la même classe d'erreur que #12/#13 sous une autre forme, en
+particulier en resssemblant de près au mean-reversion déjà rejeté en bloc
+avec les patterns intraday purs (#2 VWAP reversion) — un risque de
+rationalisation post-hoc ("cette fois c'est différent") plutôt qu'une
+innovation réelle.
+
+**Deuxième proposition, elle aussi rejetée avant implémentation (Rule #4)** :
+l'effet jour-de-la-semaine (day-of-week / "weekend effect", French 1980)
+appliqué en FILTRE de l'entrée overnight sur SPY/QQQ/IWM/DIA a été envisagé,
+mais relecture à froid : c'est structurellement un **5e filtre calendaire du
+même edge overnight**, sur le même sous-groupe, avec le même risque déjà
+matérialisé trois fois (#14, #15 pour la composante panier, #16) —
+exactement la piste que le paragraphe "Bilan" ci-dessus vient de conclure
+comme close. La proposer reviendrait à contredire ma propre conclusion
+écrite quelques lignes plus haut dans ce même document.
+
+**Piste retenue pour #17 (deuxième correction)** : tester l'effet
+pré-jour-férié ("pre-holiday effect", Ariel 1990 : le rendement moyen le
+dernier jour de bourse avant un jour férié est significativement supérieur
+aux autres jours) comme **edge autonome sur le rendement intraday (ouverture
+→ clôture, RTH)**, PAS comme filtre de l'entrée overnight. C'est une
+différence structurelle, pas seulement cosmétique, avec #14/#15/#16 : ces
+trois stratégies conditionnaient toutes la même jambe overnight
+(clôture→ouverture) déjà validée par #10 — un rendement pré-férié, lui, se
+loge dans la jambe opposée (ouverture→clôture, séance ouverte), jamais testée
+comme source d'edge dans ce projet. Purement calendaire (calendrier des jours
+fériés US connu à l'avance, zéro fuite de futur), sans indicateur ni
+classement de prix — cohérent avec l'enseignement transversal. Testé sur le
+panier complet des 20 instruments (pas de restriction a priori au sous-groupe
+indices, puisque l'hypothèse ne porte pas sur l'edge overnight déjà borné à
+ce sous-groupe, mais sur un mécanisme intraday distinct — SPY/QQQ/IWM/DIA
+restent néanmoins rapportés séparément par souci de comparabilité avec les
+stratégies précédentes), avec le même protocole complet (grille
+pré-férié/non-pré-férié/sans-filtre, IS/OOS/walk-forward/placebo).
+
+Auto-critique à surveiller dès la conception : (1) le nombre de jours fériés
+US par an (~9-10) rend le nombre de trades pré-férié mécaniquement faible
+(~9-10 par an, potentiellement 130-150 sur l'historique complet) — le risque
+de perte de puissance statistique déjà rencontré sur #16 est encore plus
+sévère ici et devra être rapporté explicitement, avec un seuil de prudence
+plus strict encore avant toute conclusion positive ; (2) un jour pré-férié
+tombe souvent en fin de semaine (nombreux jours fériés US calés sur un lundi,
+créant un pont) — vérifier que l'effet mesuré n'est pas simplement une
+redite de l'effet vendredi/weekend déjà écarté ci-dessus.
+
+**#17 → #18** : Rejeté sans ambiguïté — sur les 4 indices primaires, la
+config `pre_holiday_only` est certes retenue en in-sample, mais avec un
+Sharpe à peine positif (t-stat ≤ 0.63) et un walk-forward négatif pour les 4
+(-0.05 à -0.61) ; le test placebo ne descend jamais sous 0.05. Sur la
+cartographie secondaire, XLP est le seul résultat sous le seuil naïf
+(p=0.020), mais son Sharpe in-sample est négatif — il n'est retenu que
+comme la moins mauvaise des 3 configs, pas comme un signal positif — et il
+échoue en outre la correction Bonferroni propre au grid search de 3
+configs (seuil 0.05/3≈0.0167). Confirmation empirique du confound
+pré-enregistré (54.2 % des jours pré-fériés sont des vendredis), mais sans
+conséquence puisqu'aucun résultat ne survit au protocole de toute façon.
+Cinquième tentative consécutive de biais calendaire (#11, #14, #15, #16,
+#17) rejetée — la question "existe-t-il un filtre ou un second biais
+calendaire qui améliore ou complète l'edge overnight validé" est
+définitivement close pour ce projet (Rule #3) : la piste calendaire pure,
+sans indicateur ni classement de prix, est désormais épuisée après 5 essais
+indépendants, pas seulement les 4 précédents ciblant la jambe overnight.
+
+Application de Rule #3/#4 pour #18 : au lieu de proposer un 6ᵉ biais
+calendaire (piste désormais explicitement épuisée, voir ci-dessus) ou un
+signal directionnel isolé sur le panier cross-asset (piste également
+épuisée : Ichimoku #12, momentum #13 ont tous deux échoué), **combiner deux
+éléments déjà validés/étudiés séparément dans ce projet plutôt que
+d'importer un signal académique de plus** : le moteur de sélection
+cross-sectionnelle construit pour le momentum (#13 — comparer plusieurs
+instruments entre eux au même instant, jamais un instrument à son propre
+passé) appliqué non pas à un facteur de prix (déjà rejeté), mais pour
+**arbitrer, chaque soir, LEQUEL des paniers larges déjà validés pour l'edge
+overnight (SPY/QQQ/IWM/DIA) reçoit le trade**, sur la base d'un ensemble de
+confirmations pré-enregistrées (ex. régime de tendance Kumo déjà backtesté
+en #14, volume, ou tout autre filtre déjà étudié) — au lieu de trader les 4
+instruments chaque soir en parallèle (ce qui revient à l'edge #10 déjà
+validé), ne trader que l'instrument (ou sous-ensemble) où les confirmations
+sont réunies ce jour-là. Idée suggérée par l'utilisateur le 2026-09-25 en
+ces termes : passer le trade seulement quand plusieurs confirmations sont
+"au vert" simultanément sur un actif donné parmi plusieurs suivis, l'actif
+qui déclenche pouvant changer d'un jour à l'autre.
+
+**Passage au filtre des enseignements du projet avant de coder (Rule #4,
+appliqué à cette proposition elle-même, y compris venant de l'utilisateur)**
+: cette idée est structurellement différente des 4 filtres déjà rejetés
+(#14/#15/#16 + une variante de #17), car ceux-ci filtraient le *temps*
+(quels jours trader un instrument fixe), alors que celle-ci filtre
+*l'instrument* (quel instrument trader un jour fixe) — une dimension jamais
+testée dans ce projet pour l'edge overnight. Point de vigilance
+obligatoire avant codage, pour ne pas répéter l'erreur de #14/#16 : (1) les
+confirmations utilisées comme critère de sélection doivent être
+**pré-enregistrées avant de voir les résultats OOS/placebo**, jamais
+choisies après coup parmi plusieurs combinaisons testées (sinon c'est un
+grid search parmi N combinaisons de confirmations, sur le même
+portefeuille de 4 instruments — soumis à la correction multiple-testing
+globale standard, comme pour #13, et non à la correction hiérarchique
+cross-asset qui ne s'applique qu'à la diversité de classes d'actifs) ; (2)
+puisqu'un seul instrument (ou un sous-ensemble restreint) est tradé par
+soir au lieu de 4, le nombre de trades effectif chute mécaniquement — le
+même risque de perte de puissance statistique que #16/#17 s'applique ici et
+devra être mesuré et rapporté avant toute conclusion ; (3) vérifier que le
+mécanisme de sélection ne recrée pas simplement le filtre de régime Kumo
+déjà rejeté en #14 sous une autre forme (si la seule confirmation retenue
+est le régime de tendance) — la valeur ajoutée attendue de cette approche
+est la **sélection relative entre instruments**, pas un nouveau filtre
+temporel déguisé ; si le protocole ne teste in fine qu'un filtre par
+instrument indépendamment (comme #14), ce ne serait pas une innovation
+réelle par rapport à la piste déjà close.
 
 ## Évolutions de la méthodologie elle-même
+
+**2026-09-25 — clarification de la correction multiple-testing d'un grid
+search sur le même instrument** (précisée dans `CLAUDE.md`, section
+"Auto-amélioration de la méthodologie") : distincte de la correction
+hiérarchique par sous-groupe cross-asset (voir entrée du 2026-09-25
+ci-dessous, qui concerne la diversité de *classes d'actifs*), toute grille
+de N configurations testées sur le **même** instrument/portefeuille (ex. les
+3 configs unfiltered/filtré/anti-filtré de #14 à #17) répond à une seule
+question posée N fois, et doit recevoir une correction Bonferroni globale
+standard (seuil 0.05/N) — appliquée en plus, jamais à la place, de la
+correction hiérarchique quand l'instrument appartient également à un
+sous-groupe cross-asset. Appliqué rétroactivement à #17 (XLP, seuil
+0.05/3≈0.0167, p=0.020 échoue) ; les stratégies #12 à #16 n'ont pas nécessité
+cette distinction dans leur verdict final (les grid search y échouaient déjà
+au critère 1 ou à l'OOS avant même d'atteindre ce seuil), donc pas de
+révision de leur verdict, seulement de la justification à appliquer
+systématiquement à partir de #17.
 
 **2026-09-25 — correction de la portée de la correction multiple-testing**
 (sur remarque explicite de l'utilisateur, voir aussi `CLAUDE.md` section
@@ -412,3 +531,40 @@ hétérogènes, y compris #13 en cours.
   overnight (#10) est donc confirmé toujours présent dans cette fenêtre de
   données, mais explicitement pas concentré dans la fenêtre turn-of-month —
   preuve directe contre l'hypothèse testée, pas une simple absence de preuve.
+- **Cinq tentatives consécutives de biais calendaire pur ont maintenant
+  échoué à filtrer ou compléter l'edge overnight** (#11 actions
+  individuelles, #14 régime Kumo, #15 ETF-paniers, #16 turn-of-month, #17
+  pré-jour-férié sur la jambe intraday) : la piste "biais calendaire sans
+  indicateur ni classement de prix" est riche en théorie académique
+  (Ariel, French, Lakonishok-Smidt) mais aucune variante testée ici n'a
+  isolé un edge qui survive à l'OOS/walk-forward/placebo sur ce panier de
+  20 instruments, en dehors de l'edge overnight structurel original (#10)
+  lui-même. Un Sharpe IS positif avec un t-stat faible (<1) sur un
+  échantillon réduit par le filtrage (65 à 254 trades selon la stratégie)
+  est un schéma désormais récurrent qui ne survit jamais à l'OOS — signal
+  qu'un filtre calendaire supplémentaire, quel qu'il soit, n'a plus de
+  raison a priori de mieux se comporter qu'un des 5 déjà testés.
+- **Une p-value basse ne suffit jamais si le Sharpe in-sample de la config
+  retenue est négatif** (#17, XLP) : quand une config n'est sélectionnée que
+  parce qu'elle est la moins mauvaise des options de la grille (pas parce
+  qu'elle est positive), un résultat OOS/placebo qui a l'air bon est un
+  artefact de sélection sur un petit échantillon, pas une confirmation —
+  même logique déjà rencontrée sur `vwap_reversion` (#2, p=0.003 mais rejeté
+  sur Sharpe OOS négatif). Ce schéma justifie désormais explicitement de
+  vérifier le signe du Sharpe IS de la config retenue avant même de lire la
+  p-value du placebo, pas seulement après.
+- **La correction multiple-testing d'un grid search sur le même instrument
+  (Bonferroni global, seuil 0.05/N) est distincte de la correction
+  hiérarchique par sous-groupe cross-asset** (seuil 0.05/taille du
+  sous-groupe) et les deux s'appliquent en même temps, jamais l'une à la
+  place de l'autre, quand un instrument appartient à un sous-groupe testé
+  avec une grille de plusieurs configs (voir "Évolutions de la méthodologie"
+  ci-dessus, clarifié à l'occasion de #17).
+- **Toute proposition de stratégie suivante — y compris venant de
+  l'utilisateur ou de l'agent lui-même — doit être passée au filtre des
+  enseignements déjà tirés ci-dessus avant d'être codée** (Rule #4) : deux
+  propositions de piste calendaire supplémentaire ont déjà été écartées
+  avant codage lors du choix de #17 (retournement court terme, effet
+  jour-de-la-semaine) précisément parce qu'elles prolongeaient une classe
+  déjà rejetée ou contredisaient l'enseignement sur les signaux de prix —
+  cette discipline doit rester systématique, pas ponctuelle.

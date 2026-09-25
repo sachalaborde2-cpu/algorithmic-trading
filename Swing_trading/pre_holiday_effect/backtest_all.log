@@ -1,0 +1,1317 @@
+=== SPY ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758       0.01  0.04    754        0.30
+    pre_holiday_only    65       0.24  0.63     31        0.21
+non_pre_holiday_only  1693      -0.03 -0.07    723        0.28
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.60  exp_$=20.88  exp_R=11.44  profit_factor=1.25  total_$=1357.00  sharpe=0.24  t_stat=0.63  max_dd_$=-1660.00
+OOS : n_trades=31  win_rate=0.42  exp_$=18.29  exp_R=10.15  profit_factor=1.19  total_$=567.00  sharpe=0.21  t_stat=0.36  max_dd_$=-727.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=967  win_rate=0.53  exp_$=-1.55  exp_R=0.23  profit_factor=0.99  total_$=-1498.00  sharpe=-0.05  t_stat=-0.16  max_dd_$=-7505.00
+  test a partir de 2017-09-27 : filter=non_pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=non_pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=unfiltered
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=non_pre_holiday_only
+  test a partir de 2020-12-27 : filter=non_pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=unfiltered
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=unfiltered
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=22.04  exp_R=0.24  profit_factor=1.25  total_$=2116.00  sharpe=0.25  t_stat=0.80  max_dd_$=-1614.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=20.04  exp_R=11.02  profit_factor=1.23  total_$=1924.00  sharpe=0.23  t_stat=0.72  max_dd_$=-1660.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=18.04  exp_R=5.01  profit_factor=1.20  total_$=1732.00  sharpe=0.21  t_stat=0.65  max_dd_$=-1709.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=16.04  exp_R=3.01  profit_factor=1.18  total_$=1540.00  sharpe=0.18  t_stat=0.58  max_dd_$=-1775.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 567$ | pile ou face : -20$ +/- 1512$ | p-value = 0.349
+
+Trades ecrits dans trades_SPY_best.csv
+Courbe ecrite dans examples/equity_SPY.png
+=== QQQ ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758       0.13  0.33    754        0.15
+    pre_holiday_only    65       0.19  0.51     31       -0.24
+non_pre_holiday_only  1693       0.09  0.25    723        0.19
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.58  exp_$=17.35  exp_R=9.68  profit_factor=1.20  total_$=1128.00  sharpe=0.19  t_stat=0.51  max_dd_$=-1620.00
+OOS : n_trades=31  win_rate=0.45  exp_$=-31.16  exp_R=-14.58  profit_factor=0.81  total_$=-966.00  sharpe=-0.24  t_stat=-0.42  max_dd_$=-1343.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1313  win_rate=0.53  exp_$=-5.41  exp_R=-1.70  profit_factor=0.96  total_$=-7103.00  sharpe=-0.18  t_stat=-0.53  max_dd_$=-15775.00
+  test a partir de 2017-09-27 : filter=non_pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=non_pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=non_pre_holiday_only
+  test a partir de 2018-12-27 : filter=non_pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=non_pre_holiday_only
+  test a partir de 2020-03-27 : filter=unfiltered
+  test a partir de 2020-06-27 : filter=unfiltered
+  test a partir de 2020-09-27 : filter=non_pre_holiday_only
+  test a partir de 2020-12-27 : filter=non_pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=unfiltered
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=unfiltered
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=non_pre_holiday_only
+  test a partir de 2025-12-27 : filter=non_pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=3.69  exp_R=0.06  profit_factor=1.03  total_$=354.00  sharpe=0.04  t_stat=0.11  max_dd_$=-1840.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=1.69  exp_R=1.84  profit_factor=1.02  total_$=162.00  sharpe=0.02  t_stat=0.05  max_dd_$=-1896.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=-0.31  exp_R=0.42  profit_factor=1.00  total_$=-30.00  sharpe=-0.00  t_stat=-0.01  max_dd_$=-1952.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=-2.31  exp_R=-0.05  profit_factor=0.98  total_$=-222.00  sharpe=-0.02  t_stat=-0.07  max_dd_$=-2008.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -966$ | pile ou face : 42$ +/- 2313$ | p-value = 0.671
+
+Trades ecrits dans trades_QQQ_best.csv
+Courbe ecrite dans examples/equity_QQQ.png
+=== IWM ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.82 -2.18    754       -0.36
+    pre_holiday_only    65       0.06  0.16     31        0.43
+non_pre_holiday_only  1693      -0.84 -2.23    723       -0.43
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.63  exp_$=3.23  exp_R=2.62  profit_factor=1.06  total_$=210.00  sharpe=0.06  t_stat=0.16  max_dd_$=-1455.00
+OOS : n_trades=31  win_rate=0.58  exp_$=25.52  exp_R=13.76  profit_factor=1.43  total_$=791.00  sharpe=0.43  t_stat=0.75  max_dd_$=-802.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=496  win_rate=0.49  exp_$=-19.75  exp_R=-8.87  profit_factor=0.80  total_$=-9796.00  sharpe=-0.61  t_stat=-1.84  max_dd_$=-11808.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=non_pre_holiday_only
+  test a partir de 2021-03-27 : filter=non_pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=non_pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.61  exp_$=12.43  exp_R=0.14  profit_factor=1.22  total_$=1193.00  sharpe=0.23  t_stat=0.72  max_dd_$=-1401.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.61  exp_$=10.43  exp_R=6.21  profit_factor=1.18  total_$=1001.00  sharpe=0.19  t_stat=0.60  max_dd_$=-1455.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.61  exp_$=8.43  exp_R=2.61  profit_factor=1.14  total_$=809.00  sharpe=0.15  t_stat=0.49  max_dd_$=-1509.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.61  exp_$=6.43  exp_R=1.40  profit_factor=1.11  total_$=617.00  sharpe=0.12  t_stat=0.37  max_dd_$=-1563.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 791$ | pile ou face : -85$ +/- 1078$ | p-value = 0.209
+
+Trades ecrits dans trades_IWM_best.csv
+Courbe ecrite dans examples/equity_IWM.png
+=== DIA ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.15 -0.40    754        0.24
+    pre_holiday_only    65       0.02  0.04     31        0.26
+non_pre_holiday_only  1693      -0.16 -0.42    723        0.21
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.57  exp_$=1.08  exp_R=1.54  profit_factor=1.02  total_$=70.00  sharpe=0.02  t_stat=0.04  max_dd_$=-1811.00
+OOS : n_trades=31  win_rate=0.45  exp_$=14.58  exp_R=8.29  profit_factor=1.23  total_$=452.00  sharpe=0.26  t_stat=0.44  max_dd_$=-457.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1195  win_rate=0.52  exp_$=-3.09  exp_R=-0.55  profit_factor=0.96  total_$=-3693.00  sharpe=-0.15  t_stat=-0.46  max_dd_$=-7974.00
+  test a partir de 2017-09-27 : filter=non_pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=non_pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=non_pre_holiday_only
+  test a partir de 2018-12-27 : filter=non_pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=non_pre_holiday_only
+  test a partir de 2020-12-27 : filter=non_pre_holiday_only
+  test a partir de 2021-03-27 : filter=non_pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=non_pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=unfiltered
+  test a partir de 2025-09-27 : filter=unfiltered
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=unfiltered
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.53  exp_$=7.44  exp_R=0.09  profit_factor=1.11  total_$=714.00  sharpe=0.12  t_stat=0.38  max_dd_$=-1765.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.53  exp_$=5.44  exp_R=3.72  profit_factor=1.08  total_$=522.00  sharpe=0.09  t_stat=0.27  max_dd_$=-1811.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=3.44  exp_R=1.36  profit_factor=1.05  total_$=330.00  sharpe=0.06  t_stat=0.17  max_dd_$=-1877.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=1.44  exp_R=0.57  profit_factor=1.02  total_$=138.00  sharpe=0.02  t_stat=0.07  max_dd_$=-1949.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 452$ | pile ou face : -117$ +/- 1007$ | p-value = 0.312
+
+Trades ecrits dans trades_DIA_best.csv
+Courbe ecrite dans examples/equity_DIA.png
+=== XLE ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -1.78 -4.71    754       -1.12
+    pre_holiday_only    65      -0.47 -1.24     31        0.34
+non_pre_holiday_only  1693      -1.72 -4.55    723       -1.19
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.40  exp_$=-7.01  exp_R=-2.50  profit_factor=0.64  total_$=-455.50  sharpe=-0.47  t_stat=-1.24  max_dd_$=-573.50
+OOS : n_trades=31  win_rate=0.52  exp_$=4.19  exp_R=3.10  profit_factor=1.32  total_$=130.00  sharpe=0.34  t_stat=0.59  max_dd_$=-132.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=205  win_rate=0.48  exp_$=-1.80  exp_R=0.10  profit_factor=0.91  total_$=-370.00  sharpe=-0.17  t_stat=-0.51  max_dd_$=-633.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=non_pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=non_pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.49  exp_$=-1.39  exp_R=0.01  profit_factor=0.92  total_$=-133.50  sharpe=-0.10  t_stat=-0.31  max_dd_$=-521.50
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.44  exp_$=-3.39  exp_R=-0.70  profit_factor=0.81  total_$=-325.50  sharpe=-0.24  t_stat=-0.76  max_dd_$=-573.50
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.40  exp_$=-5.39  exp_R=-0.85  profit_factor=0.71  total_$=-517.50  sharpe=-0.38  t_stat=-1.21  max_dd_$=-663.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.40  exp_$=-7.39  exp_R=-0.90  profit_factor=0.63  total_$=-709.50  sharpe=-0.52  t_stat=-1.64  max_dd_$=-807.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 130$ | pile ou face : -135$ +/- 230$ | p-value = 0.140
+
+Trades ecrits dans trades_XLE_best.csv
+Courbe ecrite dans examples/equity_XLE.png
+=== XLF ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -2.08 -5.48    754       -1.06
+    pre_holiday_only    65      -0.01 -0.02     31        0.52
+non_pre_holiday_only  1693      -2.11 -5.56    723       -1.15
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.46  exp_$=-0.06  exp_R=0.97  profit_factor=0.99  total_$=-4.00  sharpe=-0.01  t_stat=-0.02  max_dd_$=-225.00
+OOS : n_trades=31  win_rate=0.61  exp_$=4.84  exp_R=3.42  profit_factor=1.60  total_$=150.00  sharpe=0.52  t_stat=0.91  max_dd_$=-100.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=144  win_rate=0.47  exp_$=-2.52  exp_R=-0.26  profit_factor=0.79  total_$=-363.00  sharpe=-0.35  t_stat=-1.04  max_dd_$=-587.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.60  exp_$=3.52  exp_R=0.06  profit_factor=1.43  total_$=338.00  sharpe=0.39  t_stat=1.22  max_dd_$=-193.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.51  exp_$=1.52  exp_R=1.76  profit_factor=1.17  total_$=146.00  sharpe=0.17  t_stat=0.53  max_dd_$=-225.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.48  exp_$=-0.48  exp_R=0.38  profit_factor=0.95  total_$=-46.00  sharpe=-0.05  t_stat=-0.17  max_dd_$=-283.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.46  exp_$=-2.48  exp_R=-0.08  profit_factor=0.78  total_$=-238.00  sharpe=-0.27  t_stat=-0.86  max_dd_$=-380.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 150$ | pile ou face : -116$ +/- 168$ | p-value = 0.063
+
+Trades ecrits dans trades_XLF_best.csv
+Courbe ecrite dans examples/equity_XLF.png
+=== XLK ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.40 -1.05    754       -0.18
+    pre_holiday_only    65       0.02  0.06     31       -0.37
+non_pre_holiday_only  1693      -0.41 -1.08    723       -0.12
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.51  exp_$=0.47  exp_R=1.23  profit_factor=1.02  total_$=30.50  sharpe=0.02  t_stat=0.06  max_dd_$=-457.50
+OOS : n_trades=31  win_rate=0.39  exp_$=-15.95  exp_R=-6.98  profit_factor=0.69  total_$=-494.50  sharpe=-0.37  t_stat=-0.64  max_dd_$=-575.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=906  win_rate=0.51  exp_$=-5.76  exp_R=-1.88  profit_factor=0.86  total_$=-5220.50  sharpe=-0.50  t_stat=-1.48  max_dd_$=-6206.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=non_pre_holiday_only
+  test a partir de 2020-03-27 : filter=non_pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=non_pre_holiday_only
+  test a partir de 2020-12-27 : filter=non_pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=unfiltered
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=unfiltered
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=non_pre_holiday_only
+  test a partir de 2025-12-27 : filter=non_pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.51  exp_$=-2.83  exp_R=-0.01  profit_factor=0.91  total_$=-272.00  sharpe=-0.09  t_stat=-0.29  max_dd_$=-686.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.47  exp_$=-4.83  exp_R=-1.42  profit_factor=0.85  total_$=-464.00  sharpe=-0.16  t_stat=-0.50  max_dd_$=-744.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.44  exp_$=-6.83  exp_R=-1.21  profit_factor=0.79  total_$=-656.00  sharpe=-0.22  t_stat=-0.70  max_dd_$=-802.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.41  exp_$=-8.83  exp_R=-1.14  profit_factor=0.74  total_$=-848.00  sharpe=-0.29  t_stat=-0.91  max_dd_$=-860.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -494$ | pile ou face : -54$ +/- 776$ | p-value = 0.711
+
+Trades ecrits dans trades_XLK_best.csv
+Courbe ecrite dans examples/equity_XLK.png
+=== XLV ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.36 -0.96    754        0.18
+    pre_holiday_only    65       0.14  0.37     31        0.18
+non_pre_holiday_only  1693      -0.39 -1.03    723        0.16
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.48  exp_$=3.60  exp_R=2.80  profit_factor=1.14  total_$=234.00  sharpe=0.14  t_stat=0.37  max_dd_$=-464.00
+OOS : n_trades=31  win_rate=0.58  exp_$=4.97  exp_R=3.48  profit_factor=1.18  total_$=154.00  sharpe=0.18  t_stat=0.30  max_dd_$=-239.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=896  win_rate=0.48  exp_$=-5.20  exp_R=-1.60  profit_factor=0.88  total_$=-4659.00  sharpe=-0.45  t_stat=-1.36  max_dd_$=-5907.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=non_pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=non_pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=unfiltered
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=non_pre_holiday_only
+  test a partir de 2022-12-27 : filter=non_pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=non_pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=non_pre_holiday_only
+  test a partir de 2026-03-27 : filter=unfiltered
+  test a partir de 2026-06-27 : filter=non_pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=6.04  exp_R=0.08  profit_factor=1.23  total_$=580.00  sharpe=0.23  t_stat=0.72  max_dd_$=-451.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.51  exp_$=4.04  exp_R=3.02  profit_factor=1.15  total_$=388.00  sharpe=0.15  t_stat=0.48  max_dd_$=-464.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.48  exp_$=2.04  exp_R=1.01  profit_factor=1.07  total_$=196.00  sharpe=0.08  t_stat=0.24  max_dd_$=-498.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.48  exp_$=0.04  exp_R=0.34  profit_factor=1.00  total_$=4.00  sharpe=0.00  t_stat=0.00  max_dd_$=-536.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 154$ | pile ou face : -167$ +/- 519$ | p-value = 0.279
+
+Trades ecrits dans trades_XLV_best.csv
+Courbe ecrite dans examples/equity_XLV.png
+=== XLY ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.84 -2.23    754       -0.51
+    pre_holiday_only    65       0.14  0.36     31       -0.55
+non_pre_holiday_only  1693      -0.88 -2.31    723       -0.43
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.57  exp_$=3.02  exp_R=2.51  profit_factor=1.14  total_$=196.00  sharpe=0.14  t_stat=0.36  max_dd_$=-566.00
+OOS : n_trades=31  win_rate=0.45  exp_$=-12.85  exp_R=-5.43  profit_factor=0.63  total_$=-398.50  sharpe=-0.55  t_stat=-0.95  max_dd_$=-435.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=845  win_rate=0.50  exp_$=-4.93  exp_R=-1.47  profit_factor=0.85  total_$=-4166.50  sharpe=-0.58  t_stat=-1.74  max_dd_$=-4230.50
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=non_pre_holiday_only
+  test a partir de 2020-12-27 : filter=non_pre_holiday_only
+  test a partir de 2021-03-27 : filter=non_pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=unfiltered
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=non_pre_holiday_only
+  test a partir de 2025-12-27 : filter=non_pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=-0.11  exp_R=0.02  profit_factor=1.00  total_$=-10.50  sharpe=-0.00  t_stat=-0.02  max_dd_$=-499.50
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.53  exp_$=-2.11  exp_R=-0.05  profit_factor=0.92  total_$=-202.50  sharpe=-0.09  t_stat=-0.30  max_dd_$=-566.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.49  exp_$=-4.11  exp_R=-0.53  profit_factor=0.85  total_$=-394.50  sharpe=-0.18  t_stat=-0.58  max_dd_$=-652.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.48  exp_$=-6.11  exp_R=-0.68  profit_factor=0.78  total_$=-586.50  sharpe=-0.27  t_stat=-0.85  max_dd_$=-738.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -399$ | pile ou face : -113$ +/- 399$ | p-value = 0.767
+
+Trades ecrits dans trades_XLY_best.csv
+Courbe ecrite dans examples/equity_XLY.png
+=== XLP ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.97 -2.57    754       -0.59
+    pre_holiday_only    65      -0.07 -0.20     31        1.01
+non_pre_holiday_only  1693      -0.98 -2.58    723       -0.76
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.49  exp_$=-1.08  exp_R=0.46  profit_factor=0.93  total_$=-70.00  sharpe=-0.07  t_stat=-0.20  max_dd_$=-345.00
+OOS : n_trades=31  win_rate=0.61  exp_$=14.55  exp_R=8.27  profit_factor=2.44  total_$=451.00  sharpe=1.01  t_stat=1.75  max_dd_$=-81.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=266  win_rate=0.53  exp_$=-0.76  exp_R=0.62  profit_factor=0.95  total_$=-203.00  sharpe=-0.11  t_stat=-0.32  max_dd_$=-953.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.58  exp_$=5.97  exp_R=0.08  profit_factor=1.48  total_$=573.00  sharpe=0.41  t_stat=1.30  max_dd_$=-319.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.53  exp_$=3.97  exp_R=2.98  profit_factor=1.30  total_$=381.00  sharpe=0.28  t_stat=0.87  max_dd_$=-345.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.53  exp_$=1.97  exp_R=0.99  profit_factor=1.14  total_$=189.00  sharpe=0.14  t_stat=0.43  max_dd_$=-393.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.47  exp_$=-0.03  exp_R=0.33  profit_factor=1.00  total_$=-3.00  sharpe=-0.00  t_stat=-0.01  max_dd_$=-462.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 451$ | pile ou face : -133$ +/- 279$ | p-value = 0.020
+
+Trades ecrits dans trades_XLP_best.csv
+Courbe ecrite dans examples/equity_XLP.png
+=== GLD ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.93 -2.45    754       -0.46
+    pre_holiday_only    65       0.42  1.10     31        0.00
+non_pre_holiday_only  1693      -0.99 -2.61    723       -0.47
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.57  exp_$=8.05  exp_R=5.02  profit_factor=1.44  total_$=523.00  sharpe=0.42  t_stat=1.10  max_dd_$=-246.00
+OOS : n_trades=31  win_rate=0.48  exp_$=0.29  exp_R=1.15  profit_factor=1.00  total_$=9.00  sharpe=0.00  t_stat=0.01  max_dd_$=-814.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=609  win_rate=0.52  exp_$=-9.51  exp_R=-3.75  profit_factor=0.88  total_$=-5789.00  sharpe=-0.31  t_stat=-0.94  max_dd_$=-7796.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=non_pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=non_pre_holiday_only
+  test a partir de 2025-06-27 : filter=non_pre_holiday_only
+  test a partir de 2025-09-27 : filter=non_pre_holiday_only
+  test a partir de 2025-12-27 : filter=non_pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=7.54  exp_R=0.10  profit_factor=1.21  total_$=724.00  sharpe=0.18  t_stat=0.56  max_dd_$=-948.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=5.54  exp_R=3.77  profit_factor=1.15  total_$=532.00  sharpe=0.13  t_stat=0.42  max_dd_$=-996.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.50  exp_$=3.54  exp_R=1.39  profit_factor=1.09  total_$=340.00  sharpe=0.08  t_stat=0.27  max_dd_$=-1044.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.49  exp_$=1.54  exp_R=0.59  profit_factor=1.04  total_$=148.00  sharpe=0.04  t_stat=0.12  max_dd_$=-1092.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 9$ | pile ou face : -38$ +/- 1195$ | p-value = 0.472
+
+Trades ecrits dans trades_GLD_best.csv
+Courbe ecrite dans examples/equity_GLD.png
+=== SLV ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -3.41 -9.02    754       -0.84
+    pre_holiday_only    65      -0.07 -0.19     31       -0.17
+non_pre_holiday_only  1693      -3.43 -9.07    723       -0.82
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.43  exp_$=-0.35  exp_R=0.82  profit_factor=0.94  total_$=-23.00  sharpe=-0.07  t_stat=-0.19  max_dd_$=-137.00
+OOS : n_trades=31  win_rate=0.48  exp_$=-3.65  exp_R=-0.82  profit_factor=0.86  total_$=-113.00  sharpe=-0.17  t_stat=-0.29  max_dd_$=-214.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=145  win_rate=0.48  exp_$=-9.82  exp_R=-3.91  profit_factor=0.81  total_$=-1424.00  sharpe=-0.22  t_stat=-0.66  max_dd_$=-3280.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=unfiltered
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.49  exp_$=0.58  exp_R=0.03  profit_factor=1.05  total_$=56.00  sharpe=0.04  t_stat=0.14  max_dd_$=-215.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.45  exp_$=-1.42  exp_R=0.29  profit_factor=0.88  total_$=-136.00  sharpe=-0.11  t_stat=-0.33  max_dd_$=-258.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.42  exp_$=-3.42  exp_R=-0.35  profit_factor=0.74  total_$=-328.00  sharpe=-0.25  t_stat=-0.80  max_dd_$=-407.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.38  exp_$=-5.42  exp_R=-0.57  profit_factor=0.62  total_$=-520.00  sharpe=-0.40  t_stat=-1.27  max_dd_$=-589.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -113$ | pile ou face : -70$ +/- 394$ | p-value = 0.551
+
+Trades ecrits dans trades_SLV_best.csv
+Courbe ecrite dans examples/equity_SLV.png
+=== USO ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -1.11 -2.93    754       -0.14
+    pre_holiday_only    65       0.10  0.27     31        0.12
+non_pre_holiday_only  1693      -1.15 -3.03    723       -0.16
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.58  exp_$=3.51  exp_R=2.75  profit_factor=1.10  total_$=228.00  sharpe=0.10  t_stat=0.27  max_dd_$=-1091.00
+OOS : n_trades=31  win_rate=0.48  exp_$=3.77  exp_R=2.89  profit_factor=1.10  total_$=117.00  sharpe=0.12  t_stat=0.21  max_dd_$=-633.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=497  win_rate=0.50  exp_$=-2.16  exp_R=-0.08  profit_factor=0.96  total_$=-1074.00  sharpe=-0.11  t_stat=-0.31  max_dd_$=-6222.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=unfiltered
+  test a partir de 2018-09-27 : filter=non_pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=non_pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=non_pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=non_pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=5.59  exp_R=0.08  profit_factor=1.16  total_$=537.00  sharpe=0.17  t_stat=0.53  max_dd_$=-1047.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=3.59  exp_R=2.80  profit_factor=1.10  total_$=345.00  sharpe=0.11  t_stat=0.34  max_dd_$=-1091.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=1.59  exp_R=0.90  profit_factor=1.04  total_$=153.00  sharpe=0.05  t_stat=0.15  max_dd_$=-1136.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.51  exp_$=-0.41  exp_R=0.27  profit_factor=0.99  total_$=-39.00  sharpe=-0.01  t_stat=-0.04  max_dd_$=-1243.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 117$ | pile ou face : -141$ +/- 543$ | p-value = 0.342
+
+Trades ecrits dans trades_USO_best.csv
+Courbe ecrite dans examples/equity_USO.png
+=== TLT ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.67 -1.77    754       -0.84
+    pre_holiday_only    65       0.22  0.59     31       -0.60
+non_pre_holiday_only  1693      -0.71 -1.87    723       -0.74
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.57  exp_$=5.18  exp_R=3.59  profit_factor=1.21  total_$=337.00  sharpe=0.22  t_stat=0.59  max_dd_$=-436.00
+OOS : n_trades=31  win_rate=0.42  exp_$=-8.84  exp_R=-3.42  profit_factor=0.63  total_$=-274.00  sharpe=-0.60  t_stat=-1.03  max_dd_$=-316.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=786  win_rate=0.49  exp_$=-3.11  exp_R=-0.55  profit_factor=0.88  total_$=-2444.00  sharpe=-0.45  t_stat=-1.35  max_dd_$=-3355.00
+  test a partir de 2017-09-27 : filter=non_pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=non_pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=unfiltered
+  test a partir de 2021-12-27 : filter=unfiltered
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=non_pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=non_pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=2.66  exp_R=0.05  profit_factor=1.11  total_$=255.00  sharpe=0.13  t_stat=0.40  max_dd_$=-556.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.52  exp_$=0.66  exp_R=1.33  profit_factor=1.03  total_$=63.00  sharpe=0.03  t_stat=0.10  max_dd_$=-642.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.51  exp_$=-1.34  exp_R=0.16  profit_factor=0.95  total_$=-129.00  sharpe=-0.06  t_stat=-0.20  max_dd_$=-728.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.49  exp_$=-3.34  exp_R=-0.22  profit_factor=0.87  total_$=-321.00  sharpe=-0.16  t_stat=-0.51  max_dd_$=-814.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -274$ | pile ou face : -111$ +/- 272$ | p-value = 0.708
+
+Trades ecrits dans trades_TLT_best.csv
+Courbe ecrite dans examples/equity_TLT.png
+=== IEF ===
+
+Donnees : 2297 jours (2017-08-04 -> 2026-09-24)
+In-sample : 2017-08-04 -> 2023-12-21 | Hors-echantillon : 2023-12-22 -> 2026-09-24
+Jours pre-feries detectes : 88 (3.8% des jours) | dont vendredi : 53.4%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1607      -2.07 -5.24    690       -3.06
+    pre_holiday_only    58      -0.07 -0.18     30       -0.58
+non_pre_holiday_only  1549      -2.09 -5.27    660       -3.00
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=58  win_rate=0.55  exp_$=-0.59  exp_R=0.71  profit_factor=0.94  total_$=-34.00  sharpe=-0.07  t_stat=-0.18  max_dd_$=-204.00
+OOS : n_trades=30  win_rate=0.37  exp_$=-3.37  exp_R=-0.68  profit_factor=0.65  total_$=-101.00  sharpe=-0.58  t_stat=-0.96  max_dd_$=-158.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=79  win_rate=0.46  exp_$=-2.19  exp_R=-0.09  profit_factor=0.78  total_$=-173.00  sharpe=-0.29  t_stat=-0.82  max_dd_$=-305.00
+  test a partir de 2018-08-04 : filter=pre_holiday_only
+  test a partir de 2018-11-04 : filter=pre_holiday_only
+  test a partir de 2019-02-04 : filter=pre_holiday_only
+  test a partir de 2019-05-04 : filter=pre_holiday_only
+  test a partir de 2019-08-04 : filter=pre_holiday_only
+  test a partir de 2019-11-04 : filter=pre_holiday_only
+  test a partir de 2020-02-04 : filter=pre_holiday_only
+  test a partir de 2020-05-04 : filter=pre_holiday_only
+  test a partir de 2020-08-04 : filter=pre_holiday_only
+  test a partir de 2020-11-04 : filter=pre_holiday_only
+  test a partir de 2021-02-04 : filter=pre_holiday_only
+  test a partir de 2021-05-04 : filter=pre_holiday_only
+  test a partir de 2021-08-04 : filter=pre_holiday_only
+  test a partir de 2021-11-04 : filter=pre_holiday_only
+  test a partir de 2022-02-04 : filter=pre_holiday_only
+  test a partir de 2022-05-04 : filter=pre_holiday_only
+  test a partir de 2022-08-04 : filter=pre_holiday_only
+  test a partir de 2022-11-04 : filter=pre_holiday_only
+  test a partir de 2023-02-04 : filter=pre_holiday_only
+  test a partir de 2023-05-04 : filter=pre_holiday_only
+  test a partir de 2023-08-04 : filter=pre_holiday_only
+  test a partir de 2023-11-04 : filter=pre_holiday_only
+  test a partir de 2024-02-04 : filter=pre_holiday_only
+  test a partir de 2024-05-04 : filter=pre_holiday_only
+  test a partir de 2024-08-04 : filter=pre_holiday_only
+  test a partir de 2024-11-04 : filter=pre_holiday_only
+  test a partir de 2025-02-04 : filter=pre_holiday_only
+  test a partir de 2025-05-04 : filter=pre_holiday_only
+  test a partir de 2025-08-04 : filter=pre_holiday_only
+  test a partir de 2025-11-04 : filter=pre_holiday_only
+  test a partir de 2026-02-04 : filter=pre_holiday_only
+  test a partir de 2026-05-04 : filter=pre_holiday_only
+  test a partir de 2026-08-04 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=88  win_rate=0.56  exp_$=0.47  exp_R=0.02  profit_factor=1.05  total_$=41.00  sharpe=0.06  t_stat=0.19  max_dd_$=-213.00
+  slippage 1 tick(s)/execution : n_trades=88  win_rate=0.49  exp_$=-1.53  exp_R=0.23  profit_factor=0.84  total_$=-135.00  sharpe=-0.21  t_stat=-0.63  max_dd_$=-305.00
+  slippage 2 tick(s)/execution : n_trades=88  win_rate=0.48  exp_$=-3.53  exp_R=-0.38  profit_factor=0.66  total_$=-311.00  sharpe=-0.48  t_stat=-1.44  max_dd_$=-420.00
+  slippage 3 tick(s)/execution : n_trades=88  win_rate=0.43  exp_$=-5.53  exp_R=-0.59  profit_factor=0.52  total_$=-487.00  sharpe=-0.73  t_stat=-2.21  max_dd_$=-540.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -101$ | pile ou face : -129$ +/- 106$ | p-value = 0.412
+
+Trades ecrits dans trades_IEF_best.csv
+Courbe ecrite dans examples/equity_IEF.png
+=== EFA ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.94 -2.49    754       -0.44
+    pre_holiday_only    65      -0.02 -0.05     31        0.75
+non_pre_holiday_only  1693      -0.95 -2.52    723       -0.55
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.52  exp_$=-0.23  exp_R=0.88  profit_factor=0.98  total_$=-15.00  sharpe=-0.02  t_stat=-0.05  max_dd_$=-340.00
+OOS : n_trades=31  win_rate=0.58  exp_$=8.58  exp_R=5.29  profit_factor=2.01  total_$=266.00  sharpe=0.75  t_stat=1.29  max_dd_$=-65.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=492  win_rate=0.49  exp_$=-3.40  exp_R=-0.70  profit_factor=0.80  total_$=-1675.00  sharpe=-0.56  t_stat=-1.68  max_dd_$=-2275.00
+  test a partir de 2017-09-27 : filter=unfiltered
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=non_pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=non_pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=4.61  exp_R=0.07  profit_factor=1.39  total_$=443.00  sharpe=0.37  t_stat=1.18  max_dd_$=-290.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.54  exp_$=2.61  exp_R=2.31  profit_factor=1.20  total_$=251.00  sharpe=0.21  t_stat=0.67  max_dd_$=-340.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.53  exp_$=0.61  exp_R=0.65  profit_factor=1.04  total_$=59.00  sharpe=0.05  t_stat=0.16  max_dd_$=-401.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.51  exp_$=-1.39  exp_R=0.10  profit_factor=0.91  total_$=-133.00  sharpe=-0.11  t_stat=-0.36  max_dd_$=-479.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 266$ | pile ou face : -113$ +/- 220$ | p-value = 0.053
+
+Trades ecrits dans trades_EFA_best.csv
+Courbe ecrite dans examples/equity_EFA.png
+=== EEM ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -1.96 -5.17    754       -0.83
+    pre_holiday_only    65      -0.50 -1.31     31        0.51
+non_pre_holiday_only  1693      -1.90 -5.02    723       -0.93
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.49  exp_$=-4.18  exp_R=-1.09  profit_factor=0.65  total_$=-272.00  sharpe=-0.50  t_stat=-1.31  max_dd_$=-411.00
+OOS : n_trades=31  win_rate=0.52  exp_$=5.45  exp_R=3.73  profit_factor=1.66  total_$=169.00  sharpe=0.51  t_stat=0.89  max_dd_$=-87.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=262  win_rate=0.42  exp_$=-3.96  exp_R=-0.98  profit_factor=0.72  total_$=-1038.00  sharpe=-0.65  t_stat=-1.95  max_dd_$=-1354.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=non_pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=non_pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=0.93  exp_R=0.03  profit_factor=1.09  total_$=89.00  sharpe=0.10  t_stat=0.32  max_dd_$=-330.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.50  exp_$=-1.07  exp_R=0.46  profit_factor=0.90  total_$=-103.00  sharpe=-0.12  t_stat=-0.37  max_dd_$=-411.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.45  exp_$=-3.07  exp_R=-0.27  profit_factor=0.74  total_$=-295.00  sharpe=-0.33  t_stat=-1.04  max_dd_$=-539.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.44  exp_$=-5.07  exp_R=-0.51  profit_factor=0.61  total_$=-487.00  sharpe=-0.54  t_stat=-1.71  max_dd_$=-687.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 169$ | pile ou face : -115$ +/- 198$ | p-value = 0.086
+
+Trades ecrits dans trades_EEM_best.csv
+Courbe ecrite dans examples/equity_EEM.png
+=== AAPL ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758       0.37  0.97    754        1.15
+    pre_holiday_only    65       0.15  0.40     31        0.05
+non_pre_holiday_only  1693       0.35  0.92    723        1.17
+
+=== 2. Meilleure config in-sample : filter=unfiltered ===
+IS  : n_trades=1758  win_rate=0.52  exp_$=3.80  exp_R=2.90  profit_factor=1.07  total_$=6675.00  sharpe=0.37  t_stat=0.97  max_dd_$=-5174.25
+OOS : n_trades=754  win_rate=0.54  exp_$=23.81  exp_R=12.90  profit_factor=1.24  total_$=17951.00  sharpe=1.15  t_stat=1.99  max_dd_$=-4758.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1677  win_rate=0.52  exp_$=10.54  exp_R=6.27  profit_factor=1.14  total_$=17676.75  sharpe=0.58  t_stat=1.74  max_dd_$=-4759.00
+  test a partir de 2017-09-27 : filter=non_pre_holiday_only
+  test a partir de 2017-12-27 : filter=non_pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=non_pre_holiday_only
+  test a partir de 2018-12-27 : filter=non_pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=non_pre_holiday_only
+  test a partir de 2020-03-27 : filter=unfiltered
+  test a partir de 2020-06-27 : filter=unfiltered
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=unfiltered
+  test a partir de 2022-03-27 : filter=unfiltered
+  test a partir de 2022-06-27 : filter=unfiltered
+  test a partir de 2022-09-27 : filter=non_pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=unfiltered
+  test a partir de 2023-06-27 : filter=unfiltered
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=unfiltered
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=non_pre_holiday_only
+  test a partir de 2024-12-27 : filter=non_pre_holiday_only
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=unfiltered
+  test a partir de 2025-09-27 : filter=unfiltered
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=non_pre_holiday_only
+  test a partir de 2026-06-27 : filter=non_pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2512  win_rate=0.53  exp_$=11.80  exp_R=0.14  profit_factor=1.18  total_$=29650.00  sharpe=0.83  t_stat=2.61  max_dd_$=-4782.25
+  slippage 1 tick(s)/execution : n_trades=2512  win_rate=0.52  exp_$=9.80  exp_R=5.90  profit_factor=1.15  total_$=24626.00  sharpe=0.69  t_stat=2.17  max_dd_$=-5174.25
+  slippage 2 tick(s)/execution : n_trades=2512  win_rate=0.51  exp_$=7.80  exp_R=2.45  profit_factor=1.12  total_$=19602.00  sharpe=0.55  t_stat=1.73  max_dd_$=-5566.25
+  slippage 3 tick(s)/execution : n_trades=2512  win_rate=0.50  exp_$=5.80  exp_R=1.30  profit_factor=1.09  total_$=14578.00  sharpe=0.41  t_stat=1.29  max_dd_$=-6316.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 17951$ | pile ou face : -3499$ +/- 8837$ | p-value = 0.017
+
+Trades ecrits dans trades_AAPL_best.csv
+Courbe ecrite dans examples/equity_AAPL.png
+=== JPM ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.47 -1.24    754        0.46
+    pre_holiday_only    65       0.30  0.80     31        0.53
+non_pre_holiday_only  1693      -0.55 -1.44    723        0.36
+
+=== 2. Meilleure config in-sample : filter=pre_holiday_only ===
+IS  : n_trades=65  win_rate=0.54  exp_$=16.20  exp_R=9.10  profit_factor=1.37  total_$=1053.00  sharpe=0.30  t_stat=0.80  max_dd_$=-887.00
+OOS : n_trades=31  win_rate=0.61  exp_$=53.19  exp_R=27.60  profit_factor=1.58  total_$=1649.00  sharpe=0.53  t_stat=0.91  max_dd_$=-1776.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=619  win_rate=0.49  exp_$=-4.54  exp_R=-1.27  profit_factor=0.95  total_$=-2808.00  sharpe=-0.16  t_stat=-0.48  max_dd_$=-7017.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=non_pre_holiday_only
+  test a partir de 2019-12-27 : filter=unfiltered
+  test a partir de 2020-03-27 : filter=non_pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=pre_holiday_only
+  test a partir de 2021-06-27 : filter=pre_holiday_only
+  test a partir de 2021-09-27 : filter=pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=non_pre_holiday_only
+  test a partir de 2022-09-27 : filter=pre_holiday_only
+  test a partir de 2022-12-27 : filter=pre_holiday_only
+  test a partir de 2023-03-27 : filter=pre_holiday_only
+  test a partir de 2023-06-27 : filter=pre_holiday_only
+  test a partir de 2023-09-27 : filter=pre_holiday_only
+  test a partir de 2023-12-27 : filter=pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=non_pre_holiday_only
+  test a partir de 2024-09-27 : filter=unfiltered
+  test a partir de 2024-12-27 : filter=unfiltered
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=pre_holiday_only
+  test a partir de 2026-06-27 : filter=pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=96  win_rate=0.57  exp_$=30.15  exp_R=0.32  profit_factor=1.51  total_$=2894.00  sharpe=0.41  t_stat=1.29  max_dd_$=-1770.00
+  slippage 1 tick(s)/execution : n_trades=96  win_rate=0.56  exp_$=28.15  exp_R=15.07  profit_factor=1.47  total_$=2702.00  sharpe=0.38  t_stat=1.20  max_dd_$=-1776.00
+  slippage 2 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=26.15  exp_R=7.04  profit_factor=1.43  total_$=2510.00  sharpe=0.35  t_stat=1.12  max_dd_$=-1782.00
+  slippage 3 tick(s)/execution : n_trades=96  win_rate=0.55  exp_$=24.15  exp_R=4.36  profit_factor=1.39  total_$=2318.00  sharpe=0.33  t_stat=1.04  max_dd_$=-1788.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : 1649$ | pile ou face : 3$ +/- 1760$ | p-value = 0.183
+
+Trades ecrits dans trades_JPM_best.csv
+Courbe ecrite dans examples/equity_JPM.png
+=== XOM ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-21 | Hors-echantillon : 2023-09-22 -> 2026-09-24
+Jours pre-feries detectes : 96 (3.8% des jours) | dont vendredi : 54.2%
+
+=== 1. Grille (3 configurations testees) ===
+              filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+          unfiltered  1758      -0.43 -1.14    754       -0.15
+    pre_holiday_only    65      -0.37 -0.98     31       -0.16
+non_pre_holiday_only  1693      -0.36 -0.96    723       -0.13
+
+=== 2. Meilleure config in-sample : filter=non_pre_holiday_only ===
+IS  : n_trades=1693  win_rate=0.47  exp_$=-2.53  exp_R=-0.26  profit_factor=0.94  total_$=-4280.00  sharpe=-0.36  t_stat=-0.96  max_dd_$=-10161.00
+OOS : n_trades=723  win_rate=0.52  exp_$=-1.28  exp_R=0.36  profit_factor=0.98  total_$=-928.00  sharpe=-0.13  t_stat=-0.22  max_dd_$=-5344.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=968  win_rate=0.49  exp_$=-0.44  exp_R=0.78  profit_factor=0.99  total_$=-424.00  sharpe=-0.03  t_stat=-0.10  max_dd_$=-4209.00
+  test a partir de 2017-09-27 : filter=pre_holiday_only
+  test a partir de 2017-12-27 : filter=pre_holiday_only
+  test a partir de 2018-03-27 : filter=pre_holiday_only
+  test a partir de 2018-06-27 : filter=pre_holiday_only
+  test a partir de 2018-09-27 : filter=pre_holiday_only
+  test a partir de 2018-12-27 : filter=pre_holiday_only
+  test a partir de 2019-03-27 : filter=non_pre_holiday_only
+  test a partir de 2019-06-27 : filter=non_pre_holiday_only
+  test a partir de 2019-09-27 : filter=pre_holiday_only
+  test a partir de 2019-12-27 : filter=pre_holiday_only
+  test a partir de 2020-03-27 : filter=pre_holiday_only
+  test a partir de 2020-06-27 : filter=pre_holiday_only
+  test a partir de 2020-09-27 : filter=pre_holiday_only
+  test a partir de 2020-12-27 : filter=pre_holiday_only
+  test a partir de 2021-03-27 : filter=non_pre_holiday_only
+  test a partir de 2021-06-27 : filter=non_pre_holiday_only
+  test a partir de 2021-09-27 : filter=non_pre_holiday_only
+  test a partir de 2021-12-27 : filter=pre_holiday_only
+  test a partir de 2022-03-27 : filter=pre_holiday_only
+  test a partir de 2022-06-27 : filter=non_pre_holiday_only
+  test a partir de 2022-09-27 : filter=non_pre_holiday_only
+  test a partir de 2022-12-27 : filter=unfiltered
+  test a partir de 2023-03-27 : filter=non_pre_holiday_only
+  test a partir de 2023-06-27 : filter=non_pre_holiday_only
+  test a partir de 2023-09-27 : filter=non_pre_holiday_only
+  test a partir de 2023-12-27 : filter=non_pre_holiday_only
+  test a partir de 2024-03-27 : filter=non_pre_holiday_only
+  test a partir de 2024-06-27 : filter=pre_holiday_only
+  test a partir de 2024-09-27 : filter=pre_holiday_only
+  test a partir de 2024-12-27 : filter=pre_holiday_only
+  test a partir de 2025-03-27 : filter=pre_holiday_only
+  test a partir de 2025-06-27 : filter=pre_holiday_only
+  test a partir de 2025-09-27 : filter=pre_holiday_only
+  test a partir de 2025-12-27 : filter=pre_holiday_only
+  test a partir de 2026-03-27 : filter=unfiltered
+  test a partir de 2026-06-27 : filter=non_pre_holiday_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2416  win_rate=0.49  exp_$=-0.16  exp_R=0.02  profit_factor=1.00  total_$=-376.00  sharpe=-0.02  t_stat=-0.06  max_dd_$=-8041.00
+  slippage 1 tick(s)/execution : n_trades=2416  win_rate=0.49  exp_$=-2.16  exp_R=-0.08  profit_factor=0.95  total_$=-5208.00  sharpe=-0.27  t_stat=-0.85  max_dd_$=-10161.00
+  slippage 2 tick(s)/execution : n_trades=2416  win_rate=0.48  exp_$=-4.16  exp_R=-0.54  profit_factor=0.91  total_$=-10040.00  sharpe=-0.52  t_stat=-1.65  max_dd_$=-14171.00
+  slippage 3 tick(s)/execution : n_trades=2416  win_rate=0.47  exp_$=-6.16  exp_R=-0.69  profit_factor=0.87  total_$=-14872.00  sharpe=-0.77  t_stat=-2.44  max_dd_$=-18397.00
+
+=== 5. Direction au hasard (meme filtre pre-ferie), hors-echantillon ===
+  reel : -928$ | pile ou face : -2650$ +/- 4195$ | p-value = 0.375
+
+Trades ecrits dans trades_XOM_best.csv
+Courbe ecrite dans examples/equity_XOM.png
