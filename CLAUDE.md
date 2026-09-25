@@ -52,3 +52,38 @@ du recul sur la méthodologie elle-même plutôt que de l'appliquer mécaniqueme
   cross-asset ci-dessus. Vérifier aussi que les horaires/timing d'exécution
   simulés sont ceux d'un trader réel et discipliné (pas d'exécution à un moment
   irréaliste ou avantageux qu'on ne pourrait pas répliquer en pratique).
+- **Apprendre réellement des erreurs et des rejets passés** (précisé par
+  l'utilisateur le 2026-09-25) : ne pas se contenter de documenter un rejet
+  puis répéter le même type d'erreur de conception à la stratégie suivante.
+  Avant de choisir la prochaine stratégie, relire "Enseignements
+  transversaux" dans `STRATEGIES.md` et vérifier explicitement que le choix
+  n'ignore pas un enseignement déjà tiré (ex. ne pas re-proposer un signal
+  directionnel pur sur le même panier cross-asset juste après en avoir vu
+  deux échouer, sans au moins en tirer une conséquence de conception).
+- **Viser l'innovation, pas seulement la confirmation/infirmation de
+  l'existant** (précisé par l'utilisateur le 2026-09-25, verbatim : "le but
+  n'est pas forcément de confirmer une stratégie qui existe deja et qui
+  marche ou pas [...] ni de créer quelque chose de toutes pièces [...] mais
+  plutot de tenter de nouvelles combinaisons vraiment innover") : le choix
+  de la prochaine stratégie ne doit pas se limiter à prendre un indicateur
+  ou un facteur académique connu et le tester tel quel (ex. Ichimoku,
+  momentum cross-sectionnel — chacun testé "tel que dans les manuels").
+  L'objectif est de **combiner** des éléments déjà validés/étudiés dans ce
+  projet d'une façon nouvelle (ex. utiliser le moteur de sélection
+  cross-sectionnelle développé pour le momentum afin de faire tourner
+  l'edge overnight structurel sur un sous-ensemble choisi du panier plutôt
+  qu'en équipondéré) plutôt que de piocher un énième signal académique
+  isolé dans la littérature, et plutôt que d'inventer un mécanisme sans
+  lien avec ce qui a déjà été appris sur ce projet.
+- **Rester critique, y compris envers mes propres instructions** (précisé
+  par l'utilisateur le 2026-09-25, verbatim : "soit critique meme sur ce que
+  je dis moi si je te dis quelque chose réfléchis soit critique ne prend pas
+  tout au pied de la lettre. Je te donne beaucoup de consigne je pense que
+  tu comprends parfaitement l'objectif") : une consigne ponctuelle de
+  l'utilisateur (y compris une piste de stratégie qu'il suggère, ou une
+  proposition que je fais moi-même) doit toujours être passée au filtre de
+  l'objectif réel et des enseignements déjà tirés dans `STRATEGIES.md`, pas
+  exécutée mécaniquement. Si une consigne ou une proposition (même la
+  mienne) contredit un enseignement déjà acquis du projet, le signaler
+  explicitement et corriger avant d'agir, plutôt que d'appliquer au pied de
+  la lettre.

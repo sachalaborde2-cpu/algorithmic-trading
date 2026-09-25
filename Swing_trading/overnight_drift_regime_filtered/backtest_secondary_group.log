@@ -1,0 +1,1037 @@
+=========== XLE ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.11 -2.93    754       -0.67
+   bullish   753      -0.91 -2.39    384       -1.03
+   bearish   705      -0.82 -2.17    258       -0.15
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=705  win_rate=0.48  exp_$=-3.13  exp_R=-0.56  profit_factor=0.78  total_$=-2206.00  sharpe=-0.82  t_stat=-2.17  max_dd_$=-2332.50
+OOS : n_trades=258  win_rate=0.55  exp_$=-0.65  exp_R=0.67  profit_factor=0.95  total_$=-168.00  sharpe=-0.15  t_stat=-0.26  max_dd_$=-586.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=991  win_rate=0.51  exp_$=-1.84  exp_R=0.08  profit_factor=0.86  total_$=-1823.00  sharpe=-0.54  t_stat=-1.61  max_dd_$=-2156.50
+  test a partir de 2017-09-27 : filter=unfiltered
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bullish
+  test a partir de 2019-12-27 : filter=bullish
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=bullish
+  test a partir de 2021-12-27 : filter=unfiltered
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bearish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=963  win_rate=0.52  exp_$=-0.47  exp_R=0.02  profit_factor=0.96  total_$=-448.00  sharpe=-0.12  t_stat=-0.37  max_dd_$=-1219.50
+  slippage 1 tick(s)/execution : n_trades=963  win_rate=0.50  exp_$=-2.47  exp_R=-0.23  profit_factor=0.83  total_$=-2374.00  sharpe=-0.62  t_stat=-1.97  max_dd_$=-2726.50
+  slippage 2 tick(s)/execution : n_trades=963  win_rate=0.47  exp_$=-4.47  exp_R=-0.62  profit_factor=0.71  total_$=-4300.00  sharpe=-1.12  t_stat=-3.55  max_dd_$=-4612.50
+  slippage 3 tick(s)/execution : n_trades=963  win_rate=0.43  exp_$=-6.47  exp_R=-0.74  profit_factor=0.60  total_$=-6226.00  sharpe=-1.62  t_stat=-5.12  max_dd_$=-6505.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -168$ | pile ou face : -1045$ +/- 645$ | p-value = 0.093
+
+Trades ecrits dans trades_XLE_best.csv
+
+=========== XLF ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.71 -4.51    754       -1.42
+   bullish   968      -1.76 -4.65    524       -1.25
+   bearish   464      -0.84 -2.21    138       -0.90
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=464  win_rate=0.47  exp_$=-4.28  exp_R=-1.14  profit_factor=0.72  total_$=-1986.00  sharpe=-0.84  t_stat=-2.21  max_dd_$=-2062.00
+OOS : n_trades=138  win_rate=0.42  exp_$=-5.58  exp_R=-1.79  profit_factor=0.68  total_$=-770.00  sharpe=-0.90  t_stat=-1.56  max_dd_$=-857.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=857  win_rate=0.45  exp_$=-4.87  exp_R=-1.43  profit_factor=0.67  total_$=-4171.00  sharpe=-1.27  t_stat=-3.81  max_dd_$=-4385.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bearish
+  test a partir de 2020-09-27 : filter=bearish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=602  win_rate=0.49  exp_$=-2.58  exp_R=-0.01  profit_factor=0.83  total_$=-1552.00  sharpe=-0.48  t_stat=-1.52  max_dd_$=-1857.00
+  slippage 1 tick(s)/execution : n_trades=602  win_rate=0.46  exp_$=-4.58  exp_R=-1.29  profit_factor=0.71  total_$=-2756.00  sharpe=-0.85  t_stat=-2.69  max_dd_$=-2844.00
+  slippage 2 tick(s)/execution : n_trades=602  win_rate=0.43  exp_$=-6.58  exp_R=-1.14  profit_factor=0.61  total_$=-3960.00  sharpe=-1.22  t_stat=-3.85  max_dd_$=-4003.00
+  slippage 3 tick(s)/execution : n_trades=602  win_rate=0.40  exp_$=-8.58  exp_R=-1.10  profit_factor=0.53  total_$=-5164.00  sharpe=-1.58  t_stat=-4.98  max_dd_$=-5180.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -770$ | pile ou face : -505$ +/- 534$ | p-value = 0.684
+
+Trades ecrits dans trades_XLF_best.csv
+
+=========== XLK ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -0.88 -2.33    754        1.02
+   bullish  1192      -0.72 -1.90    518        1.06
+   bearish   316      -0.45 -1.19    165       -0.10
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=316  win_rate=0.49  exp_$=-5.80  exp_R=-1.90  profit_factor=0.82  total_$=-1833.50  sharpe=-0.45  t_stat=-1.19  max_dd_$=-2613.50
+OOS : n_trades=165  win_rate=0.51  exp_$=-2.21  exp_R=-0.11  profit_factor=0.96  total_$=-365.00  sharpe=-0.10  t_stat=-0.18  max_dd_$=-2611.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1144  win_rate=0.54  exp_$=2.85  exp_R=2.43  profit_factor=1.08  total_$=3260.50  sharpe=0.28  t_stat=0.82  max_dd_$=-3267.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=bearish
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bearish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bullish
+  test a partir de 2024-03-27 : filter=bullish
+  test a partir de 2024-06-27 : filter=unfiltered
+  test a partir de 2024-09-27 : filter=unfiltered
+  test a partir de 2024-12-27 : filter=unfiltered
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bullish
+  test a partir de 2025-12-27 : filter=bullish
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=unfiltered
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=481  win_rate=0.51  exp_$=-2.57  exp_R=-0.01  profit_factor=0.94  total_$=-1236.50  sharpe=-0.15  t_stat=-0.48  max_dd_$=-2939.00
+  slippage 1 tick(s)/execution : n_trades=481  win_rate=0.49  exp_$=-4.57  exp_R=-1.29  profit_factor=0.89  total_$=-2198.50  sharpe=-0.27  t_stat=-0.85  max_dd_$=-3815.00
+  slippage 2 tick(s)/execution : n_trades=481  win_rate=0.48  exp_$=-6.57  exp_R=-1.14  profit_factor=0.84  total_$=-3160.50  sharpe=-0.39  t_stat=-1.22  max_dd_$=-4713.00
+  slippage 3 tick(s)/execution : n_trades=481  win_rate=0.47  exp_$=-8.57  exp_R=-1.10  profit_factor=0.80  total_$=-4122.50  sharpe=-0.50  t_stat=-1.59  max_dd_$=-5617.50
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -365$ | pile ou face : -804$ +/- 1977$ | p-value = 0.412
+
+Trades ecrits dans trades_XLK_best.csv
+
+=========== XLV ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -0.63 -1.65    754       -0.91
+   bullish  1059      -0.52 -1.36    432       -1.04
+   bearish   383      -0.37 -0.97    253        0.01
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=383  win_rate=0.53  exp_$=-5.19  exp_R=-1.60  profit_factor=0.85  total_$=-1989.00  sharpe=-0.37  t_stat=-0.97  max_dd_$=-2940.00
+OOS : n_trades=253  win_rate=0.51  exp_$=0.10  exp_R=1.05  profit_factor=1.00  total_$=26.00  sharpe=0.01  t_stat=0.02  max_dd_$=-1063.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1153  win_rate=0.51  exp_$=-1.41  exp_R=0.30  profit_factor=0.94  total_$=-1624.00  sharpe=-0.25  t_stat=-0.74  max_dd_$=-2716.00
+  test a partir de 2017-09-27 : filter=unfiltered
+  test a partir de 2017-12-27 : filter=unfiltered
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bullish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bullish
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bearish
+  test a partir de 2023-03-27 : filter=bullish
+  test a partir de 2023-06-27 : filter=bullish
+  test a partir de 2023-09-27 : filter=bullish
+  test a partir de 2023-12-27 : filter=bullish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=636  win_rate=0.53  exp_$=-1.09  exp_R=0.01  profit_factor=0.97  total_$=-691.00  sharpe=-0.09  t_stat=-0.29  max_dd_$=-2548.00
+  slippage 1 tick(s)/execution : n_trades=636  win_rate=0.52  exp_$=-3.09  exp_R=-0.54  profit_factor=0.90  total_$=-1963.00  sharpe=-0.26  t_stat=-0.82  max_dd_$=-3102.00
+  slippage 2 tick(s)/execution : n_trades=636  win_rate=0.51  exp_$=-5.09  exp_R=-0.77  profit_factor=0.85  total_$=-3235.00  sharpe=-0.43  t_stat=-1.35  max_dd_$=-3954.00
+  slippage 3 tick(s)/execution : n_trades=636  win_rate=0.50  exp_$=-7.09  exp_R=-0.85  profit_factor=0.79  total_$=-4507.00  sharpe=-0.60  t_stat=-1.88  max_dd_$=-4992.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 26$ | pile ou face : -1033$ +/- 1315$ | p-value = 0.216
+
+Trades ecrits dans trades_XLV_best.csv
+
+=========== XLY ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -0.33 -0.87    754       -0.15
+   bullish  1110      -0.11 -0.29    460       -0.19
+   bearish   382      -0.52 -1.36    194       -0.34
+
+=== 2. Meilleure config in-sample : filter=bullish ===
+IS  : n_trades=1110  win_rate=0.52  exp_$=-0.43  exp_R=0.79  profit_factor=0.97  total_$=-472.00  sharpe=-0.11  t_stat=-0.29  max_dd_$=-1939.50
+OOS : n_trades=460  win_rate=0.52  exp_$=-1.10  exp_R=0.45  profit_factor=0.96  total_$=-508.00  sharpe=-0.19  t_stat=-0.33  max_dd_$=-1150.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1000  win_rate=0.54  exp_$=-2.27  exp_R=-0.13  profit_factor=0.92  total_$=-2265.50  sharpe=-0.29  t_stat=-0.85  max_dd_$=-2950.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bullish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=unfiltered
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bullish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bullish
+  test a partir de 2025-12-27 : filter=bullish
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=1570  win_rate=0.55  exp_$=1.38  exp_R=0.03  profit_factor=1.08  total_$=2160.00  sharpe=0.31  t_stat=0.97  max_dd_$=-2144.50
+  slippage 1 tick(s)/execution : n_trades=1570  win_rate=0.52  exp_$=-0.62  exp_R=0.69  profit_factor=0.97  total_$=-980.00  sharpe=-0.14  t_stat=-0.44  max_dd_$=-2771.00
+  slippage 2 tick(s)/execution : n_trades=1570  win_rate=0.49  exp_$=-2.62  exp_R=-0.16  profit_factor=0.87  total_$=-4120.00  sharpe=-0.59  t_stat=-1.85  max_dd_$=-4129.00
+  slippage 3 tick(s)/execution : n_trades=1570  win_rate=0.46  exp_$=-4.62  exp_R=-0.44  profit_factor=0.78  total_$=-7260.00  sharpe=-1.03  t_stat=-3.26  max_dd_$=-7267.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -508$ | pile ou face : -1767$ +/- 1473$ | p-value = 0.193
+
+Trades ecrits dans trades_XLY_best.csv
+
+=========== XLP ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.81 -4.79    754       -2.10
+   bullish  1024      -1.68 -4.44    420       -2.54
+   bearish   449      -0.63 -1.65    232       -0.26
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=449  win_rate=0.50  exp_$=-4.03  exp_R=-1.02  profit_factor=0.74  total_$=-1811.00  sharpe=-0.63  t_stat=-1.65  max_dd_$=-2312.00
+OOS : n_trades=232  win_rate=0.48  exp_$=-1.03  exp_R=0.48  profit_factor=0.92  total_$=-240.00  sharpe=-0.26  t_stat=-0.45  max_dd_$=-705.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=963  win_rate=0.47  exp_$=-2.63  exp_R=-0.31  profit_factor=0.80  total_$=-2529.00  sharpe=-0.66  t_stat=-1.97  max_dd_$=-2861.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bullish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=bullish
+  test a partir de 2021-06-27 : filter=bearish
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bearish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bullish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=682  win_rate=0.52  exp_$=-0.94  exp_R=0.01  profit_factor=0.93  total_$=-643.00  sharpe=-0.18  t_stat=-0.57  max_dd_$=-1892.00
+  slippage 1 tick(s)/execution : n_trades=682  win_rate=0.49  exp_$=-2.94  exp_R=-0.47  profit_factor=0.80  total_$=-2007.00  sharpe=-0.53  t_stat=-1.68  max_dd_$=-2435.00
+  slippage 2 tick(s)/execution : n_trades=682  win_rate=0.46  exp_$=-4.94  exp_R=-0.74  profit_factor=0.68  total_$=-3371.00  sharpe=-0.88  t_stat=-2.79  max_dd_$=-3707.00
+  slippage 3 tick(s)/execution : n_trades=682  win_rate=0.43  exp_$=-6.94  exp_R=-0.82  profit_factor=0.58  total_$=-4735.00  sharpe=-1.23  t_stat=-3.89  max_dd_$=-4984.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -240$ | pile ou face : -903$ +/- 551$ | p-value = 0.120
+
+Trades ecrits dans trades_XLP_best.csv
+
+=========== GLD ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756       0.04  0.11    754        1.15
+   bullish   799      -0.13 -0.35    546        1.23
+   bearish   621       0.46  1.22    128        0.01
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=621  win_rate=0.53  exp_$=4.45  exp_R=3.22  profit_factor=1.15  total_$=2763.00  sharpe=0.46  t_stat=1.22  max_dd_$=-1622.00
+OOS : n_trades=128  win_rate=0.52  exp_$=0.97  exp_R=1.48  profit_factor=1.01  total_$=124.00  sharpe=0.01  t_stat=0.02  max_dd_$=-5177.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1215  win_rate=0.54  exp_$=8.50  exp_R=5.25  profit_factor=1.14  total_$=10330.00  sharpe=0.38  t_stat=1.14  max_dd_$=-6875.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bullish
+  test a partir de 2019-03-27 : filter=bullish
+  test a partir de 2019-06-27 : filter=bullish
+  test a partir de 2019-09-27 : filter=bullish
+  test a partir de 2019-12-27 : filter=unfiltered
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=unfiltered
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=bearish
+  test a partir de 2021-06-27 : filter=bearish
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bullish
+  test a partir de 2023-06-27 : filter=unfiltered
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=unfiltered
+  test a partir de 2024-12-27 : filter=unfiltered
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=unfiltered
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=unfiltered
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=749  win_rate=0.55  exp_$=5.85  exp_R=0.08  profit_factor=1.11  total_$=4385.00  sharpe=0.24  t_stat=0.76  max_dd_$=-5099.00
+  slippage 1 tick(s)/execution : n_trades=749  win_rate=0.53  exp_$=3.85  exp_R=2.93  profit_factor=1.07  total_$=2887.00  sharpe=0.16  t_stat=0.50  max_dd_$=-5177.00
+  slippage 2 tick(s)/execution : n_trades=749  win_rate=0.52  exp_$=1.85  exp_R=0.96  profit_factor=1.03  total_$=1389.00  sharpe=0.08  t_stat=0.24  max_dd_$=-5287.00
+  slippage 3 tick(s)/execution : n_trades=749  win_rate=0.50  exp_$=-0.15  exp_R=0.31  profit_factor=1.00  total_$=-109.00  sharpe=-0.01  t_stat=-0.02  max_dd_$=-5397.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 124$ | pile ou face : -358$ +/- 5254$ | p-value = 0.452
+
+Trades ecrits dans trades_GLD_best.csv
+
+=========== SLV ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.94 -5.11    754        0.23
+   bullish   675      -0.83 -2.19    421        0.36
+   bearish   753      -1.38 -3.64    237       -0.36
+
+=== 2. Meilleure config in-sample : filter=bullish ===
+IS  : n_trades=675  win_rate=0.41  exp_$=-2.58  exp_R=-0.29  profit_factor=0.77  total_$=-1743.00  sharpe=-0.83  t_stat=-2.19  max_dd_$=-1763.00
+OOS : n_trades=421  win_rate=0.53  exp_$=4.71  exp_R=3.35  profit_factor=1.15  total_$=1981.00  sharpe=0.36  t_stat=0.63  max_dd_$=-1796.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1044  win_rate=0.44  exp_$=-2.37  exp_R=-0.18  profit_factor=0.88  total_$=-2470.00  sharpe=-0.25  t_stat=-0.75  max_dd_$=-2661.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bullish
+  test a partir de 2018-12-27 : filter=bullish
+  test a partir de 2019-03-27 : filter=bullish
+  test a partir de 2019-06-27 : filter=bullish
+  test a partir de 2019-09-27 : filter=bullish
+  test a partir de 2019-12-27 : filter=bullish
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=bullish
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=bullish
+  test a partir de 2021-12-27 : filter=bullish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bullish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bullish
+  test a partir de 2024-09-27 : filter=bullish
+  test a partir de 2024-12-27 : filter=bullish
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=unfiltered
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=1096  win_rate=0.49  exp_$=2.22  exp_R=0.04  profit_factor=1.12  total_$=2430.00  sharpe=0.24  t_stat=0.75  max_dd_$=-1792.00
+  slippage 1 tick(s)/execution : n_trades=1096  win_rate=0.46  exp_$=0.22  exp_R=1.11  profit_factor=1.01  total_$=238.00  sharpe=0.02  t_stat=0.07  max_dd_$=-2274.00
+  slippage 2 tick(s)/execution : n_trades=1096  win_rate=0.43  exp_$=-1.78  exp_R=0.05  profit_factor=0.91  total_$=-1954.00  sharpe=-0.19  t_stat=-0.60  max_dd_$=-4202.00
+  slippage 3 tick(s)/execution : n_trades=1096  win_rate=0.39  exp_$=-3.78  exp_R=-0.30  profit_factor=0.82  total_$=-4146.00  sharpe=-0.40  t_stat=-1.28  max_dd_$=-6130.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 1981$ | pile ou face : -2017$ +/- 3121$ | p-value = 0.093
+
+Trades ecrits dans trades_SLV_best.csv
+
+=========== USO ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -0.01 -0.03    754        0.21
+   bullish   878      -0.07 -0.19    329        0.09
+   bearish   579       0.12  0.31    311        0.98
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=579  win_rate=0.56  exp_$=1.99  exp_R=1.99  profit_factor=1.04  total_$=1151.00  sharpe=0.12  t_stat=0.31  max_dd_$=-5424.00
+OOS : n_trades=311  win_rate=0.56  exp_$=12.85  exp_R=7.42  profit_factor=1.33  total_$=3996.00  sharpe=0.98  t_stat=1.69  max_dd_$=-2160.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1148  win_rate=0.54  exp_$=3.14  exp_R=2.57  profit_factor=1.06  total_$=3607.00  sharpe=0.19  t_stat=0.58  max_dd_$=-5424.00
+  test a partir de 2017-09-27 : filter=unfiltered
+  test a partir de 2017-12-27 : filter=unfiltered
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bearish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=bullish
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=bullish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bullish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bullish
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=890  win_rate=0.57  exp_$=7.78  exp_R=0.10  profit_factor=1.17  total_$=6927.00  sharpe=0.50  t_stat=1.58  max_dd_$=-5318.00
+  slippage 1 tick(s)/execution : n_trades=890  win_rate=0.56  exp_$=5.78  exp_R=3.89  profit_factor=1.12  total_$=5147.00  sharpe=0.37  t_stat=1.17  max_dd_$=-5424.00
+  slippage 2 tick(s)/execution : n_trades=890  win_rate=0.56  exp_$=3.78  exp_R=1.45  profit_factor=1.08  total_$=3367.00  sharpe=0.24  t_stat=0.77  max_dd_$=-5588.00
+  slippage 3 tick(s)/execution : n_trades=890  win_rate=0.54  exp_$=1.78  exp_R=0.63  profit_factor=1.04  total_$=1587.00  sharpe=0.11  t_stat=0.36  max_dd_$=-5752.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 3996$ | pile ou face : -1104$ +/- 2386$ | p-value = 0.020
+
+Trades ecrits dans trades_USO_best.csv
+
+=========== TLT ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.10 -2.92    754       -1.92
+   bullish   702      -0.08 -0.22    246       -1.33
+   bearish   747      -1.38 -3.64    407       -0.94
+
+=== 2. Meilleure config in-sample : filter=bullish ===
+IS  : n_trades=702  win_rate=0.46  exp_$=-0.94  exp_R=0.53  profit_factor=0.97  total_$=-663.00  sharpe=-0.08  t_stat=-0.22  max_dd_$=-3928.00
+OOS : n_trades=246  win_rate=0.44  exp_$=-8.52  exp_R=-3.26  profit_factor=0.68  total_$=-2097.00  sharpe=-1.33  t_stat=-2.31  max_dd_$=-2097.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1134  win_rate=0.47  exp_$=-2.69  exp_R=-0.35  profit_factor=0.92  total_$=-3055.00  sharpe=-0.31  t_stat=-0.94  max_dd_$=-7463.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=unfiltered
+  test a partir de 2019-09-27 : filter=unfiltered
+  test a partir de 2019-12-27 : filter=bullish
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=bullish
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=bullish
+  test a partir de 2021-12-27 : filter=bullish
+  test a partir de 2022-03-27 : filter=bullish
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bullish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bullish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=948  win_rate=0.47  exp_$=-0.91  exp_R=0.01  profit_factor=0.97  total_$=-864.00  sharpe=-0.09  t_stat=-0.28  max_dd_$=-5001.00
+  slippage 1 tick(s)/execution : n_trades=948  win_rate=0.46  exp_$=-2.91  exp_R=-0.46  profit_factor=0.91  total_$=-2760.00  sharpe=-0.28  t_stat=-0.88  max_dd_$=-6025.00
+  slippage 2 tick(s)/execution : n_trades=948  win_rate=0.45  exp_$=-4.91  exp_R=-0.73  profit_factor=0.86  total_$=-4656.00  sharpe=-0.47  t_stat=-1.49  max_dd_$=-7049.00
+  slippage 3 tick(s)/execution : n_trades=948  win_rate=0.43  exp_$=-6.91  exp_R=-0.82  profit_factor=0.81  total_$=-6552.00  sharpe=-0.66  t_stat=-2.10  max_dd_$=-8073.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -2097$ | pile ou face : -918$ +/- 915$ | p-value = 0.874
+
+Trades ecrits dans trades_TLT_best.csv
+
+=========== IEF ===========
+
+Donnees : 2297 jours (2017-08-04 -> 2026-09-24)
+In-sample : 2017-08-04 -> 2023-12-21 | Hors-echantillon : 2023-12-22 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1606      -2.05 -5.17    689       -2.56
+   bullish   598      -0.63 -1.60    263       -1.69
+   bearish   744      -1.95 -4.92    331       -1.20
+
+=== 2. Meilleure config in-sample : filter=bullish ===
+IS  : n_trades=598  win_rate=0.45  exp_$=-2.51  exp_R=-0.26  profit_factor=0.83  total_$=-1501.00  sharpe=-0.63  t_stat=-1.60  max_dd_$=-2091.00
+OOS : n_trades=263  win_rate=0.41  exp_$=-5.27  exp_R=-1.64  profit_factor=0.63  total_$=-1387.00  sharpe=-1.69  t_stat=-2.80  max_dd_$=-1430.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=899  win_rate=0.44  exp_$=-4.95  exp_R=-1.47  profit_factor=0.67  total_$=-4447.00  sharpe=-1.61  t_stat=-4.59  max_dd_$=-4499.00
+  test a partir de 2018-08-04 : filter=bullish
+  test a partir de 2018-11-04 : filter=bullish
+  test a partir de 2019-02-04 : filter=bearish
+  test a partir de 2019-05-04 : filter=bearish
+  test a partir de 2019-08-04 : filter=bullish
+  test a partir de 2019-11-04 : filter=bearish
+  test a partir de 2020-02-04 : filter=bearish
+  test a partir de 2020-05-04 : filter=bullish
+  test a partir de 2020-08-04 : filter=bullish
+  test a partir de 2020-11-04 : filter=bullish
+  test a partir de 2021-02-04 : filter=bullish
+  test a partir de 2021-05-04 : filter=bullish
+  test a partir de 2021-08-04 : filter=bullish
+  test a partir de 2021-11-04 : filter=bullish
+  test a partir de 2022-02-04 : filter=bullish
+  test a partir de 2022-05-04 : filter=bullish
+  test a partir de 2022-08-04 : filter=bullish
+  test a partir de 2022-11-04 : filter=bullish
+  test a partir de 2023-02-04 : filter=bullish
+  test a partir de 2023-05-04 : filter=bearish
+  test a partir de 2023-08-04 : filter=bearish
+  test a partir de 2023-11-04 : filter=bearish
+  test a partir de 2024-02-04 : filter=bearish
+  test a partir de 2024-05-04 : filter=bullish
+  test a partir de 2024-08-04 : filter=bullish
+  test a partir de 2024-11-04 : filter=bearish
+  test a partir de 2025-02-04 : filter=bearish
+  test a partir de 2025-05-04 : filter=bearish
+  test a partir de 2025-08-04 : filter=bearish
+  test a partir de 2025-11-04 : filter=bearish
+  test a partir de 2026-02-04 : filter=bearish
+  test a partir de 2026-05-04 : filter=bearish
+  test a partir de 2026-08-04 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=861  win_rate=0.47  exp_$=-1.35  exp_R=0.01  profit_factor=0.90  total_$=-1166.00  sharpe=-0.36  t_stat=-1.10  max_dd_$=-2331.00
+  slippage 1 tick(s)/execution : n_trades=861  win_rate=0.44  exp_$=-3.35  exp_R=-0.68  profit_factor=0.77  total_$=-2888.00  sharpe=-0.90  t_stat=-2.72  max_dd_$=-3431.00
+  slippage 2 tick(s)/execution : n_trades=861  win_rate=0.43  exp_$=-5.35  exp_R=-0.84  profit_factor=0.65  total_$=-4610.00  sharpe=-1.43  t_stat=-4.33  max_dd_$=-4610.00
+  slippage 3 tick(s)/execution : n_trades=861  win_rate=0.39  exp_$=-7.35  exp_R=-0.89  profit_factor=0.56  total_$=-6332.00  sharpe=-1.96  t_stat=-5.91  max_dd_$=-6332.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -1387$ | pile ou face : -1027$ +/- 508$ | p-value = 0.761
+
+Trades ecrits dans trades_IEF_best.csv
+
+=========== EFA ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.30 -3.44    754       -0.45
+   bullish   951      -1.26 -3.34    544       -0.96
+   bearish   513      -0.61 -1.62    135        0.38
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=513  win_rate=0.50  exp_$=-5.79  exp_R=-1.89  profit_factor=0.81  total_$=-2968.00  sharpe=-0.61  t_stat=-1.62  max_dd_$=-3686.00
+OOS : n_trades=135  win_rate=0.56  exp_$=4.68  exp_R=3.34  profit_factor=1.18  total_$=632.00  sharpe=0.38  t_stat=0.65  max_dd_$=-508.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1078  win_rate=0.50  exp_$=-3.89  exp_R=-0.94  profit_factor=0.85  total_$=-4192.00  sharpe=-0.60  t_stat=-1.81  max_dd_$=-5382.00
+  test a partir de 2017-09-27 : filter=bullish
+  test a partir de 2017-12-27 : filter=bullish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bullish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=649  win_rate=0.52  exp_$=-1.66  exp_R=0.00  profit_factor=0.94  total_$=-1079.00  sharpe=-0.16  t_stat=-0.50  max_dd_$=-3076.00
+  slippage 1 tick(s)/execution : n_trades=649  win_rate=0.51  exp_$=-3.66  exp_R=-0.83  profit_factor=0.87  total_$=-2377.00  sharpe=-0.36  t_stat=-1.13  max_dd_$=-3726.00
+  slippage 2 tick(s)/execution : n_trades=649  win_rate=0.50  exp_$=-5.66  exp_R=-0.92  profit_factor=0.81  total_$=-3675.00  sharpe=-0.56  t_stat=-1.75  max_dd_$=-4782.00
+  slippage 3 tick(s)/execution : n_trades=649  win_rate=0.48  exp_$=-7.66  exp_R=-0.94  profit_factor=0.75  total_$=-4973.00  sharpe=-0.75  t_stat=-2.38  max_dd_$=-5936.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 632$ | pile ou face : -457$ +/- 1020$ | p-value = 0.153
+
+Trades ecrits dans trades_EFA_best.csv
+
+=========== EEM ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -1.39 -3.67    754       -0.59
+   bullish   806      -0.93 -2.47    503       -0.76
+   bearish   651      -0.75 -1.98    141        0.55
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=651  win_rate=0.48  exp_$=-4.43  exp_R=-1.21  profit_factor=0.80  total_$=-2881.00  sharpe=-0.75  t_stat=-1.98  max_dd_$=-3536.00
+OOS : n_trades=141  win_rate=0.52  exp_$=4.99  exp_R=3.50  profit_factor=1.28  total_$=704.00  sharpe=0.55  t_stat=0.96  max_dd_$=-732.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1062  win_rate=0.48  exp_$=-3.44  exp_R=-0.72  profit_factor=0.83  total_$=-3658.00  sharpe=-0.70  t_stat=-2.11  max_dd_$=-5064.00
+  test a partir de 2017-09-27 : filter=bullish
+  test a partir de 2017-12-27 : filter=unfiltered
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bullish
+  test a partir de 2018-09-27 : filter=bullish
+  test a partir de 2018-12-27 : filter=bullish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bearish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=bearish
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bullish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=bearish
+  test a partir de 2026-06-27 : filter=bearish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=792  win_rate=0.50  exp_$=-0.75  exp_R=0.01  profit_factor=0.96  total_$=-593.00  sharpe=-0.12  t_stat=-0.36  max_dd_$=-2390.00
+  slippage 1 tick(s)/execution : n_trades=792  win_rate=0.49  exp_$=-2.75  exp_R=-0.37  profit_factor=0.87  total_$=-2177.00  sharpe=-0.42  t_stat=-1.33  max_dd_$=-3864.00
+  slippage 2 tick(s)/execution : n_trades=792  win_rate=0.46  exp_$=-4.75  exp_R=-0.69  profit_factor=0.79  total_$=-3761.00  sharpe=-0.73  t_stat=-2.30  max_dd_$=-5352.00
+  slippage 3 tick(s)/execution : n_trades=792  win_rate=0.44  exp_$=-6.75  exp_R=-0.79  profit_factor=0.71  total_$=-5345.00  sharpe=-1.03  t_stat=-3.26  max_dd_$=-6840.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 704$ | pile ou face : -528$ +/- 766$ | p-value = 0.043
+
+Trades ecrits dans trades_EEM_best.csv
+
+=========== AAPL ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -0.46 -1.22    754       -0.65
+   bullish  1082       0.01  0.02    450       -0.04
+   bearish   362      -0.14 -0.38    198       -0.75
+
+=== 2. Meilleure config in-sample : filter=bullish ===
+IS  : n_trades=1082  win_rate=0.50  exp_$=0.05  exp_R=1.02  profit_factor=1.00  total_$=53.75  sharpe=0.01  t_stat=0.02  max_dd_$=-4160.00
+OOS : n_trades=450  win_rate=0.54  exp_$=-0.69  exp_R=0.65  profit_factor=0.99  total_$=-312.00  sharpe=-0.04  t_stat=-0.06  max_dd_$=-5439.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1407  win_rate=0.53  exp_$=-3.09  exp_R=-0.55  profit_factor=0.94  total_$=-4353.50  sharpe=-0.20  t_stat=-0.60  max_dd_$=-12490.00
+  test a partir de 2017-09-27 : filter=bullish
+  test a partir de 2017-12-27 : filter=bullish
+  test a partir de 2018-03-27 : filter=bullish
+  test a partir de 2018-06-27 : filter=unfiltered
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=unfiltered
+  test a partir de 2019-03-27 : filter=unfiltered
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bullish
+  test a partir de 2019-12-27 : filter=bullish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=bearish
+  test a partir de 2021-12-27 : filter=bearish
+  test a partir de 2022-03-27 : filter=bearish
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bearish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bullish
+  test a partir de 2024-03-27 : filter=bullish
+  test a partir de 2024-06-27 : filter=bullish
+  test a partir de 2024-09-27 : filter=bullish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bullish
+  test a partir de 2025-12-27 : filter=bullish
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=1533  win_rate=0.53  exp_$=1.80  exp_R=0.04  profit_factor=1.05  total_$=2756.75  sharpe=0.15  t_stat=0.46  max_dd_$=-5209.00
+  slippage 1 tick(s)/execution : n_trades=1533  win_rate=0.51  exp_$=-0.20  exp_R=0.90  profit_factor=0.99  total_$=-309.25  sharpe=-0.01  t_stat=-0.04  max_dd_$=-6018.00
+  slippage 2 tick(s)/execution : n_trades=1533  win_rate=0.49  exp_$=-2.20  exp_R=-0.05  profit_factor=0.95  total_$=-3375.25  sharpe=-0.17  t_stat=-0.54  max_dd_$=-7102.00
+  slippage 3 tick(s)/execution : n_trades=1533  win_rate=0.47  exp_$=-4.20  exp_R=-0.37  profit_factor=0.90  total_$=-6441.25  sharpe=-0.33  t_stat=-1.05  max_dd_$=-8212.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : -312$ | pile ou face : -1717$ +/- 5140$ | p-value = 0.395
+
+Trades ecrits dans trades_AAPL_best.csv
+
+=========== JPM ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756       0.12  0.33    754        0.59
+   bullish   934       0.07  0.18    563        1.04
+   bearish   550      -0.23 -0.60    136       -0.53
+
+=== 2. Meilleure config in-sample : filter=unfiltered ===
+IS  : n_trades=1756  win_rate=0.51  exp_$=1.09  exp_R=1.54  profit_factor=1.03  total_$=1913.00  sharpe=0.12  t_stat=0.33  max_dd_$=-7709.00
+OOS : n_trades=754  win_rate=0.54  exp_$=7.60  exp_R=4.80  profit_factor=1.12  total_$=5734.00  sharpe=0.59  t_stat=1.02  max_dd_$=-6070.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1320  win_rate=0.53  exp_$=3.38  exp_R=2.69  profit_factor=1.06  total_$=4457.00  sharpe=0.23  t_stat=0.68  max_dd_$=-7631.00
+  test a partir de 2017-09-27 : filter=unfiltered
+  test a partir de 2017-12-27 : filter=bullish
+  test a partir de 2018-03-27 : filter=unfiltered
+  test a partir de 2018-06-27 : filter=unfiltered
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bearish
+  test a partir de 2020-06-27 : filter=unfiltered
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=unfiltered
+  test a partir de 2021-12-27 : filter=unfiltered
+  test a partir de 2022-03-27 : filter=unfiltered
+  test a partir de 2022-06-27 : filter=bullish
+  test a partir de 2022-09-27 : filter=bullish
+  test a partir de 2022-12-27 : filter=bullish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=bearish
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=bullish
+  test a partir de 2025-09-27 : filter=bullish
+  test a partir de 2025-12-27 : filter=bullish
+  test a partir de 2026-03-27 : filter=bullish
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.53  exp_$=5.07  exp_R=0.07  profit_factor=1.11  total_$=12724.00  sharpe=0.50  t_stat=1.57  max_dd_$=-7017.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.51  exp_$=3.07  exp_R=2.53  profit_factor=1.06  total_$=7702.00  sharpe=0.30  t_stat=0.95  max_dd_$=-7709.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.50  exp_$=1.07  exp_R=0.77  profit_factor=1.02  total_$=2680.00  sharpe=0.10  t_stat=0.33  max_dd_$=-8401.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.50  exp_$=-0.93  exp_R=0.18  profit_factor=0.98  total_$=-2342.00  sharpe=-0.09  t_stat=-0.30  max_dd_$=-10797.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 5734$ | pile ou face : -3473$ +/- 5838$ | p-value = 0.070
+
+Trades ecrits dans trades_JPM_best.csv
+
+=========== XOM ===========
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+    filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+unfiltered  1756      -0.60 -1.58    754       -0.05
+   bullish   746      -0.88 -2.32    386       -0.47
+   bearish   690      -0.22 -0.57    259        0.61
+
+=== 2. Meilleure config in-sample : filter=bearish ===
+IS  : n_trades=690  win_rate=0.50  exp_$=-1.69  exp_R=0.16  profit_factor=0.94  total_$=-1166.00  sharpe=-0.22  t_stat=-0.57  max_dd_$=-2602.00
+OOS : n_trades=259  win_rate=0.57  exp_$=6.97  exp_R=4.48  profit_factor=1.21  total_$=1805.00  sharpe=0.61  t_stat=1.06  max_dd_$=-1516.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1138  win_rate=0.53  exp_$=-2.92  exp_R=-0.46  profit_factor=0.92  total_$=-3325.00  sharpe=-0.30  t_stat=-0.91  max_dd_$=-4917.00
+  test a partir de 2017-09-27 : filter=bearish
+  test a partir de 2017-12-27 : filter=bearish
+  test a partir de 2018-03-27 : filter=bearish
+  test a partir de 2018-06-27 : filter=bearish
+  test a partir de 2018-09-27 : filter=bearish
+  test a partir de 2018-12-27 : filter=bearish
+  test a partir de 2019-03-27 : filter=bearish
+  test a partir de 2019-06-27 : filter=bearish
+  test a partir de 2019-09-27 : filter=bearish
+  test a partir de 2019-12-27 : filter=bearish
+  test a partir de 2020-03-27 : filter=bullish
+  test a partir de 2020-06-27 : filter=bullish
+  test a partir de 2020-09-27 : filter=bullish
+  test a partir de 2020-12-27 : filter=bullish
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=bullish
+  test a partir de 2021-09-27 : filter=unfiltered
+  test a partir de 2021-12-27 : filter=unfiltered
+  test a partir de 2022-03-27 : filter=unfiltered
+  test a partir de 2022-06-27 : filter=bearish
+  test a partir de 2022-09-27 : filter=bearish
+  test a partir de 2022-12-27 : filter=bearish
+  test a partir de 2023-03-27 : filter=bearish
+  test a partir de 2023-06-27 : filter=bearish
+  test a partir de 2023-09-27 : filter=bearish
+  test a partir de 2023-12-27 : filter=bearish
+  test a partir de 2024-03-27 : filter=unfiltered
+  test a partir de 2024-06-27 : filter=bearish
+  test a partir de 2024-09-27 : filter=bearish
+  test a partir de 2024-12-27 : filter=bearish
+  test a partir de 2025-03-27 : filter=bearish
+  test a partir de 2025-06-27 : filter=bearish
+  test a partir de 2025-09-27 : filter=bearish
+  test a partir de 2025-12-27 : filter=bearish
+  test a partir de 2026-03-27 : filter=unfiltered
+  test a partir de 2026-06-27 : filter=bullish
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=949  win_rate=0.53  exp_$=2.67  exp_R=0.05  profit_factor=1.10  total_$=2537.00  sharpe=0.30  t_stat=0.95  max_dd_$=-1944.00
+  slippage 1 tick(s)/execution : n_trades=949  win_rate=0.52  exp_$=0.67  exp_R=1.34  profit_factor=1.02  total_$=639.00  sharpe=0.08  t_stat=0.24  max_dd_$=-2602.00
+  slippage 2 tick(s)/execution : n_trades=949  win_rate=0.51  exp_$=-1.33  exp_R=0.17  profit_factor=0.95  total_$=-1259.00  sharpe=-0.15  t_stat=-0.47  max_dd_$=-3357.00
+  slippage 3 tick(s)/execution : n_trades=949  win_rate=0.49  exp_$=-3.33  exp_R=-0.22  profit_factor=0.89  total_$=-3157.00  sharpe=-0.38  t_stat=-1.19  max_dd_$=-4350.00
+
+=== 5. Direction au hasard (meme filtre de regime), hors-echantillon ===
+  reel : 1805$ | pile ou face : -1030$ +/- 1811$ | p-value = 0.060
+
+Trades ecrits dans trades_XOM_best.csv
+

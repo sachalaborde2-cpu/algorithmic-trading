@@ -30,7 +30,8 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 11 | Overnight drift sur actions individuelles | `overnight_drift_stocks/` | AAPL, JPM, JNJ, XOM, WMT | 5 min intraday | Rejeté sur les 5 | p=0.096 (JNJ, meilleur cas) |
 | 12 | Ichimoku Kinko Hyo | `Swing_trading/ichimoku_daily/` | 20 tickers cross-asset (indices, secteurs, matières premières, obligataire, international, méga-caps) | Daily (swing) | Rejeté (Bonferroni hiérarchique, sous-groupe des 4 indices) | p=0.030 (SPY, meilleur cas, seuil corrigé du sous-groupe = 0.0125) |
 | 13 | Momentum cross-sectionnel | `Swing_trading/momentum_cross_sectional/` | Mêmes 20 tickers cross-asset | Daily (swing, rebalancement mensuel) | Rejeté | p=0.286 (config sélectionnée en IS), p=0.035 (config non retenue, échoue quand même à 0.0125) |
-| 14 | **Effet de changement de mois (turn-of-month)** | `Swing_trading/turn_of_month/` (à créer) | Mêmes 20 tickers cross-asset | Daily (swing, fenêtre calendaire) | En cours de conception | — |
+| 14 | Overnight drift filtré par régime de tendance (Kumo Ichimoku) | `Swing_trading/overnight_drift_regime_filtered/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée) | Rejeté (le filtre n'apporte rien face à l'edge non filtré) | p=0.003 (SPY/QQQ, mais leur meilleure config est "sans filtre" — n'appuie pas l'hypothèse testée) |
+| 15 | Overnight drift sur ETF-paniers hors indices actions larges | `Swing_trading/overnight_drift_baskets/` (à créer) | Secteurs SPDR (XLE, XLF, XLK, XLV, XLY, XLP), matières premières (GLD, SLV, USO), obligataire (TLT, IEF), international (EFA, EEM) — 13 ETF-paniers | Daily (swing, entrée overnight non filtrée) | En cours de conception | — |
 
 ## Rationale des transitions
 
@@ -104,18 +105,109 @@ Deux signaux directionnels/relatifs de suite (Ichimoku #12, momentum #13)
 échouent sur ce même panier cross-asset de 20 instruments, alors que le seul
 edge validé du projet (`overnight_drift`, #10) est un **biais structurel
 calendaire/horaire**, pas un signal basé sur le niveau ou le classement des
-prix. Piste suivante choisie de façon autonome, dans la continuité logique
-de cet enseignement transversal : l'**effet de changement de mois
-(turn-of-month)** — anomalie calendaire documentée (Ariel, 1987 ; McConnell
-& Xu, 2008) selon laquelle le rendement des indices actions se concentre
-anormalement sur une fenêtre de quelques jours autour du changement de mois
-(dernier jour du mois + premiers jours du mois suivant), attribuée à des
-flux structurels récurrents (rebalancements de fonds, versements de
-salaires/401k investis en fin/début de mois) — donc un troisième candidat de
-la même famille que `overnight_drift` (biais calendaire structurel sans
-indicateur technique) plutôt qu'un quatrième signal directionnel de la
-famille qui a déjà échoué deux fois. Réutilise à nouveau le même panier de
-20 instruments et les mêmes données déjà téléchargées.
+prix.
+
+Sur instruction explicite de l'utilisateur (2026-09-25) : apprendre
+réellement de cette série d'échecs plutôt que de la documenter puis répéter
+le même type d'erreur de conception, ET viser l'**innovation par
+combinaison** de ce qui a déjà été étudié dans ce projet plutôt que
+d'importer un énième facteur académique isolé testé tel quel (ce qu'étaient,
+chacun à sa façon, Ichimoku #12 et le momentum #13). Piste retenue :
+**l'edge overnight structurel (`overnight_drift`, seul edge validé du
+projet) filtré par le régime de tendance Ichimoku (Kumo)** — n'entrer en
+position overnight long que lorsque l'instrument est déjà en régime
+haussier au sens du nuage Ichimoku (clôture au-dessus du Kumo), et rester à
+plat sinon. C'est une combinaison inédite de deux éléments déjà présents
+dans ce projet mais jamais associés : le seul biais structurel validé
+(#10) et l'indicateur de régime de tendance déjà backtesté et compris (#12,
+dont le signal KBO/Kumo a été rejeté comme signal directionnel autonome,
+mais dont la légitimité comme **filtre de régime** — cf. `vocabulaire.md`,
+"Filtre de régime" — n'a jamais été testée séparément). Hypothèse
+testable et non triviale : l'edge overnight pourrait être plus fort (ou
+plus stable) en régime haussier établi qu'en régime baissier/neutre — mais
+rien ne garantit a priori ce sens (l'effet pourrait tout aussi bien être
+plus fort en régime baissier, type "fuite vers la sécurité" overnight) : le
+test doit rester symétrique (au-dessus du Kumo vs en-dessous, testés tous
+les deux) et laisser les données trancher, pas cadrer le protocole autour du
+résultat anticipé.
+
+**#14 → #15** : Le filtre de régime Kumo est rejeté proprement : sur 3 des 4
+indices primaires (SPY, QQQ, DIA), il n'est même pas préféré à l'absence de
+filtre en in-sample, et le seul cas où il l'est (IWM) échoue le seuil
+Bonferroni de son sous-groupe (p=0.013 contre 0.0125 requis). L'edge overnight
+non filtré reste, lui, pleinement confirmé (p=0.003 sur SPY/QQQ) — c'est le
+filtre qui échoue, pas la stratégie `overnight_drift` sous-jacente.
+Application de Rule #4 (être critique, y compris envers mes propres choix
+précédents) : `overnight_drift` (#10) n'a été validé que sur 4 paniers larges
+d'indices actions US, très corrélés entre eux, et `overnight_drift_stocks`
+(#11) l'a rejeté sur 5 actions individuelles — mais la frontière testée par
+#11 (indice vs action individuelle) confond deux dimensions : "large panier
+diversifié" et "classe d'actifs actions". Une question restée sans réponse
+dans ce projet : l'edge overnight est-il spécifique aux **indices actions**,
+ou plus généralement à **tout ETF/panier liquide avec flux institutionnels
+lourds à la clôture** (secteurs, matières premières, obligataire,
+international) ? Les 16 tickers cross-asset déjà téléchargés pour Ichimoku
+incluent justement 13 ETF-paniers (hors les 3 méga-caps déjà couvertes par
+#11 : AAPL, JPM, XOM) jamais testés pour ce biais structurel précis avec le
+protocole complet. Piste retenue pour #15 : **généralisation de l'overnight
+drift aux ETF-paniers hors indices actions larges** — XLE/XLF/XLK/XLV/XLY/XLP
+(secteurs SPDR), GLD/SLV/USO (matières premières), TLT/IEF (obligataire),
+EFA/EEM (international) — dossier `Swing_trading/overnight_drift_baskets/`,
+réutilisant les données déjà en place, sans filtre ni indicateur (retour
+volontaire à la version la plus simple de la stratégie validée, pas une
+nouvelle combinaison) pour isoler la question à sa forme la plus pure : ce
+biais est-il un phénomène par classe d'actif ou par structure de produit
+(panier vs titre unique) ? Sous-groupe Bonferroni a priori : ces 13 ETF,
+seuil 0.05/13 ≈ 0.00385 — auto-critique assumée : ce sous-groupe mélange déjà
+4 classes économiques différentes (secteurs, matières premières, obligataire,
+international), ce qui est justifiable ici uniquement parce que l'hypothèse
+testée porte sur une propriété de *structure de produit* commune aux 13
+(panier liquide, flux de clôture institutionnels), pas sur une propriété
+économique sectorielle — mais si l'edge ne se concentre finalement que sur
+une seule de ces 4 classes, un second test hiérarchique plus étroit sur cette
+classe sera nécessaire avant toute conclusion, exactement comme pour Ichimoku
+(#12) où seuls les indices se sont distingués du reste du panier de 20.
+
+**Auto-critique avant de coder (exigée explicitement par l'utilisateur,
+2026-09-25 : "sois critique même sur ce que je dis moi [...] ne prend pas
+tout au pied de la lettre")** — relecture à froid de cette conception,
+deux défauts corrigés avant implémentation :
+1. **Mauvais panier pour l'hypothèse principale.** `overnight_drift` (#10)
+   n'a été validé que sur des paniers larges indices/ETF fortement corrélés
+   (SPY/QQQ/IWM/MES/CSPX) et a été explicitement rejeté sur les actions
+   individuelles (#11). Réutiliser mécaniquement les mêmes 20 tickers
+   cross-asset qu'Ichimoku/momentum (qui incluent méga-caps individuelles,
+   matières premières, obligataire, international — classes où #11 indique
+   déjà que l'edge overnight a peu de chances de tenir) aurait dilué un
+   résultat potentiellement réel dans un panier majoritairement hors
+   périmètre. **Correction, cohérente avec le principe de Bonferroni
+   hiérarchique déjà acté** : l'**hypothèse principale** est testée sur le
+   sous-groupe où l'edge a une légitimité établie a priori — les indices/ETF
+   larges (SPY, QQQ, IWM, DIA — les 4 indices déjà présents dans le panier
+   des 20 d'Ichimoku/momentum, cohérent avec le sous-groupe Bonferroni déjà
+   défini pour #12) — avec
+   sa propre correction multiple-testing restreinte à ce sous-groupe. Le
+   reste du panier des 20 (méga-caps, secteurs, matières premières,
+   obligataire, international) est conservé en **cartographie exploratoire
+   secondaire**, reportée séparément, jamais mélangée au verdict principal.
+2. **Risque de perte de puissance statistique.** Le filtre de régime réduit
+   mécaniquement le nombre d'entrées overnight, sur un edge déjà marginal
+   (p=0.040 à 0.113 selon l'instrument sans filtre). Le nombre de trades
+   post-filtre doit être vérifié et rapporté explicitement ; si trop faible,
+   la conclusion doit être "échantillon insuffisant pour statuer", jamais une
+   extrapolation sur un sous-échantillon appauvri.
+
+**Note technique (vérifiée avant codage)** : contrairement à l'estimation
+initiale, aucune nouvelle donnée n'est nécessaire. La fenêtre overnight
+(clôture J-1 → ouverture J) se calcule directement à partir des colonnes
+open/close des barres **journalières** déjà téléchargées pour Ichimoku
+(mêmes conventions de séance `useRTH=True`, 09:30-16:00 ET, que les barres
+5 min utilisées dans `overnight_drift/` original — la clôture d'une barre
+journalière IB *est* la clôture 16:00, l'ouverture *est* l'ouverture 9:30,
+donc rigoureusement équivalent, sans le bruit de devoir ré-identifier les
+bornes de séance). Réutilise donc telles quelles les données de
+`Swing_trading/ichimoku_daily/data_*/` pour les 20 instruments (hypothèse
+principale sur SPY/QQQ/IWM/DIA, cartographie secondaire sur le reste).
 
 ## Évolutions de la méthodologie elle-même
 
@@ -187,3 +279,13 @@ hétérogènes, y compris #13 en cours.
   structurels sans indicateur ni classement de prix pourraient être une
   piste plus prometteuse que les signaux basés sur le niveau ou le rang des
   prix, sur ce type de panier large.
+- **Toujours inclure une config "non traitée" (baseline) dans la grille d'un
+  filtre, pas seulement ses variantes filtrées** (#14, filtre de régime Kumo) :
+  un filtre peut échouer de deux façons bien distinctes — soit il est
+  sélectionné en in-sample mais ne survit pas à l'OOS/placebo (cas classique
+  d'overfitting, ex. Ichimoku #12, momentum #13), soit il n'est **même pas
+  sélectionné** comme meilleur que l'absence de filtre dès l'étape in-sample
+  (cas #14 sur 3 des 4 indices primaires) — un rejet plus net et moins cher
+  à détecter, mais invisible si la grille ne teste que des variantes filtrées
+  entre elles. Cette pratique (déjà appliquée par construction dans #14) doit
+  rester systématique pour toute stratégie de filtrage future.
