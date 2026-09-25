@@ -34,6 +34,7 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 15 | Overnight drift sur ETF-paniers hors indices actions larges | `Swing_trading/overnight_drift_baskets/` | Secteurs SPDR (XLE, XLF, XLK, XLV, XLY, XLP), matières premières (GLD, SLV, USO), obligataire (TLT, IEF), international (EFA, EEM) — 13 ETF-paniers | Daily (swing, entrée overnight non filtrée) | Rejeté (12/13 Sharpe IS négatif ; seul GLD positif échoue le seuil Bonferroni) | p=0.013 (GLD, meilleur cas, seuil corrigé du sous-groupe = 0.00385) |
 | 16 | Overnight drift filtré par effet turn-of-month | `Swing_trading/turn_of_month/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée au calendrier) | Rejeté (config IS `tom_only` s'effondre en OOS sur les 4 indices, placebo p=0.90-0.97) | p=0.904-0.967 (4 indices primaires, tous pires que le hasard) |
 | 17 | Effet pré-jour-férié (jambe intraday, pas filtre overnight) | `Swing_trading/pre_holiday_effect/` | 20 tickers cross-asset (4 indices primaires + 16 cartographie secondaire) | Daily (swing, edge intraday open→close) | Rejeté (Sharpe IS/WF trop faibles sur le groupe primaire ; seul XLP < 0.05 mais Sharpe IS négatif et échoue Bonferroni du grid search) | p=0.020 (XLP, Sharpe IS négatif — rejeté malgré la p-value) |
+| 18 | Sélection cross-sectionnelle de l'instrument recevant l'edge overnight | `Swing_trading/overnight_selection_cross_sectional/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — seul sous-groupe où #10 est validé, pas de cartographie secondaire | Daily (swing, sélection nocturne de l'instrument) | Rejeté (config gagnante IS échoue le placebo de sélection ; amélioration IS entièrement portée par le régime Kumo, pas par le classement relatif) | p=0.183 (config gagnante, hors-échantillon) |
 
 ## Rationale des transitions
 
@@ -402,6 +403,43 @@ temporel déguisé ; si le protocole ne teste in fine qu'un filtre par
 instrument indépendamment (comme #14), ce ne serait pas une innovation
 réelle par rapport à la piste déjà close.
 
+**#18 → #19** : Rejeté sans ambiguïté, et le point de vigilance (3)
+pré-enregistré ci-dessus s'est confirmé empiriquement. La grille IS ne
+départage presque pas `unfiltered_baseline` (Sharpe 0.335) de
+`cross_sectional_only` (Sharpe 0.336, sélection relative pure sans régime)
+— la totalité de l'amélioration de la config gagnante
+(`cross_sectional_plus_regime`, Sharpe IS 0.445) vient de l'intersection
+avec le régime Kumo, pas du classement de force relative entre instruments.
+Le test placebo de sélection aléatoire hors-échantillon confirme sans
+ambiguïté l'absence de signal dans le classement : p=0.183 (réel 31 846$
+vs aléatoire 28 606$ ± 3 534$), très loin même du seuil naïf 0.05, a
+fortiori du seuil Bonferroni du grid search (0.05/3≈0.0167). Le Sharpe OOS
+(1.50)/walk-forward (0.60) de la config gagnante, qui semblaient bons pris
+isolément, ne reflètent que la bonne structure de risque héritée de l'edge
+overnight #10 sous-jacent — exactement le type de faux signal que le test
+placebo est conçu pour démasquer (voir `METHODOLOGIE.md` section 7).
+Interprétation économique : SPY/QQQ/IWM/DIA partagent la même exposition
+structurelle (marché actions US large, fortement corrélé) et le même flux
+overnight structurel — un classement de force relative à court terme entre
+4 expositions quasi-identiques n'a pas de raison a priori de prédire LEQUEL
+bénéficiera le plus du même flux la nuit suivante. L'edge overnight #10
+lui-même reste valide ; c'est le mécanisme de sélection qui échoue.
+
+Sixième dimension consécutive testée pour combiner/améliorer l'edge
+overnight à échouer (après les 5 filtres calendaires #11/#14/#15/#16/#17,
+puis cette tentative de sélection d'instrument #18). Conséquence de
+conception à tirer avant #19 (Rule #3/#4, voir aussi "Enseignements
+transversaux" ci-dessous) : la piste "combiner un signal de suivi de
+tendance/momentum avec l'edge overnight sur ce panier précis de 4 indices
+larges" doit être considérée comme close, quelle que soit la forme prise
+(filtre temporel #14, signal autonome #13, ou critère de sélection
+d'instrument #18) — les 3 formes ont échoué sur le même panier. Une
+prochaine tentative de combinaison sur ce panier devrait s'appuyer sur un
+mécanisme de nature différente (ex. lié au volume, à la volatilité, ou à
+une source de données non encore exploitée dans ce projet), ou bien
+changer de panier plutôt que de rejouer tendance/momentum sur SPY/QQQ/IWM/DIA
+une quatrième fois.
+
 ## Évolutions de la méthodologie elle-même
 
 **2026-09-25 — clarification de la correction multiple-testing d'un grid
@@ -568,3 +606,17 @@ hétérogènes, y compris #13 en cours.
   jour-de-la-semaine) précisément parce qu'elles prolongeaient une classe
   déjà rejetée ou contredisaient l'enseignement sur les signaux de prix —
   cette discipline doit rester systématique, pas ponctuelle.
+- **Sur le panier SPY/QQQ/IWM/DIA, tendance (Kumo) et momentum ont
+  maintenant échoué sous 3 formes différentes** — signal autonome (#13),
+  filtre temporel d'un instrument fixe (#14), et critère de sélection
+  d'instrument (#18) — sans qu'aucune ne produise une information
+  exploitable au-delà de ce qu'apporte déjà l'edge overnight brut #10. Une
+  amélioration de Sharpe in-sample obtenue par intersection avec un filtre
+  déjà rejeté séparément (#18 : le gain vient entièrement du Kumo, pas du
+  classement relatif) doit être traitée avec la même suspicion qu'un filtre
+  testé seul — le test placebo reste le juge de paix, pas le Sharpe
+  IS/OOS pris isolément (voir `METHODOLOGIE.md` section 7 : un Sharpe
+  positif peut n'être que la structure de risque héritée d'un edge déjà
+  validé, sans information propre au mécanisme testé). Conséquence pour
+  #19 : ne pas recombiner tendance/momentum avec ce panier précis sous une
+  4ᵉ forme sans un enseignement nouveau qui changerait cette conclusion.

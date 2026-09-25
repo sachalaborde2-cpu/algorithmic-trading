@@ -1,0 +1,64 @@
+
+Donnees : 2512 jours communs aux 4 instruments (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+                     config  n_IS  avg_sel_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+        unfiltered_baseline  7024       4.000      0.335 0.884   3016       1.191
+       cross_sectional_only  3218       2.000      0.336 0.888   1508       1.227
+cross_sectional_plus_regime  2206       1.817      0.445 1.174   1078       1.499
+
+=== 2. Meilleure config in-sample : cross_sectional_plus_regime ===
+IS  : n_trades=2206  avg_selected=1.82  win_rate=0.54  exp_$=5.61  profit_factor=1.10  total_$=12372.00  sharpe=0.44  t_stat=1.17  max_dd_$=-10217.00
+OOS : n_trades=1078  avg_selected=1.82  win_rate=0.58  exp_$=29.54  profit_factor=1.35  total_$=31846.00  sharpe=1.50  t_stat=2.59  max_dd_$=-6615.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=5079  avg_selected=2.47  win_rate=0.55  exp_$=9.65  profit_factor=1.14  total_$=49005.00  sharpe=0.60  t_stat=1.79  max_dd_$=-29643.00
+  test a partir de 2017-09-27 : config=unfiltered_baseline
+  test a partir de 2017-12-27 : config=cross_sectional_only
+  test a partir de 2018-03-27 : config=cross_sectional_only
+  test a partir de 2018-06-27 : config=cross_sectional_only
+  test a partir de 2018-09-27 : config=unfiltered_baseline
+  test a partir de 2018-12-27 : config=unfiltered_baseline
+  test a partir de 2019-03-27 : config=unfiltered_baseline
+  test a partir de 2019-06-27 : config=unfiltered_baseline
+  test a partir de 2019-09-27 : config=unfiltered_baseline
+  test a partir de 2019-12-27 : config=unfiltered_baseline
+  test a partir de 2020-03-27 : config=cross_sectional_plus_regime
+  test a partir de 2020-06-27 : config=cross_sectional_plus_regime
+  test a partir de 2020-09-27 : config=cross_sectional_plus_regime
+  test a partir de 2020-12-27 : config=cross_sectional_plus_regime
+  test a partir de 2021-03-27 : config=cross_sectional_only
+  test a partir de 2021-06-27 : config=cross_sectional_only
+  test a partir de 2021-09-27 : config=cross_sectional_only
+  test a partir de 2021-12-27 : config=cross_sectional_only
+  test a partir de 2022-03-27 : config=cross_sectional_plus_regime
+  test a partir de 2022-06-27 : config=cross_sectional_plus_regime
+  test a partir de 2022-09-27 : config=cross_sectional_plus_regime
+  test a partir de 2022-12-27 : config=cross_sectional_plus_regime
+  test a partir de 2023-03-27 : config=unfiltered_baseline
+  test a partir de 2023-06-27 : config=cross_sectional_only
+  test a partir de 2023-09-27 : config=cross_sectional_only
+  test a partir de 2023-12-27 : config=cross_sectional_only
+  test a partir de 2024-03-27 : config=cross_sectional_only
+  test a partir de 2024-06-27 : config=cross_sectional_only
+  test a partir de 2024-09-27 : config=unfiltered_baseline
+  test a partir de 2024-12-27 : config=cross_sectional_only
+  test a partir de 2025-03-27 : config=cross_sectional_plus_regime
+  test a partir de 2025-06-27 : config=cross_sectional_plus_regime
+  test a partir de 2025-09-27 : config=cross_sectional_plus_regime
+  test a partir de 2025-12-27 : config=cross_sectional_plus_regime
+  test a partir de 2026-03-27 : config=cross_sectional_plus_regime
+  test a partir de 2026-06-27 : config=cross_sectional_plus_regime
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=3285  avg_selected=1.82  win_rate=0.56  exp_$=15.28  profit_factor=1.24  total_$=50192.00  sharpe=0.99  t_stat=3.13  max_dd_$=-9683.00
+  slippage 1 tick(s)/execution : n_trades=3285  avg_selected=1.82  win_rate=0.55  exp_$=13.28  profit_factor=1.20  total_$=43622.00  sharpe=0.86  t_stat=2.73  max_dd_$=-10217.00
+  slippage 2 tick(s)/execution : n_trades=3285  avg_selected=1.82  win_rate=0.54  exp_$=11.28  profit_factor=1.17  total_$=37052.00  sharpe=0.74  t_stat=2.32  max_dd_$=-10751.00
+  slippage 3 tick(s)/execution : n_trades=3285  avg_selected=1.82  win_rate=0.54  exp_$=9.28  profit_factor=1.14  total_$=30482.00  sharpe=0.61  t_stat=1.92  max_dd_$=-11285.00
+
+=== 5. Selection aleatoire (meme nombre d'instruments/nuit), hors-echantillon ===
+  reel : 31846$ | selection aleatoire : 28606$ +/- 3534$ | p-value = 0.183
+
+Trades ecrits dans trades_best.csv
+Courbe ecrite dans examples/equity_best.png
