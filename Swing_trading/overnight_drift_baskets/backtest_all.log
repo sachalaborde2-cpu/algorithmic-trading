@@ -1,0 +1,829 @@
+=== XLE ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.11 -2.93    754       -0.67
+    short  1756      -2.44 -6.44    754       -2.25
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.48  exp_$=-2.50  exp_R=-0.25  profit_factor=0.81  total_$=-4392.50  sharpe=-1.11  t_stat=-2.93  max_dd_$=-4854.50
+OOS : n_trades=754  win_rate=0.50  exp_$=-1.83  exp_R=0.08  profit_factor=0.88  total_$=-1381.00  sharpe=-0.67  t_stat=-1.15  max_dd_$=-1753.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.47  exp_$=-3.65  exp_R=-0.83  profit_factor=0.76  total_$=-8255.50  sharpe=-1.46  t_stat=-4.36  max_dd_$=-8579.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=short
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=long
+  test a partir de 2022-06-27 : direction=long
+  test a partir de 2022-09-27 : direction=long
+  test a partir de 2022-12-27 : direction=long
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=long
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=long
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.51  exp_$=-0.27  exp_R=0.02  profit_factor=0.98  total_$=-685.50  sharpe=-0.12  t_stat=-0.39  max_dd_$=-1682.50
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.48  exp_$=-2.27  exp_R=-0.14  profit_factor=0.84  total_$=-5707.50  sharpe=-0.95  t_stat=-3.01  max_dd_$=-6323.50
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.45  exp_$=-4.27  exp_R=-0.57  profit_factor=0.71  total_$=-10729.50  sharpe=-1.78  t_stat=-5.63  max_dd_$=-11119.50
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.41  exp_$=-6.27  exp_R=-0.71  profit_factor=0.61  total_$=-15751.50  sharpe=-2.61  t_stat=-8.25  max_dd_$=-15962.50
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -1381$ | pile ou face : -2852$ +/- 1174$ | p-value = 0.106
+
+Trades ecrits dans trades_XLE_best.csv
+
+=== XLF ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.71 -4.51    754       -1.42
+    short  1756      -2.72 -7.17    754       -2.97
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.45  exp_$=-3.09  exp_R=-0.54  profit_factor=0.71  total_$=-5426.00  sharpe=-1.71  t_stat=-4.51  max_dd_$=-5503.00
+OOS : n_trades=754  win_rate=0.47  exp_$=-2.59  exp_R=-0.30  profit_factor=0.76  total_$=-1953.00  sharpe=-1.42  t_stat=-2.46  max_dd_$=-2136.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.45  exp_$=-2.81  exp_R=-0.40  profit_factor=0.75  total_$=-6338.00  sharpe=-1.49  t_stat=-4.46  max_dd_$=-6478.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=short
+  test a partir de 2019-09-27 : direction=short
+  test a partir de 2019-12-27 : direction=short
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=short
+  test a partir de 2020-09-27 : direction=short
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=long
+  test a partir de 2022-06-27 : direction=long
+  test a partir de 2022-09-27 : direction=long
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=short
+  test a partir de 2023-12-27 : direction=short
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=short
+  test a partir de 2026-03-27 : direction=short
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.50  exp_$=-0.94  exp_R=0.01  profit_factor=0.90  total_$=-2354.00  sharpe=-0.52  t_stat=-1.64  max_dd_$=-3147.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.46  exp_$=-2.94  exp_R=-0.47  profit_factor=0.73  total_$=-7376.00  sharpe=-1.62  t_stat=-5.12  max_dd_$=-7631.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.40  exp_$=-4.94  exp_R=-0.73  profit_factor=0.58  total_$=-12398.00  sharpe=-2.73  t_stat=-8.61  max_dd_$=-12430.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.36  exp_$=-6.94  exp_R=-0.82  profit_factor=0.47  total_$=-17420.00  sharpe=-3.83  t_stat=-12.09  max_dd_$=-17419.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -1953$ | pile ou face : -3122$ +/- 788$ | p-value = 0.066
+
+Trades ecrits dans trades_XLF_best.csv
+
+=== XLK ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -0.88 -2.33    754        1.02
+    short  1756      -1.55 -4.10    754       -1.94
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.48  exp_$=-2.90  exp_R=-0.45  profit_factor=0.84  total_$=-5088.00  sharpe=-0.88  t_stat=-2.33  max_dd_$=-5175.50
+OOS : n_trades=754  win_rate=0.56  exp_$=8.94  exp_R=5.47  profit_factor=1.21  total_$=6737.50  sharpe=1.02  t_stat=1.77  max_dd_$=-2865.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.52  exp_$=0.40  exp_R=1.20  profit_factor=1.01  total_$=898.50  sharpe=0.07  t_stat=0.20  max_dd_$=-6228.50
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=short
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=long
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=short
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=long
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.53  exp_$=2.57  exp_R=0.05  profit_factor=1.11  total_$=6443.50  sharpe=0.48  t_stat=1.52  max_dd_$=-3390.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.50  exp_$=0.57  exp_R=1.28  profit_factor=1.02  total_$=1421.50  sharpe=0.12  t_stat=0.37  max_dd_$=-5469.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.48  exp_$=-1.43  exp_R=0.14  profit_factor=0.95  total_$=-3600.50  sharpe=-0.24  t_stat=-0.77  max_dd_$=-9504.50
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.45  exp_$=-3.43  exp_R=-0.24  profit_factor=0.87  total_$=-8622.50  sharpe=-0.60  t_stat=-1.91  max_dd_$=-13808.50
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : 6738$ | pile ou face : -3549$ +/- 3964$ | p-value = 0.003
+
+Trades ecrits dans trades_XLK_best.csv
+
+=== XLV ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -0.63 -1.65    754       -0.91
+    short  1756      -1.31 -3.46    754       -0.83
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.49  exp_$=-2.59  exp_R=-0.29  profit_factor=0.88  total_$=-4544.00  sharpe=-0.63  t_stat=-1.65  max_dd_$=-5088.00
+OOS : n_trades=754  win_rate=0.48  exp_$=-4.18  exp_R=-1.09  profit_factor=0.85  total_$=-3154.00  sharpe=-0.91  t_stat=-1.57  max_dd_$=-5396.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.49  exp_$=-3.30  exp_R=-0.65  profit_factor=0.87  total_$=-7444.00  sharpe=-0.74  t_stat=-2.21  max_dd_$=-7824.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=short
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=long
+  test a partir de 2023-12-27 : direction=short
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=short
+  test a partir de 2025-06-27 : direction=short
+  test a partir de 2025-09-27 : direction=short
+  test a partir de 2025-12-27 : direction=short
+  test a partir de 2026-03-27 : direction=short
+  test a partir de 2026-06-27 : direction=short
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.51  exp_$=-1.06  exp_R=0.01  profit_factor=0.95  total_$=-2673.00  sharpe=-0.25  t_stat=-0.79  max_dd_$=-6639.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.49  exp_$=-3.06  exp_R=-0.53  profit_factor=0.87  total_$=-7695.00  sharpe=-0.72  t_stat=-2.26  max_dd_$=-9336.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.47  exp_$=-5.06  exp_R=-0.77  profit_factor=0.79  total_$=-12717.00  sharpe=-1.18  t_stat=-3.73  max_dd_$=-14052.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.45  exp_$=-7.06  exp_R=-0.84  profit_factor=0.72  total_$=-17739.00  sharpe=-1.65  t_stat=-5.21  max_dd_$=-18848.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -3154$ | pile ou face : -3087$ +/- 1977$ | p-value = 0.508
+
+Trades ecrits dans trades_XLV_best.csv
+
+=== XLY ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -0.33 -0.87    754       -0.15
+    short  1756      -1.72 -4.53    754       -1.27
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.51  exp_$=-1.28  exp_R=0.36  profit_factor=0.94  total_$=-2254.50  sharpe=-0.33  t_stat=-0.87  max_dd_$=-3430.50
+OOS : n_trades=754  win_rate=0.52  exp_$=-0.86  exp_R=0.57  profit_factor=0.97  total_$=-650.50  sharpe=-0.15  t_stat=-0.27  max_dd_$=-2709.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.52  exp_$=-2.67  exp_R=-0.34  profit_factor=0.90  total_$=-6032.00  sharpe=-0.56  t_stat=-1.69  max_dd_$=-6679.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=long
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=short
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=short
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.54  exp_$=0.82  exp_R=0.03  profit_factor=1.04  total_$=2064.00  sharpe=0.19  t_stat=0.59  max_dd_$=-2810.50
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.51  exp_$=-1.18  exp_R=0.41  profit_factor=0.95  total_$=-2958.00  sharpe=-0.26  t_stat=-0.81  max_dd_$=-4610.50
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.49  exp_$=-3.18  exp_R=-0.29  profit_factor=0.87  total_$=-7980.00  sharpe=-0.70  t_stat=-2.22  max_dd_$=-8474.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.46  exp_$=-5.18  exp_R=-0.53  profit_factor=0.79  total_$=-13002.00  sharpe=-1.15  t_stat=-3.62  max_dd_$=-13238.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -651$ | pile ou face : -3304$ +/- 2509$ | p-value = 0.146
+
+Trades ecrits dans trades_XLY_best.csv
+
+=== XLP ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.81 -4.79    754       -2.10
+    short  1756      -1.92 -5.06    754       -1.67
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.44  exp_$=-3.89  exp_R=-0.95  profit_factor=0.67  total_$=-6831.00  sharpe=-1.81  t_stat=-4.79  max_dd_$=-6861.00
+OOS : n_trades=754  win_rate=0.42  exp_$=-4.46  exp_R=-1.23  profit_factor=0.69  total_$=-3360.00  sharpe=-2.10  t_stat=-3.64  max_dd_$=-3536.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.42  exp_$=-4.76  exp_R=-1.38  profit_factor=0.65  total_$=-10749.00  sharpe=-2.13  t_stat=-6.39  max_dd_$=-10947.00
+  test a partir de 2017-09-27 : direction=short
+  test a partir de 2017-12-27 : direction=short
+  test a partir de 2018-03-27 : direction=short
+  test a partir de 2018-06-27 : direction=short
+  test a partir de 2018-09-27 : direction=short
+  test a partir de 2018-12-27 : direction=short
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=short
+  test a partir de 2020-09-27 : direction=short
+  test a partir de 2020-12-27 : direction=short
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=long
+  test a partir de 2023-09-27 : direction=long
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=short
+  test a partir de 2025-06-27 : direction=short
+  test a partir de 2025-09-27 : direction=short
+  test a partir de 2025-12-27 : direction=short
+  test a partir de 2026-03-27 : direction=short
+  test a partir de 2026-06-27 : direction=short
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.48  exp_$=-2.04  exp_R=-0.00  profit_factor=0.82  total_$=-5125.00  sharpe=-0.96  t_stat=-3.04  max_dd_$=-5427.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.44  exp_$=-4.04  exp_R=-1.02  profit_factor=0.68  total_$=-10147.00  sharpe=-1.90  t_stat=-6.00  max_dd_$=-10250.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.40  exp_$=-6.04  exp_R=-1.01  profit_factor=0.56  total_$=-15169.00  sharpe=-2.84  t_stat=-8.95  max_dd_$=-15258.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.35  exp_$=-8.04  exp_R=-1.01  profit_factor=0.46  total_$=-20191.00  sharpe=-3.77  t_stat=-11.91  max_dd_$=-20268.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -3360$ | pile ou face : -2961$ +/- 890$ | p-value = 0.654
+
+Trades ecrits dans trades_XLP_best.csv
+
+=== GLD ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756       0.04  0.11    754        1.15
+    short  1756      -1.31 -3.46    754       -1.47
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.52  exp_$=0.26  exp_R=1.13  profit_factor=1.01  total_$=463.00  sharpe=0.04  t_stat=0.11  max_dd_$=-4225.00
+OOS : n_trades=754  win_rate=0.57  exp_$=28.15  exp_R=15.07  profit_factor=1.27  total_$=21225.00  sharpe=1.15  t_stat=1.98  max_dd_$=-7525.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.53  exp_$=8.64  exp_R=5.32  profit_factor=1.14  total_$=19510.00  sharpe=0.57  t_stat=1.70  max_dd_$=-7525.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=short
+  test a partir de 2018-09-27 : direction=short
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=long
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=long
+  test a partir de 2023-06-27 : direction=long
+  test a partir de 2023-09-27 : direction=long
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=long
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.55  exp_$=10.60  exp_R=0.13  profit_factor=1.19  total_$=26612.00  sharpe=0.74  t_stat=2.32  max_dd_$=-7345.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.54  exp_$=8.60  exp_R=5.30  profit_factor=1.15  total_$=21590.00  sharpe=0.60  t_stat=1.88  max_dd_$=-7525.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.52  exp_$=6.60  exp_R=2.15  profit_factor=1.12  total_$=16568.00  sharpe=0.46  t_stat=1.45  max_dd_$=-7737.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.51  exp_$=4.60  exp_R=1.10  profit_factor=1.08  total_$=11546.00  sharpe=0.32  t_stat=1.01  max_dd_$=-7949.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : 21225$ | pile ou face : -2955$ +/- 10141$ | p-value = 0.013
+
+Trades ecrits dans trades_GLD_best.csv
+
+=== SLV ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.94 -5.11    754        0.23
+    short  1756      -3.01 -7.94    754       -1.16
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.40  exp_$=-3.13  exp_R=-0.57  profit_factor=0.69  total_$=-5501.00  sharpe=-1.94  t_stat=-5.11  max_dd_$=-5601.00
+OOS : n_trades=754  win_rate=0.53  exp_$=1.94  exp_R=1.97  profit_factor=1.06  total_$=1464.00  sharpe=0.23  t_stat=0.39  max_dd_$=-3134.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.44  exp_$=-1.68  exp_R=0.16  profit_factor=0.91  total_$=-3805.00  sharpe=-0.33  t_stat=-0.98  max_dd_$=-5749.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=short
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=long
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=long
+  test a partir de 2023-06-27 : direction=long
+  test a partir de 2023-09-27 : direction=long
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=long
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.48  exp_$=0.36  exp_R=0.02  profit_factor=1.02  total_$=896.00  sharpe=0.08  t_stat=0.25  max_dd_$=-2880.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.44  exp_$=-1.64  exp_R=0.18  profit_factor=0.90  total_$=-4126.00  sharpe=-0.33  t_stat=-1.04  max_dd_$=-6028.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.40  exp_$=-3.64  exp_R=-0.41  profit_factor=0.80  total_$=-9148.00  sharpe=-0.74  t_stat=-2.33  max_dd_$=-10459.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.36  exp_$=-5.64  exp_R=-0.61  profit_factor=0.71  total_$=-14170.00  sharpe=-1.15  t_stat=-3.61  max_dd_$=-14935.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : 1464$ | pile ou face : -3071$ +/- 3584$ | p-value = 0.093
+
+Trades ecrits dans trades_SLV_best.csv
+
+=== USO ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -0.01 -0.03    754        0.21
+    short  1756      -1.05 -2.78    754       -0.83
+
+=== 2. Meilleure config in-sample : direction=long ===
+IS  : n_trades=1756  win_rate=0.52  exp_$=-0.08  exp_R=0.96  profit_factor=1.00  total_$=-149.00  sharpe=-0.01  t_stat=-0.03  max_dd_$=-6918.00
+OOS : n_trades=754  win_rate=0.51  exp_$=2.74  exp_R=2.37  profit_factor=1.05  total_$=2066.00  sharpe=0.21  t_stat=0.36  max_dd_$=-5862.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.50  exp_$=-4.87  exp_R=-1.44  profit_factor=0.90  total_$=-11003.00  sharpe=-0.50  t_stat=-1.49  max_dd_$=-14267.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=long
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=short
+  test a partir de 2020-09-27 : direction=short
+  test a partir de 2020-12-27 : direction=short
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=long
+  test a partir de 2022-03-27 : direction=long
+  test a partir de 2022-06-27 : direction=long
+  test a partir de 2022-09-27 : direction=long
+  test a partir de 2022-12-27 : direction=long
+  test a partir de 2023-03-27 : direction=long
+  test a partir de 2023-06-27 : direction=long
+  test a partir de 2023-09-27 : direction=long
+  test a partir de 2023-12-27 : direction=long
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=short
+  test a partir de 2026-03-27 : direction=long
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.52  exp_$=2.85  exp_R=0.05  profit_factor=1.06  total_$=7158.00  sharpe=0.29  t_stat=0.92  max_dd_$=-6380.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.52  exp_$=0.85  exp_R=1.43  profit_factor=1.02  total_$=2136.00  sharpe=0.08  t_stat=0.25  max_dd_$=-6918.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.51  exp_$=-1.15  exp_R=0.21  profit_factor=0.98  total_$=-2886.00  sharpe=-0.13  t_stat=-0.41  max_dd_$=-8105.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.49  exp_$=-3.15  exp_R=-0.19  profit_factor=0.93  total_$=-7908.00  sharpe=-0.34  t_stat=-1.07  max_dd_$=-11959.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : 2066$ | pile ou face : -2192$ +/- 5859$ | p-value = 0.233
+
+Trades ecrits dans trades_USO_best.csv
+
+=== TLT ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.10 -2.92    754       -1.92
+    short  1756      -0.22 -0.58    754       -0.25
+
+=== 2. Meilleure config in-sample : direction=short ===
+IS  : n_trades=1756  win_rate=0.49  exp_$=-1.33  exp_R=0.34  profit_factor=0.96  total_$=-2331.00  sharpe=-0.22  t_stat=-0.58  max_dd_$=-9259.00
+OOS : n_trades=754  win_rate=0.49  exp_$=-0.93  exp_R=0.54  profit_factor=0.96  total_$=-700.00  sharpe=-0.25  t_stat=-0.44  max_dd_$=-1789.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.49  exp_$=0.14  exp_R=1.07  profit_factor=1.00  total_$=305.00  sharpe=0.02  t_stat=0.07  max_dd_$=-5639.00
+  test a partir de 2017-09-27 : direction=short
+  test a partir de 2017-12-27 : direction=short
+  test a partir de 2018-03-27 : direction=short
+  test a partir de 2018-06-27 : direction=short
+  test a partir de 2018-09-27 : direction=short
+  test a partir de 2018-12-27 : direction=short
+  test a partir de 2019-03-27 : direction=long
+  test a partir de 2019-06-27 : direction=long
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=long
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=short
+  test a partir de 2021-06-27 : direction=short
+  test a partir de 2021-09-27 : direction=short
+  test a partir de 2021-12-27 : direction=short
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=short
+  test a partir de 2023-12-27 : direction=short
+  test a partir de 2024-03-27 : direction=short
+  test a partir de 2024-06-27 : direction=short
+  test a partir de 2024-09-27 : direction=short
+  test a partir de 2024-12-27 : direction=short
+  test a partir de 2025-03-27 : direction=short
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=short
+  test a partir de 2025-12-27 : direction=short
+  test a partir de 2026-03-27 : direction=short
+  test a partir de 2026-06-27 : direction=short
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.50  exp_$=0.80  exp_R=0.03  profit_factor=1.03  total_$=1998.00  sharpe=0.15  t_stat=0.46  max_dd_$=-8111.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.49  exp_$=-1.20  exp_R=0.40  profit_factor=0.96  total_$=-3024.00  sharpe=-0.22  t_stat=-0.70  max_dd_$=-9259.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.49  exp_$=-3.20  exp_R=-0.30  profit_factor=0.90  total_$=-8046.00  sharpe=-0.59  t_stat=-1.86  max_dd_$=-10829.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.47  exp_$=-5.20  exp_R=-0.53  profit_factor=0.84  total_$=-13068.00  sharpe=-0.96  t_stat=-3.02  max_dd_$=-14137.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -700$ | pile ou face : -3067$ +/- 1672$ | p-value = 0.073
+
+Trades ecrits dans trades_TLT_best.csv
+
+=== IEF ===
+
+Donnees : 2297 jours (2017-08-04 -> 2026-09-24)
+In-sample : 2017-08-04 -> 2023-12-21 | Hors-echantillon : 2023-12-22 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1606      -2.05 -5.17    689       -2.56
+    short  1606      -1.54 -3.89    689       -1.89
+
+=== 2. Meilleure config in-sample : direction=short ===
+IS  : n_trades=1606  win_rate=0.45  exp_$=-3.43  exp_R=-0.72  profit_factor=0.76  total_$=-5516.00  sharpe=-1.54  t_stat=-3.89  max_dd_$=-5517.00
+OOS : n_trades=689  win_rate=0.44  exp_$=-3.39  exp_R=-0.70  profit_factor=0.73  total_$=-2338.00  sharpe=-1.89  t_stat=-3.12  max_dd_$=-2627.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2044  win_rate=0.45  exp_$=-3.07  exp_R=-0.53  profit_factor=0.78  total_$=-6265.00  sharpe=-1.40  t_stat=-3.98  max_dd_$=-6522.00
+  test a partir de 2018-08-04 : direction=short
+  test a partir de 2018-11-04 : direction=short
+  test a partir de 2019-02-04 : direction=long
+  test a partir de 2019-05-04 : direction=long
+  test a partir de 2019-08-04 : direction=long
+  test a partir de 2019-11-04 : direction=long
+  test a partir de 2020-02-04 : direction=long
+  test a partir de 2020-05-04 : direction=long
+  test a partir de 2020-08-04 : direction=long
+  test a partir de 2020-11-04 : direction=long
+  test a partir de 2021-02-04 : direction=long
+  test a partir de 2021-05-04 : direction=short
+  test a partir de 2021-08-04 : direction=short
+  test a partir de 2021-11-04 : direction=short
+  test a partir de 2022-02-04 : direction=short
+  test a partir de 2022-05-04 : direction=short
+  test a partir de 2022-08-04 : direction=short
+  test a partir de 2022-11-04 : direction=short
+  test a partir de 2023-02-04 : direction=short
+  test a partir de 2023-05-04 : direction=short
+  test a partir de 2023-08-04 : direction=short
+  test a partir de 2023-11-04 : direction=short
+  test a partir de 2024-02-04 : direction=short
+  test a partir de 2024-05-04 : direction=short
+  test a partir de 2024-08-04 : direction=short
+  test a partir de 2024-11-04 : direction=short
+  test a partir de 2025-02-04 : direction=short
+  test a partir de 2025-05-04 : direction=long
+  test a partir de 2025-08-04 : direction=short
+  test a partir de 2025-11-04 : direction=long
+  test a partir de 2026-02-04 : direction=long
+  test a partir de 2026-05-04 : direction=short
+  test a partir de 2026-08-04 : direction=short
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2296  win_rate=0.48  exp_$=-1.43  exp_R=0.01  profit_factor=0.89  total_$=-3274.00  sharpe=-0.67  t_stat=-2.04  max_dd_$=-3523.00
+  slippage 1 tick(s)/execution : n_trades=2296  win_rate=0.45  exp_$=-3.43  exp_R=-0.71  profit_factor=0.75  total_$=-7866.00  sharpe=-1.62  t_stat=-4.90  max_dd_$=-7871.00
+  slippage 2 tick(s)/execution : n_trades=2296  win_rate=0.43  exp_$=-5.43  exp_R=-0.86  profit_factor=0.64  total_$=-12458.00  sharpe=-2.57  t_stat=-7.77  max_dd_$=-12458.00
+  slippage 3 tick(s)/execution : n_trades=2296  win_rate=0.40  exp_$=-7.43  exp_R=-0.90  profit_factor=0.54  total_$=-17050.00  sharpe=-3.52  t_stat=-10.63  max_dd_$=-17046.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -2338$ | pile ou face : -2743$ +/- 680$ | p-value = 0.266
+
+Trades ecrits dans trades_IEF_best.csv
+
+=== EFA ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.30 -3.44    754       -0.45
+    short  1756      -0.86 -2.28    754       -1.42
+
+=== 2. Meilleure config in-sample : direction=short ===
+IS  : n_trades=1756  win_rate=0.44  exp_$=-3.19  exp_R=-0.60  profit_factor=0.85  total_$=-5606.00  sharpe=-0.86  t_stat=-2.28  max_dd_$=-5925.00
+OOS : n_trades=754  win_rate=0.42  exp_$=-6.08  exp_R=-2.04  profit_factor=0.78  total_$=-4584.00  sharpe=-1.42  t_stat=-2.46  max_dd_$=-4844.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.46  exp_$=-5.14  exp_R=-1.57  profit_factor=0.79  total_$=-11605.00  sharpe=-1.27  t_stat=-3.81  max_dd_$=-12253.00
+  test a partir de 2017-09-27 : direction=short
+  test a partir de 2017-12-27 : direction=short
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=long
+  test a partir de 2018-12-27 : direction=short
+  test a partir de 2019-03-27 : direction=short
+  test a partir de 2019-06-27 : direction=short
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=short
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=short
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=short
+  test a partir de 2023-12-27 : direction=short
+  test a partir de 2024-03-27 : direction=long
+  test a partir de 2024-06-27 : direction=long
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=short
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=short
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.46  exp_$=-2.05  exp_R=-0.00  profit_factor=0.91  total_$=-5135.00  sharpe=-0.53  t_stat=-1.68  max_dd_$=-5555.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.43  exp_$=-4.05  exp_R=-1.02  profit_factor=0.83  total_$=-10157.00  sharpe=-1.05  t_stat=-3.30  max_dd_$=-10381.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.42  exp_$=-6.05  exp_R=-1.01  profit_factor=0.75  total_$=-15179.00  sharpe=-1.56  t_stat=-4.93  max_dd_$=-15333.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.40  exp_$=-8.05  exp_R=-1.01  profit_factor=0.68  total_$=-20201.00  sharpe=-2.08  t_stat=-6.56  max_dd_$=-20327.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -4584$ | pile ou face : -3187$ +/- 1781$ | p-value = 0.771
+
+Trades ecrits dans trades_EFA_best.csv
+
+=== EEM ===
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (2 configurations testees) ===
+direction  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+     long  1756      -1.39 -3.67    754       -0.59
+    short  1756      -1.38 -3.63    754       -1.62
+
+=== 2. Meilleure config in-sample : direction=short ===
+IS  : n_trades=1756  win_rate=0.43  exp_$=-3.98  exp_R=-0.99  profit_factor=0.78  total_$=-6992.00  sharpe=-1.38  t_stat=-3.63  max_dd_$=-7055.00
+OOS : n_trades=754  win_rate=0.42  exp_$=-5.86  exp_R=-1.93  profit_factor=0.74  total_$=-4420.00  sharpe=-1.62  t_stat=-2.80  max_dd_$=-4652.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=2259  win_rate=0.48  exp_$=-3.70  exp_R=-0.85  profit_factor=0.81  total_$=-8369.00  sharpe=-1.14  t_stat=-3.41  max_dd_$=-9156.00
+  test a partir de 2017-09-27 : direction=long
+  test a partir de 2017-12-27 : direction=long
+  test a partir de 2018-03-27 : direction=long
+  test a partir de 2018-06-27 : direction=long
+  test a partir de 2018-09-27 : direction=short
+  test a partir de 2018-12-27 : direction=short
+  test a partir de 2019-03-27 : direction=short
+  test a partir de 2019-06-27 : direction=short
+  test a partir de 2019-09-27 : direction=long
+  test a partir de 2019-12-27 : direction=long
+  test a partir de 2020-03-27 : direction=short
+  test a partir de 2020-06-27 : direction=long
+  test a partir de 2020-09-27 : direction=long
+  test a partir de 2020-12-27 : direction=long
+  test a partir de 2021-03-27 : direction=long
+  test a partir de 2021-06-27 : direction=long
+  test a partir de 2021-09-27 : direction=long
+  test a partir de 2021-12-27 : direction=short
+  test a partir de 2022-03-27 : direction=short
+  test a partir de 2022-06-27 : direction=short
+  test a partir de 2022-09-27 : direction=short
+  test a partir de 2022-12-27 : direction=short
+  test a partir de 2023-03-27 : direction=short
+  test a partir de 2023-06-27 : direction=short
+  test a partir de 2023-09-27 : direction=short
+  test a partir de 2023-12-27 : direction=short
+  test a partir de 2024-03-27 : direction=short
+  test a partir de 2024-06-27 : direction=short
+  test a partir de 2024-09-27 : direction=long
+  test a partir de 2024-12-27 : direction=long
+  test a partir de 2025-03-27 : direction=long
+  test a partir de 2025-06-27 : direction=long
+  test a partir de 2025-09-27 : direction=long
+  test a partir de 2025-12-27 : direction=long
+  test a partir de 2026-03-27 : direction=long
+  test a partir de 2026-06-27 : direction=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2511  win_rate=0.45  exp_$=-2.54  exp_R=-0.01  profit_factor=0.86  total_$=-6380.00  sharpe=-0.81  t_stat=-2.57  max_dd_$=-6681.00
+  slippage 1 tick(s)/execution : n_trades=2511  win_rate=0.43  exp_$=-4.54  exp_R=-1.27  profit_factor=0.77  total_$=-11402.00  sharpe=-1.45  t_stat=-4.58  max_dd_$=-11552.00
+  slippage 2 tick(s)/execution : n_trades=2511  win_rate=0.39  exp_$=-6.54  exp_R=-1.14  profit_factor=0.68  total_$=-16424.00  sharpe=-2.09  t_stat=-6.60  max_dd_$=-16515.00
+  slippage 3 tick(s)/execution : n_trades=2511  win_rate=0.38  exp_$=-8.54  exp_R=-1.09  profit_factor=0.61  total_$=-21446.00  sharpe=-2.73  t_stat=-8.62  max_dd_$=-21529.00
+
+=== 5. Direction au hasard (meme timing), hors-echantillon ===
+  reel : -4420$ | pile ou face : -3158$ +/- 1483$ | p-value = 0.804
+
+Trades ecrits dans trades_EEM_best.csv
+

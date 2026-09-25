@@ -31,7 +31,7 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 12 | Ichimoku Kinko Hyo | `Swing_trading/ichimoku_daily/` | 20 tickers cross-asset (indices, secteurs, matières premières, obligataire, international, méga-caps) | Daily (swing) | Rejeté (Bonferroni hiérarchique, sous-groupe des 4 indices) | p=0.030 (SPY, meilleur cas, seuil corrigé du sous-groupe = 0.0125) |
 | 13 | Momentum cross-sectionnel | `Swing_trading/momentum_cross_sectional/` | Mêmes 20 tickers cross-asset | Daily (swing, rebalancement mensuel) | Rejeté | p=0.286 (config sélectionnée en IS), p=0.035 (config non retenue, échoue quand même à 0.0125) |
 | 14 | Overnight drift filtré par régime de tendance (Kumo Ichimoku) | `Swing_trading/overnight_drift_regime_filtered/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée) | Rejeté (le filtre n'apporte rien face à l'edge non filtré) | p=0.003 (SPY/QQQ, mais leur meilleure config est "sans filtre" — n'appuie pas l'hypothèse testée) |
-| 15 | Overnight drift sur ETF-paniers hors indices actions larges | `Swing_trading/overnight_drift_baskets/` (à créer) | Secteurs SPDR (XLE, XLF, XLK, XLV, XLY, XLP), matières premières (GLD, SLV, USO), obligataire (TLT, IEF), international (EFA, EEM) — 13 ETF-paniers | Daily (swing, entrée overnight non filtrée) | En cours de conception | — |
+| 15 | Overnight drift sur ETF-paniers hors indices actions larges | `Swing_trading/overnight_drift_baskets/` | Secteurs SPDR (XLE, XLF, XLK, XLV, XLY, XLP), matières premières (GLD, SLV, USO), obligataire (TLT, IEF), international (EFA, EEM) — 13 ETF-paniers | Daily (swing, entrée overnight non filtrée) | Rejeté (12/13 Sharpe IS négatif ; seul GLD positif échoue le seuil Bonferroni) | p=0.013 (GLD, meilleur cas, seuil corrigé du sous-groupe = 0.00385) |
 
 ## Rationale des transitions
 
@@ -168,6 +168,47 @@ une seule de ces 4 classes, un second test hiérarchique plus étroit sur cette
 classe sera nécessaire avant toute conclusion, exactement comme pour Ichimoku
 (#12) où seuls les indices se sont distingués du reste du panier de 20.
 
+**#15 → #16** : Rejeté sans ambiguïté — sur les 13 ETF-paniers hors indices
+actions larges, 12 ont un Sharpe in-sample négatif sur leur meilleure
+direction (échec du critère 1 avant même l'OOS), et le seul cas positif
+(GLD, Sharpe IS=0.04) échoue le seuil Bonferroni pré-enregistré du
+sous-groupe (p=0.013 contre 0.00385 requis). Aucune des 4 sous-classes
+(secteurs, matières premières, obligataire, international) ne montre un edge
+concentré et cohérent — le caveat pré-enregistré (second test hiérarchique
+plus étroit si concentration) ne se déclenche donc pas. Conclusion consolidée
+sur #10/#11/#15 : l'edge overnight n'est pas une propriété de *structure de
+produit* (panier vs titre unique, hypothèse de #15) ni généralisable à
+d'autres *classes d'actifs* en panier — y compris des indices larges
+non-US/EM (EFA/EEM, structurellement proches de SPY/QQQ en tant qu'indices
+pondérés par capitalisation, mais rejetés ici) — il semble spécifique aux
+indices actions **US** larges et très liquides (SPY/QQQ/IWM/DIA). Cette
+question de généralisation est donc close pour ce projet, sans qu'il soit
+utile de la retester sous une variante supplémentaire (Rule #3 : privilégier
+l'innovation par combinaison plutôt que confirmer/infirmer indéfiniment la
+même piste).
+Application de Rule #3 pour #16 : les deux stratégies validées ou
+prometteuses de ce projet sont toutes deux des **biais structurels/calendaires
+sans indicateur ni classement de prix** (overnight drift, #10), alors que
+tous les signaux basés sur le niveau ou le rang des prix ont échoué (Ichimoku
+#12, momentum #13) — enseignement transversal déjà noté. Aucune autre piste
+de biais calendaire (indépendante de la fenêtre overnight elle-même) n'a
+encore été testée dans ce projet : effet de fin de mois / début de mois
+("turn-of-month"), documenté dans la littérature académique comme
+concentrant une large part du rendement actions sur quelques jours du
+calendrier boursier (flux de rebalancement institutionnels, cotisations
+mensuelles). Piste retenue pour #16 : **effet turn-of-month sur indices/ETF
+actions larges**, testé avec le même degré de rigueur (IS/OOS/walk-forward/
+placebo/Bonferroni), sur le même sous-groupe a priori légitime (SPY, QQQ,
+IWM, DIA) en hypothèse principale, et sur un panier cross-asset plus large en
+cartographie exploratoire secondaire (cohérent avec le principe de
+sous-groupe hiérarchique acté pour #12/#14). Auto-critique à surveiller dès
+la conception : le turn-of-month et l'overnight drift ne sont pas
+nécessairement indépendants (les jours de fin de mois pourraient simplement
+hériter du biais overnight déjà connu) — le protocole devra isoler la
+composante turn-of-month spécifique (ex. comparer le rendement overnight des
+jours de fin de mois à celui des autres jours) plutôt que mesurer un
+rendement brut qui remélangerait les deux effets.
+
 **Auto-critique avant de coder (exigée explicitement par l'utilisateur,
 2026-09-25 : "sois critique même sur ce que je dis moi [...] ne prend pas
 tout au pied de la lettre")** — relecture à froid de cette conception,
@@ -289,3 +330,16 @@ hétérogènes, y compris #13 en cours.
   à détecter, mais invisible si la grille ne teste que des variantes filtrées
   entre elles. Cette pratique (déjà appliquée par construction dans #14) doit
   rester systématique pour toute stratégie de filtrage future.
+- **Un edge structurel validé sur un panier ne se généralise pas
+  automatiquement à d'autres classes d'actifs en panier** (#15, ETF-paniers
+  hors indices actions larges) : l'auto-critique de #14→#15 supposait que la
+  frontière tracée par #11 (indice vs action individuelle) confondait classe
+  d'actif et structure de produit — mais testée directement, l'hypothèse
+  "structure de panier" ne tient pas (12/13 ETF en Sharpe IS négatif, y
+  compris EFA/EEM qui sont pourtant des indices pondérés par capitalisation
+  comme SPY/QQQ). L'edge overnight semble donc bien spécifique aux indices
+  actions **US** larges et très liquides, pas à la notion générale de panier
+  diversifié. Enseignement méthodologique : une auto-critique (Rule #4) doit
+  être testée empiriquement avant d'être actée comme correction — elle peut
+  elle-même se révéler fausse, et c'est un résultat valide en soi, pas un
+  échec du processus.
