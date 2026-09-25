@@ -1,0 +1,63 @@
+
+Donnees : 2297 jours communs aux 20 instruments (2017-08-04 -> 2026-09-24)
+Rebalancements mensuels : 110 dates
+In-sample : 2017-08-04 -> 2023-12-21 | Hors-echantillon : 2023-12-22 -> 2026-09-24
+
+=== 1. Grille (4 configurations testees) ===
+ lookback       mode  sharpe_IS   t_IS  sharpe_OOS  total_ret_OOS
+        6  long_only     0.4884 1.2333      1.0554         0.6717
+       12  long_only     0.4385 1.1072      1.2050         0.8625
+        6 long_short     0.4009 1.0125     -0.1514        -0.1365
+       12 long_short     0.1357 0.3426      0.3074         0.1252
+
+=== 2. Meilleure config in-sample : Params(lookback_months=6, skip_months=1, mode='long_only', n_long=4, n_short=4, cost_bps=2.0) ===
+IS  : n_trades=88  win_rate=0.5795  exp_ret=0.0292  profit_factor=2.0692  total_ret=0.7226  sharpe=0.4884  t_stat=1.2333  max_dd=-0.3344
+OOS : n_trades=39  win_rate=0.6923  exp_ret=0.0612  profit_factor=5.2148  total_ret=0.6717  sharpe=1.0554  t_stat=1.7464  max_dd=-0.2753
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=134  win_rate=0.5373  exp_ret=0.0311  profit_factor=1.9303  total_ret=0.6526  sharpe=0.3767  t_stat=1.0731  max_dd=-0.3801
+  test a partir de 2018-08-04 : lookback=6, mode=long_only
+  test a partir de 2018-11-04 : lookback=6, mode=long_short
+  test a partir de 2019-02-04 : lookback=6, mode=long_only
+  test a partir de 2019-05-04 : lookback=6, mode=long_only
+  test a partir de 2019-08-04 : lookback=6, mode=long_only
+  test a partir de 2019-11-04 : lookback=6, mode=long_only
+  test a partir de 2020-02-04 : lookback=6, mode=long_only
+  test a partir de 2020-05-04 : lookback=6, mode=long_short
+  test a partir de 2020-08-04 : lookback=6, mode=long_short
+  test a partir de 2020-11-04 : lookback=6, mode=long_short
+  test a partir de 2021-02-04 : lookback=6, mode=long_short
+  test a partir de 2021-05-04 : lookback=6, mode=long_only
+  test a partir de 2021-08-04 : lookback=12, mode=long_only
+  test a partir de 2021-11-04 : lookback=6, mode=long_only
+  test a partir de 2022-02-04 : lookback=12, mode=long_only
+  test a partir de 2022-05-04 : lookback=12, mode=long_short
+  test a partir de 2022-08-04 : lookback=12, mode=long_short
+  test a partir de 2022-11-04 : lookback=12, mode=long_short
+  test a partir de 2023-02-04 : lookback=12, mode=long_short
+  test a partir de 2023-05-04 : lookback=6, mode=long_only
+  test a partir de 2023-08-04 : lookback=6, mode=long_only
+  test a partir de 2023-11-04 : lookback=12, mode=long_only
+  test a partir de 2024-02-04 : lookback=12, mode=long_only
+  test a partir de 2024-05-04 : lookback=6, mode=long_only
+  test a partir de 2024-08-04 : lookback=6, mode=long_only
+  test a partir de 2024-11-04 : lookback=6, mode=long_only
+  test a partir de 2025-02-04 : lookback=12, mode=long_only
+  test a partir de 2025-05-04 : lookback=12, mode=long_only
+  test a partir de 2025-08-04 : lookback=12, mode=long_only
+  test a partir de 2025-11-04 : lookback=12, mode=long_only
+  test a partir de 2026-02-04 : lookback=12, mode=long_only
+  test a partir de 2026-05-04 : lookback=12, mode=long_only
+  test a partir de 2026-08-04 : lookback=12, mode=long_only
+
+=== 4. Sensibilite au cout (meilleure config, toute la periode) ===
+  cout 0 bps/turnover : n_trades=127  win_rate=0.6142  exp_ret=0.0390  profit_factor=2.6699  total_ret=1.9158  sharpe=0.6463  t_stat=1.9513  max_dd=-0.3343
+  cout 2 bps/turnover : n_trades=127  win_rate=0.6142  exp_ret=0.0390  profit_factor=2.6699  total_ret=1.8795  sharpe=0.6400  t_stat=1.9322  max_dd=-0.3344
+  cout 5 bps/turnover : n_trades=127  win_rate=0.6142  exp_ret=0.0390  profit_factor=2.6699  total_ret=1.8259  sharpe=0.6305  t_stat=1.9037  max_dd=-0.3345
+  cout 10 bps/turnover : n_trades=127  win_rate=0.6142  exp_ret=0.0390  profit_factor=2.6699  total_ret=1.7388  sharpe=0.6148  t_stat=1.8561  max_dd=-0.3346
+
+=== 5. Selection aleatoire (meme timing/taille de panier), hors-echantillon ===
+  reel : 0.5671 | selection aleatoire : 0.4900 +/- 0.1334 | p-value = 0.286
+
+Trades ecrits dans trades_best.csv
+Courbe ecrite dans examples/equity_best.png

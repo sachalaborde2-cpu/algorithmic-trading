@@ -72,8 +72,20 @@ de cette stratégie :
 - Coûts : 1 tick de référence, sensibilité 0-3 ticks. Split IS/OOS 70/30
   chronologique. Walk-forward 12 mois train / 3 mois test. Test placebo
   (direction aléatoire, même timing, Monte Carlo, OOS).
-- **Correction multiple-testing** : 20 instruments testés en parallèle →
-  seuil de p-value Bonferroni-corrigé = 0.05 / 20 = **0.0025** (voir Verdict).
+- **Correction multiple-testing (révisée le 2026-09-25)** : les 20
+  instruments ne sont PAS traités comme un seul pool de 20 tests — l'objectif
+  du panier cross-asset est de cartographier où l'edge se généralise, pas de
+  répondre à une question unique. La correction Bonferroni est appliquée par
+  **sous-groupe économiquement cohérent défini a priori**, ici les 4 indices
+  larges (SPY/QQQ/IWM/DIA), seule classe où Ichimoku a une légitimité
+  traditionnelle documentée (cf. L'idée) : seuil = 0.05 / 4 = **0.0125** (voir
+  Verdict). Une correction globale sur les 20 instruments a aussi été
+  calculée par acquit de conscience (Benjamini-Hochberg, et effective-N
+  ajusté de la corrélation façon Nyholt) : les deux aboutissent à peu près au
+  même seuil que le Bonferroni global naïf (~0.0025-0.0027) — la correction
+  hiérarchique par sous-groupe n'est donc pas un moyen détourné d'obtenir un
+  seuil plus permissif par un autre calcul, c'est un choix de *portée* du
+  test, décidé avant de regarder les résultats.
 
 ## Données
 
@@ -123,13 +135,16 @@ d'équité dans `examples/equity_<TICKER>.png`.
   quasiment insensible au slippage (Sharpe 0.87 stable de 0 à 3 ticks sur la
   période complète) — contrairement à `overnight_drift_stocks/` où
   XOM/WMT s'effondraient sous 1-2 ticks.
-- **Mais aucun instrument ne passe la correction Bonferroni** : avec 20
-  instruments testés en parallèle, le seuil de significativité corrigé est
-  0.05/20 = 0.0025, très loin des 0.030 de SPY. Sur 20 essais indépendants,
-  obtenir au moins un p<0.05 par pur hasard a une probabilité de
-  1-(0.95)^20 ≈ 64 % — un seul "succès" isolé à p=0.030 est exactement le
-  type de résultat que le protocole de la section 5 de `METHODOLOGIE.md` est
-  conçu pour ne pas prendre pour argent comptant.
+- **Mais SPY ne passe pas non plus la correction Bonferroni appliquée à son
+  propre sous-groupe** (les 4 indices larges, seul groupe où on avait une
+  raison a priori de tester Ichimoku comme signal de tendance) : seuil
+  0.05/4 = 0.0125, encore 2,4× plus strict que les 0.030 obtenus. Sur ces 4
+  essais réellement concurrents (même hypothèse — "Ichimoku marche sur les
+  grands indices" — posée 4 fois), obtenir au moins un p<0.05 par pur hasard
+  a une probabilité de 1-(0.95)^4 ≈ 19 % : un seul "succès" isolé à p=0.030
+  reste un résultat faible même sur ce panier restreint et pertinent, pas
+  seulement dilué par les 16 autres classes d'actifs qui n'avaient de toute
+  façon pas vocation à valider ou invalider ce résultat.
 - **Pas de config unanime** : TKC long_only domine sur les indices/secteurs
   actions (SPY, QQQ, XLK, XLV, XLY, XLP, GLD, SLV, AAPL, XOM), mais KBO
   (souvent long_short) l'emporte sur IWM, DIA, XLF, TLT, IEF, EFA, EEM, JPM —
@@ -141,25 +156,34 @@ d'équité dans `examples/equity_<TICKER>.png`.
   positif. Seuls SPY, QQQ, XLK, GLD, AAPL, JPM gardent un signe cohérent et
   un ordre de grandeur comparable entre IS/OOS/walk-forward — et parmi
   ceux-là, seul SPY passe le test placebo même au seuil non corrigé.
-- **Aucune spécialisation par classe d'actifs** : les meilleures p-values ne
-  se concentrent ni sur les indices, ni sur les matières premières, ni sur
-  l'obligataire — le signal Ichimoku ne semble pas capter un edge structurel
-  propre à une classe, plutôt du bruit qui ressort ponctuellement.
+- **Aucune spécialisation par classe d'actifs qui se dégage par ailleurs** :
+  en dehors du sous-groupe indices (où SPY sort du lot sans suffire), les
+  meilleures p-values ne se concentrent ni sur les matières premières, ni sur
+  l'obligataire, ni sur les méga-caps — pas de deuxième poche cohérente
+  d'edge à isoler pour un test hiérarchique alternatif.
 
 ## Verdict
 
-**Rejeté sur les 20 instruments après correction multiple-testing.** Le
-critère de décision global de `METHODOLOGIE.md` exige que la p-value du
-test placebo survive à la correction Bonferroni quand plusieurs instruments
-sont testés en parallèle (condition 5) — aucun des 20 ne descend sous
-0.0025 (minimum observé : SPY à 0.030, soit 12× trop haut). Le résultat SPY
-pris isolément aurait pu sembler prometteur (c'est d'ailleurs le premier
-signal directionnel du projet à passer le seuil naïf de 0.05), mais
-l'exigence de robustesse face au nombre d'essais — la même exigence qui a
-fait rejeter `intraday_seasonality/` malgré des tranches horaires
-individuellement significatives — s'applique ici à l'identique. Le nombre de
-faux positifs attendus sur 20 essais indépendants à p=0.05 est déjà proche
-de 1, ce qui rend un unique résultat à p=0.030 statistiquement inconcluant.
+**Rejeté.** Contrairement à la version initiale de ce verdict, la raison
+n'est plus "aucun des 20 instruments ne survit à une correction Bonferroni
+globale sur l'ensemble du panier cross-asset" — cette façon de raisonner a
+été corrigée le 2026-09-25 (voir `METHODOLOGIE.md` section 5) car tester 20
+classes d'actifs différentes sert à cartographier où un edge se généralise,
+pas à traiter les 20 comme une seule famille d'hypothèses interchangeables ;
+un edge réel et rentable pourrait très bien n'exister que sur une seule
+classe. La raison correcte est plus étroite et reste suffisante pour
+rejeter : le seul sous-groupe où Ichimoku avait une légitimité a priori (les
+4 indices larges, cf. L'idée) est aussi le seul test dont le périmètre est
+pertinent, et SPY (p=0.030) ne passe pas le seuil Bonferroni propre à ce
+sous-groupe (0.05/4 = 0.0125, soit 2,4× trop haut) — contrairement au calcul
+initial (12× trop haut), l'écart est net mais nettement moins écrasant.
+Aucun autre sous-groupe économiquement cohérent ne se dégage des résultats
+pour justifier un second test hiérarchique. Le résultat SPY pris isolément
+reste le premier signal directionnel du projet à passer le seuil naïf de
+0.05, mais l'exigence de robustesse face au nombre d'essais **au sein de son
+propre groupe pertinent** s'applique ici à l'identique — la même logique qui
+a fait rejeter `intraday_seasonality/` malgré des tranches horaires
+individuellement significatives.
 
 ## Fichiers
 

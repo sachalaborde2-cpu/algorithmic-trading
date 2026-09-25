@@ -114,13 +114,47 @@ d'essais, pas une découverte. Même logique pour tester 8 tickers en parallèle
 on multiplie les essais, plus la probabilité qu'un seul d'entre eux ressorte
 positif par hasard augmente.
 
-**Comment c'est géré** : quand plusieurs hypothèses sont testées explicitement
-(ex. 13 tranches horaires), une **correction de Bonferroni** est appliquée —
-diviser le seuil de p-value voulu par le nombre de tests, ce qui rend le seuil
-de t-stat correspondant beaucoup plus strict. Plus généralement, un résultat
-isolé qui ressort positif sur un seul ticker/une seule config parmi beaucoup
-testés en parallèle est jugé avec la même exigence que les autres (persistance
-OOS + walk-forward + placebo), jamais accepté sur son seul mérite in-sample.
+**Nuance essentielle (révisée le 2026-09-25, sur remarque de l'utilisateur)** :
+la correction multiple-testing ne doit **jamais** être appliquée aveuglément à
+"tous les instruments testés dans le run", sans se demander *pourquoi* on les
+teste tous ensemble. Il y a deux situations très différentes, à ne pas
+confondre :
+
+1. **Test d'une hypothèse unique et homogène** (ex. `intraday_seasonality/` :
+   "une tranche horaire précise a-t-elle un edge ?", posée 13 fois sur le
+   même instrument) — ici les 13 essais sont bien 13 tentatives concurrentes
+   de répondre à la même question, et un seul "gagnant" parmi 13 est
+   exactement le type de faux positif que Bonferroni doit filtrer. Correction
+   sur l'ensemble des essais, pertinente.
+2. **Cartographie d'un edge à travers des classes d'actifs différentes** (ex.
+   Ichimoku testé sur indices/secteurs/matières premières/obligataire/
+   international/méga-caps) — ici l'**objectif explicite** n'est pas "y a-t-il
+   un edge quelque part dans ce panier ?" mais "sur quelle(s) classe(s)
+   d'actifs cette stratégie fonctionne-t-elle ?". Un résultat concentré sur
+   une seule classe (voire un seul instrument) n'est PAS automatiquement un
+   faux positif à corriger contre tous les autres essais non liés — c'est au
+   contraire potentiellement le signal recherché (cf. `overnight_drift`, seul
+   edge validé du projet, qui ne fonctionne que sur des paniers larges
+   indices/ETF et pas sur les actions individuelles : personne n'aurait dû le
+   rejeter au prétexte qu'il "échoue" sur 5 des 9 instruments testés au total
+   dans le projet).
+
+**Comment c'est géré, en pratique** :
+- Définir le(s) sous-groupe(s) de test **a priori**, avant de voir les
+  résultats, sur un critère économique (classe d'actifs, famille de config),
+  jamais après coup en regroupant autour du "gagnant" apparent (ce serait une
+  nouvelle forme de data snooping).
+- Appliquer Bonferroni (ou une correction plus fine, ex. le nombre de tests
+  *effectif* corrigé de la corrélation entre instruments — méthode de type
+  Nyholt/valeurs propres — quand les instruments testés sont fortement
+  corrélés entre eux, ce qui réduit le nombre de tests "vraiment"
+  indépendants) **à l'intérieur de chaque sous-groupe**, pas sur l'ensemble
+  du panier cross-asset.
+- Un résultat qui ne passe pas la correction *intra-groupe* reste rejeté avec
+  la même exigence qu'avant (persistance OOS + walk-forward + placebo, jamais
+  accepté sur son seul mérite in-sample). Mais l'absence d'edge sur les autres
+  classes d'actifs testées en parallèle ne doit jamais, à elle seule, être
+  utilisée pour rejeter un résultat par ailleurs solide sur une classe donnée.
 
 ## 6. Sensibilité au slippage
 

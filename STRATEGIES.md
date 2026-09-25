@@ -28,8 +28,9 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 9 | Pairs trading | `pairs_trading/` (+ racine, screening S&P 500) | Paires actions US | Daily | Abandonné | — |
 | 10 | **Overnight drift** | `overnight_drift/` | MES, SPY, QQQ, IWM, CSPX | 5 min intraday (fenêtres close/open) | **Seul edge validé du projet** | p=0.040 (SPY), 0.070-0.113 (MES/QQQ/IWM) |
 | 11 | Overnight drift sur actions individuelles | `overnight_drift_stocks/` | AAPL, JPM, JNJ, XOM, WMT | 5 min intraday | Rejeté sur les 5 | p=0.096 (JNJ, meilleur cas) |
-| 12 | Ichimoku Kinko Hyo | `Swing_trading/ichimoku_daily/` | 20 tickers cross-asset (indices, secteurs, matières premières, obligataire, international, méga-caps) | Daily (swing) | Rejeté (Bonferroni) | p=0.030 (SPY, meilleur cas, mais seuil corrigé = 0.0025) |
-| 13 | **Momentum cross-sectionnel** | `Swing_trading/momentum_cross_sectional/` (à créer) | Mêmes 20 tickers cross-asset | Daily (swing, rebalancement périodique) | En cours de conception | — |
+| 12 | Ichimoku Kinko Hyo | `Swing_trading/ichimoku_daily/` | 20 tickers cross-asset (indices, secteurs, matières premières, obligataire, international, méga-caps) | Daily (swing) | Rejeté (Bonferroni hiérarchique, sous-groupe des 4 indices) | p=0.030 (SPY, meilleur cas, seuil corrigé du sous-groupe = 0.0125) |
+| 13 | Momentum cross-sectionnel | `Swing_trading/momentum_cross_sectional/` | Mêmes 20 tickers cross-asset | Daily (swing, rebalancement mensuel) | Rejeté | p=0.286 (config sélectionnée en IS), p=0.035 (config non retenue, échoue quand même à 0.0125) |
+| 14 | **Effet de changement de mois (turn-of-month)** | `Swing_trading/turn_of_month/` (à créer) | Mêmes 20 tickers cross-asset | Daily (swing, fenêtre calendaire) | En cours de conception | — |
 
 ## Rationale des transitions
 
@@ -61,13 +62,21 @@ l'indicateur plutôt qu'un choix arbitraire.
 matières premières, obligataire, international, méga-caps), un seul —
 SPY — passe le test placebo au seuil naïf de 0.05 (p=0.030), avec un Sharpe
 IS/OOS/walk-forward cohérent et une robustesse au slippage inédite dans ce
-projet. Mais la correction Bonferroni pour 20 tests en parallèle (seuil
-0.05/20 = 0.0025) rejette ce résultat sans ambiguïté : un p=0.030 isolé parmi
-20 essais indépendants a ~64 % de chances d'apparaître par pur hasard. Ce
-rejet est cohérent avec le reste du projet — un signal directionnel testé sur
-un large panier cross-asset n'a, à ce jour, jamais survécu à la correction
-multiple-testing (seul le biais structurel `overnight_drift`, testé sur 4
-instruments fortement corrélés plutôt que 20 indépendants, y est parvenu).
+projet. **Correction méthodologique du 2026-09-25** (voir événement dédié
+ci-dessous) : le rejet ne repose plus sur une correction Bonferroni globale à
+20 tests (seuil 0.05/20=0.0025), qui traitait à tort 20 classes d'actifs
+volontairement diverses comme une seule famille d'hypothèses interchangeables,
+mais sur la correction Bonferroni appliquée au seul sous-groupe pertinent a
+priori — les 4 indices larges (SPY/QQQ/IWM/DIA), seule classe où Ichimoku a
+une légitimité traditionnelle documentée. Seuil de ce sous-groupe : 0.05/4 =
+0.0125, encore 2,4× trop strict pour les 0.030 de SPY — donc le verdict final
+(rejeté) ne change pas, mais la marge d'échec est nettement plus fine
+(2,4× au lieu de 12×) et la raison invoquée est désormais correcte. Ce rejet
+reste cohérent avec le reste du projet — un signal directionnel testé sur un
+sous-groupe pertinent d'actifs comparables n'a, à ce jour, jamais survécu à la
+correction multiple-testing intra-groupe (seul le biais structurel
+`overnight_drift`, testé sur 4 instruments fortement corrélés et analysé sans
+prétention de généralisation cross-asset, y est parvenu).
 Piste suivante choisie de façon autonome : le **momentum cross-sectionnel**
 (classement relatif des mêmes 20 instruments par performance passée,
 rebalancement périodique), un facteur académique établi (Jegadeesh-Titman)
@@ -78,6 +87,63 @@ testé dans ce projet, où toutes les stratégies précédentes comparaient un
 instrument à son propre passé plutôt qu'à ses pairs au même instant. Réutilise
 directement les données déjà téléchargées pour Ichimoku (mêmes 20 tickers, 10
 ans de barres journalières), donc pas de nouveau téléchargement nécessaire.
+
+**#13 → #14** : Le momentum cross-sectionnel est rejeté sans ambiguïté : la
+config retenue par la procédure de sélection décidée a priori (Sharpe
+in-sample, lookback=6/long_only) échoue le test placebo par une large marge
+(p=0.286), et le seul résultat isolé qui aurait pu sembler prometteur
+(lookback=12/long_only, p=0.035, découvert seulement après coup lors d'un
+balayage complet de la grille) n'était pas la config retenue par la
+procédure et échoue de toute façon la correction multiple-testing propre à
+un grid search de 4 configurations sur le même portefeuille (seuil
+0.05/4=0.0125) — l'accepter aurait exigé de revenir sur la sélection après
+avoir vu les résultats, exactement le biais psychologique de rationalisation
+post-hoc que la règle d'auto-amélioration de la méthodologie interdit
+explicitement (voir `CLAUDE.md`, révisé le 2026-09-25).
+Deux signaux directionnels/relatifs de suite (Ichimoku #12, momentum #13)
+échouent sur ce même panier cross-asset de 20 instruments, alors que le seul
+edge validé du projet (`overnight_drift`, #10) est un **biais structurel
+calendaire/horaire**, pas un signal basé sur le niveau ou le classement des
+prix. Piste suivante choisie de façon autonome, dans la continuité logique
+de cet enseignement transversal : l'**effet de changement de mois
+(turn-of-month)** — anomalie calendaire documentée (Ariel, 1987 ; McConnell
+& Xu, 2008) selon laquelle le rendement des indices actions se concentre
+anormalement sur une fenêtre de quelques jours autour du changement de mois
+(dernier jour du mois + premiers jours du mois suivant), attribuée à des
+flux structurels récurrents (rebalancements de fonds, versements de
+salaires/401k investis en fin/début de mois) — donc un troisième candidat de
+la même famille que `overnight_drift` (biais calendaire structurel sans
+indicateur technique) plutôt qu'un quatrième signal directionnel de la
+famille qui a déjà échoué deux fois. Réutilise à nouveau le même panier de
+20 instruments et les mêmes données déjà téléchargées.
+
+## Évolutions de la méthodologie elle-même
+
+**2026-09-25 — correction de la portée de la correction multiple-testing**
+(sur remarque explicite de l'utilisateur, voir aussi `CLAUDE.md` section
+"Auto-amélioration de la méthodologie") : le verdict initial d'Ichimoku (#12)
+appliquait une correction Bonferroni globale sur les 20 instruments
+cross-asset testés, comme si tester 20 classes d'actifs différentes revenait
+à poser 20 fois la même question. Erreur de raisonnement identifiée : le but
+explicite de tester un large panier cross-asset est de **cartographier** où
+un edge se généralise, pas de le soumettre à une seule hypothèse pooled — un
+edge concentré sur une seule classe d'actifs peut être un vrai edge
+économiquement cohérent plutôt qu'un faux positif à corriger contre des
+essais non liés (précédent déjà présent dans le projet sans avoir été nommé
+comme principe général : `overnight_drift`, seul edge validé, ne fonctionne
+que sur des paniers larges et a été rejeté sur les actions individuelles,
+sans que cela remette en cause sa validité sur les paniers).
+**Correction adoptée** : appliquer Bonferroni (ou une correction plus fine
+type effective-N ajusté de la corrélation) à l'intérieur de **sous-groupes
+économiquement cohérents définis a priori**, jamais sur l'ensemble hétérogène
+du panier. Recalcul pour Ichimoku : sous-groupe des 4 indices larges
+(seule classe avec une légitimité a priori pour ce signal), seuil 0.05/4 =
+0.0125 — SPY (p=0.030) échoue toujours, donc le verdict rejeté est confirmé,
+mais pour la bonne raison. `METHODOLOGIE.md` section 5 et
+`Swing_trading/ichimoku_daily/README.md` (Rigueur/Constats/Verdict) ont été
+corrigés en conséquence. Cette distinction (sous-groupe a priori vs pool
+global) s'applique désormais à toute stratégie testée sur des actifs
+hétérogènes, y compris #13 en cours.
 
 ## Enseignements transversaux (mis à jour à chaque stratégie)
 
@@ -95,9 +161,29 @@ ans de barres journalières), donc pas de nouveau téléchargement nécessaire.
   automatiquement à l'action individuelle (#10 vs #11) — chaque niveau de
   granularité doit être retesté indépendamment, pas supposé hérité.
 - Tester un signal directionnel sur un large panier cross-asset (20
-  instruments) rend la correction multiple-testing décisive : un résultat
-  isolé à p=0.03-0.05 (#12, SPY) est exactement le type de faux positif que
-  Bonferroni est censé filtrer, même quand toutes les autres conditions
-  (Sharpe IS/OOS/walk-forward cohérents, robustesse au slippage) semblent
-  réunies. La rigueur du protocole ne se relâche jamais face à un résultat
-  qui "a l'air bon" sur un seul instrument parmi beaucoup testés.
+  instruments) rend la correction multiple-testing décisive, mais celle-ci
+  doit être bornée au bon périmètre : un résultat isolé à p=0.03-0.05 (#12,
+  SPY) reste jugé contre les essais *comparables* (les 4 indices larges,
+  seuil 0.0125), pas contre 16 autres classes d'actifs sans rapport dont
+  l'échec ou le succès ne dit rien sur la validité du résultat testé. La
+  rigueur du protocole ne se relâche jamais face à un résultat qui "a l'air
+  bon", mais elle ne se durcit pas non plus artificiellement en élargissant
+  le pool de comparaison au-delà de ce qui est économiquement pertinent (voir
+  "Évolutions de la méthodologie elle-même" ci-dessus).
+- **Ne jamais choisir la config d'une grille après avoir vu les résultats
+  OOS/placebo** (#13, momentum cross-sectionnel) : la procédure de sélection
+  (Sharpe in-sample) doit être fixée avant de regarder le reste, sinon un
+  résultat isolé qui "a l'air bon" dans un balayage complet (ex : p=0.035
+  sur une config non retenue) devient une tentation de rationalisation
+  post-hoc — la même erreur qu'un trader qui change sa règle après avoir vu
+  le trade gagnant. Un grid search de plusieurs configs sur le **même**
+  portefeuille/instrument (contrairement à un panier cross-asset diversifié)
+  reste soumis à une correction multiple-testing globale classique, car
+  toutes les configs répondent à la même question.
+- **Deux signaux directionnels/relatifs de suite ont échoué sur le même
+  panier cross-asset** (Ichimoku #12, momentum #13), alors que le seul edge
+  validé du projet (`overnight_drift`, #10) est un biais structurel
+  calendaire/horaire — signal (encore provisoire à ce stade) que les biais
+  structurels sans indicateur ni classement de prix pourraient être une
+  piste plus prometteuse que les signaux basés sur le niveau ou le rang des
+  prix, sur ce type de panier large.
