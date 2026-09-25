@@ -1,0 +1,42 @@
+
+Donnees : 766 jours (2023-08-24 -> 2026-09-23), 8 jours incomplets ecartes
+In-sample : 2023-08-25 -> 2025-10-20 | Hors-echantillon : 2025-10-21 -> 2026-09-23
+
+=== 1. Grille (4 configurations testees) ===
+      leg   dir  n_IS  exp$_IS  sharpe_IS  t_IS  sharpe_OOS  exp$_OOS
+ intraday  long   535     5.99       0.63  0.92        1.12     17.09
+overnight short   535     0.61       0.11  0.16       -1.52    -15.77
+ intraday short   535   -13.99      -1.47 -2.15       -1.64    -25.09
+overnight  long   535    -8.61      -1.55 -2.25        0.75      7.77
+
+=== 2. Meilleure config in-sample : Params(leg='intraday', direction=1, slippage_ticks=1.0) ===
+IS  : n_trades=535  win_rate=0.55  exp_$=5.99  exp_R=4.00  profit_factor=1.11  total_$=3206.00  sharpe=0.63  t_stat=0.92  max_dd_$=-3091.00
+OOS : n_trades=230  win_rate=0.54  exp_$=17.09  exp_R=9.55  profit_factor=1.20  total_$=3931.00  sharpe=1.12  t_stat=1.07  max_dd_$=-2804.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=516  win_rate=0.54  exp_$=14.34  exp_R=8.17  profit_factor=1.23  total_$=7401.00  sharpe=1.18  t_stat=1.69  max_dd_$=-2804.00
+  test a partir de 2024-08-25 : leg=intraday, dir=short
+  test a partir de 2024-11-25 : leg=intraday, dir=long
+  test a partir de 2025-02-25 : leg=overnight, dir=short
+  test a partir de 2025-05-25 : leg=overnight, dir=short
+  test a partir de 2025-08-25 : leg=intraday, dir=long
+  test a partir de 2025-11-25 : leg=intraday, dir=long
+  test a partir de 2026-02-25 : leg=intraday, dir=long
+  test a partir de 2026-05-25 : leg=intraday, dir=long
+  test a partir de 2026-08-25 : leg=intraday, dir=long
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=765  win_rate=0.55  exp_$=11.33  exp_R=0.13  profit_factor=1.18  total_$=8667.00  sharpe=0.98  t_stat=1.71  max_dd_$=-2715.00
+  slippage 1 tick(s)/execution : n_trades=765  win_rate=0.55  exp_$=9.33  exp_R=5.66  profit_factor=1.15  total_$=7137.00  sharpe=0.81  t_stat=1.41  max_dd_$=-3091.00
+  slippage 2 tick(s)/execution : n_trades=765  win_rate=0.54  exp_$=7.33  exp_R=2.33  profit_factor=1.11  total_$=5607.00  sharpe=0.63  t_stat=1.11  max_dd_$=-3467.00
+  slippage 3 tick(s)/execution : n_trades=765  win_rate=0.53  exp_$=5.33  exp_R=1.22  profit_factor=1.08  total_$=4077.00  sharpe=0.46  t_stat=0.80  max_dd_$=-4079.00
+
+=== 5. Direction au hasard (meme fenetre, meme timing), hors-echantillon ===
+  reel : 3931$ | pile ou face : -866$ +/- 3658$ | p-value = 0.096
+
+=== 6. Combo long-overnight / short-intraday (les 2 legs simultanement) ===
+IS  : n_trades=1070  win_rate=0.45  exp_$=-11.30  exp_R=-4.65  profit_factor=0.76  total_$=-12092.00  sharpe=-2.00  t_stat=-2.92  max_dd_$=-13785.00
+OOS : n_trades=460  win_rate=0.47  exp_$=-8.66  exp_R=-3.33  profit_factor=0.89  total_$=-3984.00  sharpe=-0.93  t_stat=-0.89  max_dd_$=-7110.00
+
+Trades ecrits dans trades_JNJ_best.csv
+Courbe ecrite dans equity_best.png

@@ -5,3 +5,5 @@ timestamp_ny,action,symbol,quantity,order_type,tif,status,fill_price,note
 2026-09-24T09:36:13.510101-04:00,SELL,SPY,100,MKT,OPG,PendingSubmit,,sortie overnight J+1
 2026-09-24T09:45:33.043139-04:00,BUY,SPY,100,MOC,DAY,Inactive,,entree overnight
 2026-09-24T09:45:34.158134-04:00,SELL,SPY,100,MKT,OPG,Inactive,,sortie overnight J+1
+2026-09-25T03:37:30.021889-04:00,BUY,SPY,100,MOC,DAY,DryRun,,entree overnight (dry-run)
+2026-09-25T03:37:30.026462-04:00,SELL,SPY,100,MKT,OPG,DryRun,,sortie overnight J+1 (dry-run)
