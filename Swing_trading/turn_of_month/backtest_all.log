@@ -1,0 +1,1277 @@
+=========================== SPY ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756       0.27  0.72    754        1.24
+    tom_only   254       0.60  1.59    108       -0.93
+non_tom_only  1502       0.08  0.20    646        1.88
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.61  exp_$=21.67  exp_R=11.83  profit_factor=1.32  total_$=5504.00  sharpe=0.60  t_stat=1.59  max_dd_$=-2661.00
+OOS : n_trades=108  win_rate=0.47  exp_$=-66.69  exp_R=-32.35  profit_factor=0.61  total_$=-7203.00  sharpe=-0.93  t_stat=-1.62  max_dd_$=-8972.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1137  win_rate=0.58  exp_$=29.69  exp_R=15.85  profit_factor=1.37  total_$=33759.00  sharpe=1.17  t_stat=3.49  max_dd_$=-6015.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.57  exp_$=-2.69  exp_R=-0.01  profit_factor=0.97  total_$=-975.00  sharpe=-0.05  t_stat=-0.17  max_dd_$=-10761.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.57  exp_$=-4.69  exp_R=-1.35  profit_factor=0.95  total_$=-1699.00  sharpe=-0.10  t_stat=-0.30  max_dd_$=-11055.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=-6.69  exp_R=-1.17  profit_factor=0.93  total_$=-2423.00  sharpe=-0.14  t_stat=-0.43  max_dd_$=-11349.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=-8.69  exp_R=-1.12  profit_factor=0.91  total_$=-3147.00  sharpe=-0.18  t_stat=-0.56  max_dd_$=-11647.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -7203$ | pile ou face : -216$ +/- 4586$ | p-value = 0.934
+
+Trades ecrits dans trades_SPY_best.csv
+=========================== QQQ ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756       0.25  0.66    754        1.36
+    tom_only   254       0.25  0.66    108       -0.81
+non_tom_only  1502       0.17  0.45    646        1.89
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.57  exp_$=8.90  exp_R=5.45  profit_factor=1.13  total_$=2260.00  sharpe=0.25  t_stat=0.66  max_dd_$=-3480.00
+OOS : n_trades=108  win_rate=0.52  exp_$=-67.94  exp_R=-32.97  profit_factor=0.67  total_$=-7337.00  sharpe=-0.81  t_stat=-1.41  max_dd_$=-8856.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1387  win_rate=0.57  exp_$=26.47  exp_R=14.23  profit_factor=1.28  total_$=36712.00  sharpe=0.96  t_stat=2.89  max_dd_$=-7229.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=unfiltered
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=unfiltered
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=non_tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=non_tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=-12.02  exp_R=-0.10  profit_factor=0.89  total_$=-4353.00  sharpe=-0.22  t_stat=-0.70  max_dd_$=-11455.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=-14.02  exp_R=-6.01  profit_factor=0.87  total_$=-5077.00  sharpe=-0.26  t_stat=-0.82  max_dd_$=-11755.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=-16.02  exp_R=-3.51  profit_factor=0.85  total_$=-5801.00  sharpe=-0.30  t_stat=-0.93  max_dd_$=-12055.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=-18.02  exp_R=-2.67  profit_factor=0.84  total_$=-6525.00  sharpe=-0.33  t_stat=-1.05  max_dd_$=-12363.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -7337$ | pile ou face : -135$ +/- 5392$ | p-value = 0.904
+
+Trades ecrits dans trades_QQQ_best.csv
+=========================== IWM ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756       0.59  1.55    754        0.91
+    tom_only   254       0.94  2.47    108       -1.19
+non_tom_only  1502       0.28  0.73    646        1.65
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.60  exp_$=20.79  exp_R=11.40  profit_factor=1.53  total_$=5281.00  sharpe=0.94  t_stat=2.47  max_dd_$=-1396.00
+OOS : n_trades=108  win_rate=0.48  exp_$=-46.69  exp_R=-22.35  profit_factor=0.54  total_$=-5043.00  sharpe=-1.19  t_stat=-2.05  max_dd_$=-5934.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1254  win_rate=0.55  exp_$=14.53  exp_R=8.27  profit_factor=1.30  total_$=18221.00  sharpe=1.09  t_stat=3.27  max_dd_$=-2573.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=unfiltered
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=unfiltered
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.57  exp_$=2.66  exp_R=0.05  profit_factor=1.05  total_$=962.00  sharpe=0.09  t_stat=0.29  max_dd_$=-6704.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=0.66  exp_R=1.33  profit_factor=1.01  total_$=238.00  sharpe=0.02  t_stat=0.07  max_dd_$=-6972.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=-1.34  exp_R=0.16  profit_factor=0.98  total_$=-486.00  sharpe=-0.05  t_stat=-0.15  max_dd_$=-7240.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=-3.34  exp_R=-0.22  profit_factor=0.94  total_$=-1210.00  sharpe=-0.12  t_stat=-0.37  max_dd_$=-7512.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -5043$ | pile ou face : -350$ +/- 2516$ | p-value = 0.967
+
+Trades ecrits dans trades_IWM_best.csv
+=========================== DIA ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756       0.27  0.70    754        0.69
+    tom_only   254       0.70  1.85    108       -0.85
+non_tom_only  1502       0.04  0.10    646        1.17
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.59  exp_$=20.48  exp_R=11.24  profit_factor=1.37  total_$=5203.00  sharpe=0.70  t_stat=1.85  max_dd_$=-2011.00
+OOS : n_trades=108  win_rate=0.47  exp_$=-38.25  exp_R=-18.12  profit_factor=0.65  total_$=-4131.00  sharpe=-0.85  t_stat=-1.47  max_dd_$=-6410.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1137  win_rate=0.55  exp_$=14.71  exp_R=8.36  profit_factor=1.24  total_$=16730.00  sharpe=0.82  t_stat=2.46  max_dd_$=-4685.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=4.96  exp_R=0.07  profit_factor=1.07  total_$=1796.00  sharpe=0.14  t_stat=0.45  max_dd_$=-7517.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=2.96  exp_R=2.48  profit_factor=1.04  total_$=1072.00  sharpe=0.09  t_stat=0.27  max_dd_$=-7785.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=0.96  exp_R=0.74  profit_factor=1.01  total_$=348.00  sharpe=0.03  t_stat=0.09  max_dd_$=-8060.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=-1.04  exp_R=0.16  profit_factor=0.99  total_$=-376.00  sharpe=-0.03  t_stat=-0.09  max_dd_$=-8352.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -4131$ | pile ou face : -253$ +/- 2858$ | p-value = 0.910
+
+Trades ecrits dans trades_DIA_best.csv
+=========================== XLE ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.11 -2.93    754       -0.67
+    tom_only   254       0.64  1.69    108       -0.48
+non_tom_only  1502      -1.43 -3.77    646       -0.51
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.55  exp_$=3.52  exp_R=2.76  profit_factor=1.34  total_$=895.00  sharpe=0.64  t_stat=1.69  max_dd_$=-484.00
+OOS : n_trades=108  win_rate=0.44  exp_$=-4.12  exp_R=-1.06  profit_factor=0.78  total_$=-444.50  sharpe=-0.48  t_stat=-0.83  max_dd_$=-575.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=726  win_rate=0.50  exp_$=-2.01  exp_R=-0.00  profit_factor=0.86  total_$=-1458.50  sharpe=-0.45  t_stat=-1.34  max_dd_$=-1844.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=tom_only
+  test a partir de 2024-06-27 : filter=tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=3.24  exp_R=0.05  profit_factor=1.27  total_$=1174.50  sharpe=0.49  t_stat=1.55  max_dd_$=-496.50
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.52  exp_$=1.24  exp_R=1.62  profit_factor=1.10  total_$=450.50  sharpe=0.19  t_stat=0.60  max_dd_$=-656.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-0.76  exp_R=0.31  profit_factor=0.95  total_$=-273.50  sharpe=-0.11  t_stat=-0.36  max_dd_$=-881.50
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.44  exp_$=-2.76  exp_R=-0.13  profit_factor=0.82  total_$=-997.50  sharpe=-0.42  t_stat=-1.32  max_dd_$=-1171.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -444$ | pile ou face : -449$ +/- 527$ | p-value = 0.512
+
+Trades ecrits dans trades_XLE_best.csv
+=========================== XLF ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.71 -4.51    754       -1.42
+    tom_only   254      -0.10 -0.28    108       -1.70
+non_tom_only  1502      -1.77 -4.67    646       -0.73
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.50  exp_$=-0.42  exp_R=0.79  profit_factor=0.96  total_$=-106.00  sharpe=-0.10  t_stat=-0.28  max_dd_$=-473.00
+OOS : n_trades=108  win_rate=0.42  exp_$=-9.84  exp_R=-3.92  profit_factor=0.39  total_$=-1063.00  sharpe=-1.70  t_stat=-2.95  max_dd_$=-1230.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=868  win_rate=0.47  exp_$=-1.53  exp_R=0.23  profit_factor=0.85  total_$=-1329.00  sharpe=-0.55  t_stat=-1.65  max_dd_$=-1479.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.51  exp_$=-1.23  exp_R=0.01  profit_factor=0.88  total_$=-445.00  sharpe=-0.27  t_stat=-0.85  max_dd_$=-1319.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-3.23  exp_R=-0.61  profit_factor=0.72  total_$=-1169.00  sharpe=-0.70  t_stat=-2.21  max_dd_$=-1613.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.42  exp_$=-5.23  exp_R=-0.81  profit_factor=0.58  total_$=-1893.00  sharpe=-1.13  t_stat=-3.55  max_dd_$=-2090.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.38  exp_$=-7.23  exp_R=-0.87  profit_factor=0.47  total_$=-2617.00  sharpe=-1.54  t_stat=-4.85  max_dd_$=-2760.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -1063$ | pile ou face : -429$ +/- 354$ | p-value = 0.967
+
+Trades ecrits dans trades_XLF_best.csv
+=========================== XLK ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -0.88 -2.33    754        1.02
+    tom_only   254      -0.21 -0.55    108       -0.89
+non_tom_only  1502      -0.86 -2.27    646        1.51
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.52  exp_$=-1.60  exp_R=0.20  profit_factor=0.91  total_$=-407.50  sharpe=-0.21  t_stat=-0.55  max_dd_$=-992.00
+OOS : n_trades=108  win_rate=0.48  exp_$=-21.90  exp_R=-9.95  profit_factor=0.64  total_$=-2365.00  sharpe=-0.89  t_stat=-1.54  max_dd_$=-2764.50
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1091  win_rate=0.54  exp_$=7.63  exp_R=4.82  profit_factor=1.26  total_$=8328.50  sharpe=0.77  t_stat=2.32  max_dd_$=-1963.50
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=-5.66  exp_R=-0.04  profit_factor=0.81  total_$=-2048.50  sharpe=-0.38  t_stat=-1.20  max_dd_$=-3415.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.51  exp_$=-7.66  exp_R=-2.83  profit_factor=0.75  total_$=-2772.50  sharpe=-0.51  t_stat=-1.63  max_dd_$=-3729.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.49  exp_$=-9.66  exp_R=-1.91  profit_factor=0.69  total_$=-3496.50  sharpe=-0.65  t_stat=-2.05  max_dd_$=-4043.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.47  exp_$=-11.66  exp_R=-1.61  profit_factor=0.64  total_$=-4220.50  sharpe=-0.78  t_stat=-2.46  max_dd_$=-4528.50
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -2365$ | pile ou face : -367$ +/- 1602$ | p-value = 0.877
+
+Trades ecrits dans trades_XLK_best.csv
+=========================== XLV ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -0.63 -1.65    754       -0.91
+    tom_only   254       0.31  0.83    108       -1.02
+non_tom_only  1502      -0.78 -2.07    646       -0.56
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.56  exp_$=3.10  exp_R=2.55  profit_factor=1.16  total_$=787.00  sharpe=0.31  t_stat=0.83  max_dd_$=-621.00
+OOS : n_trades=108  win_rate=0.42  exp_$=-12.60  exp_R=-5.30  profit_factor=0.63  total_$=-1361.00  sharpe=-1.02  t_stat=-1.76  max_dd_$=-2119.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=868  win_rate=0.49  exp_$=-1.10  exp_R=0.45  profit_factor=0.95  total_$=-954.00  sharpe=-0.16  t_stat=-0.47  max_dd_$=-3165.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.53  exp_$=0.41  exp_R=0.02  profit_factor=1.02  total_$=150.00  sharpe=0.04  t_stat=0.12  max_dd_$=-2343.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.52  exp_$=-1.59  exp_R=0.21  profit_factor=0.93  total_$=-574.00  sharpe=-0.15  t_stat=-0.47  max_dd_$=-2609.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.50  exp_$=-3.59  exp_R=-0.40  profit_factor=0.85  total_$=-1298.00  sharpe=-0.34  t_stat=-1.06  max_dd_$=-2875.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-5.59  exp_R=-0.60  profit_factor=0.78  total_$=-2022.00  sharpe=-0.52  t_stat=-1.65  max_dd_$=-3183.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -1361$ | pile ou face : -451$ +/- 743$ | p-value = 0.884
+
+Trades ecrits dans trades_XLV_best.csv
+=========================== XLY ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -0.33 -0.87    754       -0.15
+    tom_only   254       0.12  0.31    108       -1.30
+non_tom_only  1502      -0.39 -1.04    646        0.56
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.53  exp_$=1.10  exp_R=1.55  profit_factor=1.06  total_$=280.50  sharpe=0.12  t_stat=0.31  max_dd_$=-994.00
+OOS : n_trades=108  win_rate=0.51  exp_$=-25.01  exp_R=-11.50  profit_factor=0.52  total_$=-2701.00  sharpe=-1.30  t_stat=-2.25  max_dd_$=-3158.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1281  win_rate=0.52  exp_$=1.69  exp_R=1.85  profit_factor=1.08  total_$=2167.00  sharpe=0.29  t_stat=0.88  max_dd_$=-1373.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=non_tom_only
+  test a partir de 2020-09-27 : filter=non_tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=-4.69  exp_R=-0.03  profit_factor=0.83  total_$=-1696.50  sharpe=-0.36  t_stat=-1.13  max_dd_$=-3696.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.52  exp_$=-6.69  exp_R=-2.34  profit_factor=0.77  total_$=-2420.50  sharpe=-0.51  t_stat=-1.60  max_dd_$=-4010.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.50  exp_$=-8.69  exp_R=-1.67  profit_factor=0.71  total_$=-3144.50  sharpe=-0.66  t_stat=-2.08  max_dd_$=-4324.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-10.69  exp_R=-1.45  profit_factor=0.65  total_$=-3868.50  sharpe=-0.81  t_stat=-2.55  max_dd_$=-4638.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -2701$ | pile ou face : -331$ +/- 1196$ | p-value = 0.987
+
+Trades ecrits dans trades_XLY_best.csv
+=========================== XLP ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.81 -4.79    754       -2.10
+    tom_only   254      -0.86 -2.26    108       -1.32
+non_tom_only  1502      -1.63 -4.32    646       -1.79
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.44  exp_$=-3.63  exp_R=-0.81  profit_factor=0.67  total_$=-922.00  sharpe=-0.86  t_stat=-2.26  max_dd_$=-929.00
+OOS : n_trades=108  win_rate=0.35  exp_$=-5.86  exp_R=-1.93  profit_factor=0.57  total_$=-633.00  sharpe=-1.32  t_stat=-2.29  max_dd_$=-772.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=683  win_rate=0.43  exp_$=-3.16  exp_R=-0.58  profit_factor=0.71  total_$=-2156.00  sharpe=-1.07  t_stat=-3.20  max_dd_$=-2260.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=tom_only
+  test a partir de 2018-06-27 : filter=tom_only
+  test a partir de 2018-09-27 : filter=tom_only
+  test a partir de 2018-12-27 : filter=tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=non_tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=non_tom_only
+  test a partir de 2023-03-27 : filter=non_tom_only
+  test a partir de 2023-06-27 : filter=non_tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=tom_only
+  test a partir de 2025-06-27 : filter=tom_only
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=tom_only
+  test a partir de 2026-03-27 : filter=tom_only
+  test a partir de 2026-06-27 : filter=tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.45  exp_$=-2.30  exp_R=-0.00  profit_factor=0.78  total_$=-831.00  sharpe=-0.54  t_stat=-1.70  max_dd_$=-1065.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.41  exp_$=-4.30  exp_R=-1.15  profit_factor=0.63  total_$=-1555.00  sharpe=-1.00  t_stat=-3.15  max_dd_$=-1665.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.37  exp_$=-6.30  exp_R=-1.07  profit_factor=0.51  total_$=-2279.00  sharpe=-1.44  t_stat=-4.56  max_dd_$=-2371.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.33  exp_$=-8.30  exp_R=-1.05  profit_factor=0.41  total_$=-3003.00  sharpe=-1.87  t_stat=-5.90  max_dd_$=-3077.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -633$ | pile ou face : -448$ +/- 291$ | p-value = 0.728
+
+Trades ecrits dans trades_XLP_best.csv
+=========================== GLD ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756       0.04  0.11    754        1.15
+    tom_only   254       0.37  0.98    108        0.82
+non_tom_only  1502      -0.11 -0.30    646        0.86
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.53  exp_$=6.33  exp_R=4.17  profit_factor=1.18  total_$=1608.00  sharpe=0.37  t_stat=0.98  max_dd_$=-1091.00
+OOS : n_trades=108  win_rate=0.62  exp_$=65.54  exp_R=33.77  profit_factor=1.57  total_$=7078.00  sharpe=0.82  t_stat=1.42  max_dd_$=-3159.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1307  win_rate=0.54  exp_$=12.23  exp_R=7.11  profit_factor=1.16  total_$=15984.00  sharpe=0.50  t_stat=1.51  max_dd_$=-7525.00
+  test a partir de 2017-09-27 : filter=non_tom_only
+  test a partir de 2017-12-27 : filter=non_tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=tom_only
+  test a partir de 2018-09-27 : filter=tom_only
+  test a partir de 2018-12-27 : filter=tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=non_tom_only
+  test a partir de 2019-12-27 : filter=non_tom_only
+  test a partir de 2020-03-27 : filter=unfiltered
+  test a partir de 2020-06-27 : filter=unfiltered
+  test a partir de 2020-09-27 : filter=unfiltered
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=non_tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=unfiltered
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=unfiltered
+  test a partir de 2025-03-27 : filter=unfiltered
+  test a partir de 2025-06-27 : filter=unfiltered
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=unfiltered
+  test a partir de 2026-03-27 : filter=unfiltered
+  test a partir de 2026-06-27 : filter=unfiltered
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=25.99  exp_R=0.28  profit_factor=1.44  total_$=9410.00  sharpe=0.57  t_stat=1.79  max_dd_$=-3137.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=23.99  exp_R=13.00  profit_factor=1.40  total_$=8686.00  sharpe=0.52  t_stat=1.65  max_dd_$=-3159.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=21.99  exp_R=6.00  profit_factor=1.36  total_$=7962.00  sharpe=0.48  t_stat=1.52  max_dd_$=-3181.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=19.99  exp_R=3.67  profit_factor=1.33  total_$=7238.00  sharpe=0.44  t_stat=1.38  max_dd_$=-3203.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : 7078$ | pile ou face : -34$ +/- 5066$ | p-value = 0.080
+
+Trades ecrits dans trades_GLD_best.csv
+=========================== SLV ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.94 -5.11    754        0.23
+    tom_only   254      -0.31 -0.82    108        0.46
+non_tom_only  1502      -2.02 -5.34    646        0.04
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.42  exp_$=-1.61  exp_R=0.19  profit_factor=0.85  total_$=-409.00  sharpe=-0.31  t_stat=-0.82  max_dd_$=-539.00
+OOS : n_trades=108  win_rate=0.61  exp_$=11.28  exp_R=6.64  profit_factor=1.34  total_$=1218.00  sharpe=0.46  t_stat=0.79  max_dd_$=-1573.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=556  win_rate=0.47  exp_$=-0.35  exp_R=0.83  profit_factor=0.99  total_$=-192.00  sharpe=-0.02  t_stat=-0.06  max_dd_$=-2719.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=tom_only
+  test a partir de 2018-06-27 : filter=tom_only
+  test a partir de 2018-09-27 : filter=tom_only
+  test a partir de 2018-12-27 : filter=tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=tom_only
+  test a partir de 2025-06-27 : filter=tom_only
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=unfiltered
+  test a partir de 2026-03-27 : filter=tom_only
+  test a partir de 2026-06-27 : filter=tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.51  exp_$=4.23  exp_R=0.06  profit_factor=1.26  total_$=1533.00  sharpe=0.30  t_stat=0.95  max_dd_$=-1547.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=2.23  exp_R=2.12  profit_factor=1.13  total_$=809.00  sharpe=0.16  t_stat=0.50  max_dd_$=-1573.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.44  exp_$=0.23  exp_R=0.56  profit_factor=1.01  total_$=85.00  sharpe=0.02  t_stat=0.05  max_dd_$=-1599.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.41  exp_$=-1.77  exp_R=0.04  profit_factor=0.91  total_$=-639.00  sharpe=-0.12  t_stat=-0.39  max_dd_$=-1951.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : 1218$ | pile ou face : -386$ +/- 1562$ | p-value = 0.156
+
+Trades ecrits dans trades_SLV_best.csv
+=========================== USO ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -0.01 -0.03    754        0.21
+    tom_only   254       1.15  3.05    108        0.02
+non_tom_only  1502      -0.50 -1.33    646        0.22
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.54  exp_$=23.54  exp_R=12.77  profit_factor=1.70  total_$=5978.00  sharpe=1.15  t_stat=3.05  max_dd_$=-1016.00
+OOS : n_trades=108  win_rate=0.54  exp_$=1.00  exp_R=1.50  profit_factor=1.02  total_$=108.00  sharpe=0.02  t_stat=0.04  max_dd_$=-2032.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1087  win_rate=0.52  exp_$=1.01  exp_R=1.51  profit_factor=1.02  total_$=1102.00  sharpe=0.07  t_stat=0.20  max_dd_$=-7568.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=unfiltered
+  test a partir de 2018-03-27 : filter=unfiltered
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=unfiltered
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=unfiltered
+  test a partir de 2024-06-27 : filter=unfiltered
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=18.81  exp_R=0.21  profit_factor=1.44  total_$=6810.00  sharpe=0.67  t_stat=2.13  max_dd_$=-1956.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=16.81  exp_R=9.41  profit_factor=1.39  total_$=6086.00  sharpe=0.60  t_stat=1.90  max_dd_$=-2032.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=14.81  exp_R=4.20  profit_factor=1.33  total_$=5362.00  sharpe=0.53  t_stat=1.68  max_dd_$=-2108.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.52  exp_$=12.81  exp_R=2.47  profit_factor=1.28  total_$=4638.00  sharpe=0.46  t_stat=1.45  max_dd_$=-2184.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : 108$ | pile ou face : -623$ +/- 2487$ | p-value = 0.359
+
+Trades ecrits dans trades_USO_best.csv
+=========================== TLT ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.10 -2.92    754       -1.92
+    tom_only   254      -1.62 -4.28    108       -0.79
+non_tom_only  1502      -0.52 -1.37    646       -1.76
+
+=== 2. Meilleure config in-sample : filter=non_tom_only ===
+IS  : n_trades=1502  win_rate=0.48  exp_$=-3.39  exp_R=-0.69  profit_factor=0.90  total_$=-5091.00  sharpe=-0.52  t_stat=-1.37  max_dd_$=-8454.00
+OOS : n_trades=646  win_rate=0.45  exp_$=-6.65  exp_R=-2.32  profit_factor=0.73  total_$=-4295.00  sharpe=-1.76  t_stat=-3.04  max_dd_$=-4362.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1173  win_rate=0.49  exp_$=-2.43  exp_R=-0.21  profit_factor=0.93  total_$=-2849.00  sharpe=-0.28  t_stat=-0.83  max_dd_$=-7933.00
+  test a partir de 2017-09-27 : filter=non_tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=non_tom_only
+  test a partir de 2019-09-27 : filter=non_tom_only
+  test a partir de 2019-12-27 : filter=non_tom_only
+  test a partir de 2020-03-27 : filter=non_tom_only
+  test a partir de 2020-06-27 : filter=non_tom_only
+  test a partir de 2020-09-27 : filter=non_tom_only
+  test a partir de 2020-12-27 : filter=non_tom_only
+  test a partir de 2021-03-27 : filter=non_tom_only
+  test a partir de 2021-06-27 : filter=non_tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=non_tom_only
+  test a partir de 2022-03-27 : filter=non_tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=tom_only
+  test a partir de 2024-06-27 : filter=tom_only
+  test a partir de 2024-09-27 : filter=tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=tom_only
+  test a partir de 2025-06-27 : filter=tom_only
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=2149  win_rate=0.48  exp_$=-2.37  exp_R=-0.00  profit_factor=0.92  total_$=-5103.00  sharpe=-0.41  t_stat=-1.28  max_dd_$=-10069.00
+  slippage 1 tick(s)/execution : n_trades=2149  win_rate=0.47  exp_$=-4.37  exp_R=-1.19  profit_factor=0.86  total_$=-9401.00  sharpe=-0.75  t_stat=-2.36  max_dd_$=-12771.00
+  slippage 2 tick(s)/execution : n_trades=2149  win_rate=0.47  exp_$=-6.37  exp_R=-1.09  profit_factor=0.80  total_$=-13699.00  sharpe=-1.09  t_stat=-3.44  max_dd_$=-15556.00
+  slippage 3 tick(s)/execution : n_trades=2149  win_rate=0.45  exp_$=-8.37  exp_R=-1.06  profit_factor=0.75  total_$=-17997.00  sharpe=-1.43  t_stat=-4.52  max_dd_$=-18346.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -4295$ | pile ou face : -2472$ +/- 1434$ | p-value = 0.884
+
+Trades ecrits dans trades_TLT_best.csv
+=========================== IEF ===========================
+
+Donnees : 2297 jours (2017-08-04 -> 2026-09-24)
+In-sample : 2017-08-04 -> 2023-12-21 | Hors-echantillon : 2023-12-22 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1606      -2.05 -5.17    689       -2.56
+    tom_only   230      -1.81 -4.57     99       -1.81
+non_tom_only  1376      -1.43 -3.61    590       -1.88
+
+=== 2. Meilleure config in-sample : filter=non_tom_only ===
+IS  : n_trades=1376  win_rate=0.44  exp_$=-3.41  exp_R=-0.70  profit_factor=0.76  total_$=-4689.00  sharpe=-1.43  t_stat=-3.61  max_dd_$=-4788.00
+OOS : n_trades=590  win_rate=0.43  exp_$=-3.38  exp_R=-0.69  profit_factor=0.72  total_$=-1995.00  sharpe=-1.88  t_stat=-3.11  max_dd_$=-2060.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=947  win_rate=0.45  exp_$=-3.60  exp_R=-0.80  profit_factor=0.74  total_$=-3411.00  sharpe=-1.12  t_stat=-3.20  max_dd_$=-4455.00
+  test a partir de 2018-08-04 : filter=tom_only
+  test a partir de 2018-11-04 : filter=tom_only
+  test a partir de 2019-02-04 : filter=non_tom_only
+  test a partir de 2019-05-04 : filter=non_tom_only
+  test a partir de 2019-08-04 : filter=non_tom_only
+  test a partir de 2019-11-04 : filter=non_tom_only
+  test a partir de 2020-02-04 : filter=non_tom_only
+  test a partir de 2020-05-04 : filter=non_tom_only
+  test a partir de 2020-08-04 : filter=non_tom_only
+  test a partir de 2020-11-04 : filter=non_tom_only
+  test a partir de 2021-02-04 : filter=non_tom_only
+  test a partir de 2021-05-04 : filter=tom_only
+  test a partir de 2021-08-04 : filter=tom_only
+  test a partir de 2021-11-04 : filter=tom_only
+  test a partir de 2022-02-04 : filter=tom_only
+  test a partir de 2022-05-04 : filter=tom_only
+  test a partir de 2022-08-04 : filter=tom_only
+  test a partir de 2022-11-04 : filter=tom_only
+  test a partir de 2023-02-04 : filter=tom_only
+  test a partir de 2023-05-04 : filter=tom_only
+  test a partir de 2023-08-04 : filter=non_tom_only
+  test a partir de 2023-11-04 : filter=non_tom_only
+  test a partir de 2024-02-04 : filter=non_tom_only
+  test a partir de 2024-05-04 : filter=non_tom_only
+  test a partir de 2024-08-04 : filter=tom_only
+  test a partir de 2024-11-04 : filter=tom_only
+  test a partir de 2025-02-04 : filter=tom_only
+  test a partir de 2025-05-04 : filter=tom_only
+  test a partir de 2025-08-04 : filter=tom_only
+  test a partir de 2025-11-04 : filter=tom_only
+  test a partir de 2026-02-04 : filter=tom_only
+  test a partir de 2026-05-04 : filter=non_tom_only
+  test a partir de 2026-08-04 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=1967  win_rate=0.47  exp_$=-1.40  exp_R=0.01  profit_factor=0.89  total_$=-2746.00  sharpe=-0.63  t_stat=-1.90  max_dd_$=-4047.00
+  slippage 1 tick(s)/execution : n_trades=1967  win_rate=0.44  exp_$=-3.40  exp_R=-0.70  profit_factor=0.75  total_$=-6680.00  sharpe=-1.53  t_stat=-4.61  max_dd_$=-6758.00
+  slippage 2 tick(s)/execution : n_trades=1967  win_rate=0.43  exp_$=-5.40  exp_R=-0.85  profit_factor=0.63  total_$=-10614.00  sharpe=-2.42  t_stat=-7.31  max_dd_$=-10674.00
+  slippage 3 tick(s)/execution : n_trades=1967  win_rate=0.39  exp_$=-7.40  exp_R=-0.90  profit_factor=0.53  total_$=-14548.00  sharpe=-3.31  t_stat=-10.01  max_dd_$=-14592.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -1995$ | pile ou face : -2357$ +/- 648$ | p-value = 0.272
+
+Trades ecrits dans trades_IEF_best.csv
+=========================== EFA ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.30 -3.44    754       -0.45
+    tom_only   254       0.33  0.87    108       -0.56
+non_tom_only  1502      -1.51 -3.98    646       -0.20
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.53  exp_$=2.90  exp_R=2.45  profit_factor=1.15  total_$=736.00  sharpe=0.33  t_stat=0.87  max_dd_$=-676.00
+OOS : n_trades=108  win_rate=0.56  exp_$=-8.07  exp_R=-3.04  profit_factor=0.75  total_$=-872.00  sharpe=-0.56  t_stat=-0.97  max_dd_$=-1360.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=770  win_rate=0.50  exp_$=-2.02  exp_R=-0.01  profit_factor=0.91  total_$=-1555.00  sharpe=-0.33  t_stat=-0.97  max_dd_$=-2473.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=tom_only
+  test a partir de 2026-03-27 : filter=tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.56  exp_$=1.62  exp_R=0.04  profit_factor=1.07  total_$=588.00  sharpe=0.15  t_stat=0.48  max_dd_$=-1616.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=-0.38  exp_R=0.81  profit_factor=0.98  total_$=-136.00  sharpe=-0.03  t_stat=-0.11  max_dd_$=-1932.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.52  exp_$=-2.38  exp_R=-0.09  profit_factor=0.90  total_$=-860.00  sharpe=-0.22  t_stat=-0.70  max_dd_$=-2248.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.50  exp_$=-4.38  exp_R=-0.40  profit_factor=0.83  total_$=-1584.00  sharpe=-0.41  t_stat=-1.28  max_dd_$=-2564.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -872$ | pile ou face : -414$ +/- 863$ | p-value = 0.711
+
+Trades ecrits dans trades_EFA_best.csv
+=========================== EEM ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -1.39 -3.67    754       -0.59
+    tom_only   254       0.44  1.16    108       -0.31
+non_tom_only  1502      -1.66 -4.38    646       -0.50
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.56  exp_$=3.16  exp_R=2.58  profit_factor=1.21  total_$=802.00  sharpe=0.44  t_stat=1.16  max_dd_$=-672.00
+OOS : n_trades=108  win_rate=0.54  exp_$=-3.44  exp_R=-0.72  profit_factor=0.85  total_$=-371.00  sharpe=-0.31  t_stat=-0.54  max_dd_$=-664.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=636  win_rate=0.50  exp_$=-2.09  exp_R=-0.04  profit_factor=0.90  total_$=-1327.00  sharpe=-0.29  t_stat=-0.87  max_dd_$=-2085.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=tom_only
+  test a partir de 2024-06-27 : filter=tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=tom_only
+  test a partir de 2025-06-27 : filter=tom_only
+  test a partir de 2025-09-27 : filter=tom_only
+  test a partir de 2025-12-27 : filter=tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.57  exp_$=3.19  exp_R=0.05  profit_factor=1.20  total_$=1155.00  sharpe=0.38  t_stat=1.19  max_dd_$=-654.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=1.19  exp_R=1.60  profit_factor=1.07  total_$=431.00  sharpe=0.14  t_stat=0.44  max_dd_$=-955.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.50  exp_$=-0.81  exp_R=0.30  profit_factor=0.96  total_$=-293.00  sharpe=-0.10  t_stat=-0.30  max_dd_$=-1305.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-2.81  exp_R=-0.13  profit_factor=0.85  total_$=-1017.00  sharpe=-0.33  t_stat=-1.05  max_dd_$=-1664.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -371$ | pile ou face : -413$ +/- 671$ | p-value = 0.462
+
+Trades ecrits dans trades_EEM_best.csv
+=========================== AAPL ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -0.46 -1.22    754       -0.65
+    tom_only   254       0.14  0.37    108       -1.15
+non_tom_only  1502      -0.56 -1.49    646       -0.01
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.54  exp_$=2.86  exp_R=2.43  profit_factor=1.08  total_$=726.25  sharpe=0.14  t_stat=0.37  max_dd_$=-1798.00
+OOS : n_trades=108  win_rate=0.37  exp_$=-71.39  exp_R=-34.69  profit_factor=0.47  total_$=-7710.00  sharpe=-1.15  t_stat=-1.99  max_dd_$=-9220.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=939  win_rate=0.52  exp_$=-5.05  exp_R=-1.52  profit_factor=0.92  total_$=-4741.25  sharpe=-0.25  t_stat=-0.73  max_dd_$=-9066.50
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=tom_only
+  test a partir de 2018-06-27 : filter=tom_only
+  test a partir de 2018-09-27 : filter=tom_only
+  test a partir de 2018-12-27 : filter=tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=unfiltered
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=unfiltered
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=unfiltered
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.49  exp_$=-17.29  exp_R=-0.15  profit_factor=0.74  total_$=-6259.75  sharpe=-0.46  t_stat=-1.44  max_dd_$=-10681.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.49  exp_$=-19.29  exp_R=-8.65  profit_factor=0.71  total_$=-6983.75  sharpe=-0.51  t_stat=-1.61  max_dd_$=-10937.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.47  exp_$=-21.29  exp_R=-4.82  profit_factor=0.69  total_$=-7707.75  sharpe=-0.56  t_stat=-1.77  max_dd_$=-11193.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.46  exp_$=-23.29  exp_R=-3.55  profit_factor=0.66  total_$=-8431.75  sharpe=-0.61  t_stat=-1.94  max_dd_$=-11449.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -7710$ | pile ou face : -375$ +/- 4043$ | p-value = 0.970
+
+Trades ecrits dans trades_AAPL_best.csv
+=========================== JPM ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756       0.12  0.33    754        0.59
+    tom_only   254       0.40  1.06    108       -1.16
+non_tom_only  1502      -0.00 -0.01    646        1.16
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.52  exp_$=7.81  exp_R=4.91  profit_factor=1.20  total_$=1985.00  sharpe=0.40  t_stat=1.06  max_dd_$=-1384.00
+OOS : n_trades=108  win_rate=0.44  exp_$=-42.17  exp_R=-20.08  profit_factor=0.54  total_$=-4554.00  sharpe=-1.16  t_stat=-2.01  max_dd_$=-6334.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=1273  win_rate=0.53  exp_$=9.18  exp_R=5.59  profit_factor=1.20  total_$=11691.00  sharpe=0.68  t_stat=2.04  max_dd_$=-3827.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=non_tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=non_tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=unfiltered
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=non_tom_only
+  test a partir de 2023-06-27 : filter=non_tom_only
+  test a partir de 2023-09-27 : filter=non_tom_only
+  test a partir de 2023-12-27 : filter=non_tom_only
+  test a partir de 2024-03-27 : filter=non_tom_only
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=non_tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=non_tom_only
+  test a partir de 2026-06-27 : filter=non_tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.49  exp_$=-5.10  exp_R=-0.03  profit_factor=0.90  total_$=-1845.00  sharpe=-0.20  t_stat=-0.63  max_dd_$=-6997.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.49  exp_$=-7.10  exp_R=-2.55  profit_factor=0.87  total_$=-2569.00  sharpe=-0.28  t_stat=-0.87  max_dd_$=-7312.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-9.10  exp_R=-1.77  profit_factor=0.84  total_$=-3293.00  sharpe=-0.35  t_stat=-1.12  max_dd_$=-7632.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.48  exp_$=-11.10  exp_R=-1.52  profit_factor=0.80  total_$=-4017.00  sharpe=-0.43  t_stat=-1.36  max_dd_$=-7952.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : -4554$ | pile ou face : -403$ +/- 2262$ | p-value = 0.980
+
+Trades ecrits dans trades_JPM_best.csv
+=========================== XOM ===========================
+
+Donnees : 2512 jours (2016-09-27 -> 2026-09-24)
+In-sample : 2016-09-27 -> 2023-09-20 | Hors-echantillon : 2023-09-21 -> 2026-09-23
+
+=== 1. Grille (3 configurations testees) ===
+      filter  n_IS  sharpe_IS  t_IS  n_OOS  sharpe_OOS
+  unfiltered  1756      -0.60 -1.58    754       -0.05
+    tom_only   254       0.51  1.36    108        0.11
+non_tom_only  1502      -0.82 -2.17    646       -0.11
+
+=== 2. Meilleure config in-sample : filter=tom_only ===
+IS  : n_trades=254  win_rate=0.56  exp_$=6.56  exp_R=4.28  profit_factor=1.28  total_$=1666.00  sharpe=0.51  t_stat=1.36  max_dd_$=-1222.00
+OOS : n_trades=108  win_rate=0.49  exp_$=2.52  exp_R=2.26  profit_factor=1.06  total_$=272.00  sharpe=0.11  t_stat=0.19  max_dd_$=-908.00
+
+=== 3. Walk-forward (train 12 mois, test 3 mois) ===
+Concatenation des periodes de test : n_trades=881  win_rate=0.52  exp_$=-2.44  exp_R=-0.22  profit_factor=0.93  total_$=-2151.00  sharpe=-0.23  t_stat=-0.70  max_dd_$=-4189.00
+  test a partir de 2017-09-27 : filter=tom_only
+  test a partir de 2017-12-27 : filter=tom_only
+  test a partir de 2018-03-27 : filter=non_tom_only
+  test a partir de 2018-06-27 : filter=non_tom_only
+  test a partir de 2018-09-27 : filter=non_tom_only
+  test a partir de 2018-12-27 : filter=non_tom_only
+  test a partir de 2019-03-27 : filter=tom_only
+  test a partir de 2019-06-27 : filter=tom_only
+  test a partir de 2019-09-27 : filter=tom_only
+  test a partir de 2019-12-27 : filter=tom_only
+  test a partir de 2020-03-27 : filter=tom_only
+  test a partir de 2020-06-27 : filter=tom_only
+  test a partir de 2020-09-27 : filter=tom_only
+  test a partir de 2020-12-27 : filter=tom_only
+  test a partir de 2021-03-27 : filter=tom_only
+  test a partir de 2021-06-27 : filter=tom_only
+  test a partir de 2021-09-27 : filter=tom_only
+  test a partir de 2021-12-27 : filter=tom_only
+  test a partir de 2022-03-27 : filter=tom_only
+  test a partir de 2022-06-27 : filter=tom_only
+  test a partir de 2022-09-27 : filter=tom_only
+  test a partir de 2022-12-27 : filter=tom_only
+  test a partir de 2023-03-27 : filter=tom_only
+  test a partir de 2023-06-27 : filter=tom_only
+  test a partir de 2023-09-27 : filter=tom_only
+  test a partir de 2023-12-27 : filter=tom_only
+  test a partir de 2024-03-27 : filter=unfiltered
+  test a partir de 2024-06-27 : filter=non_tom_only
+  test a partir de 2024-09-27 : filter=non_tom_only
+  test a partir de 2024-12-27 : filter=tom_only
+  test a partir de 2025-03-27 : filter=non_tom_only
+  test a partir de 2025-06-27 : filter=non_tom_only
+  test a partir de 2025-09-27 : filter=non_tom_only
+  test a partir de 2025-12-27 : filter=non_tom_only
+  test a partir de 2026-03-27 : filter=unfiltered
+  test a partir de 2026-06-27 : filter=tom_only
+
+=== 4. Sensibilite au slippage (meilleure config, toute la periode) ===
+  slippage 0 tick(s)/execution : n_trades=362  win_rate=0.55  exp_$=7.35  exp_R=0.09  profit_factor=1.26  total_$=2662.00  sharpe=0.45  t_stat=1.42  max_dd_$=-1120.00
+  slippage 1 tick(s)/execution : n_trades=362  win_rate=0.54  exp_$=5.35  exp_R=3.68  profit_factor=1.18  total_$=1938.00  sharpe=0.33  t_stat=1.04  max_dd_$=-1222.00
+  slippage 2 tick(s)/execution : n_trades=362  win_rate=0.53  exp_$=3.35  exp_R=1.34  profit_factor=1.11  total_$=1214.00  sharpe=0.21  t_stat=0.65  max_dd_$=-1324.00
+  slippage 3 tick(s)/execution : n_trades=362  win_rate=0.51  exp_$=1.35  exp_R=0.56  profit_factor=1.04  total_$=490.00  sharpe=0.08  t_stat=0.26  max_dd_$=-1426.00
+
+=== 5. Direction au hasard (meme filtre TOM), hors-echantillon ===
+  reel : 272$ | pile ou face : -481$ +/- 1384$ | p-value = 0.319
+
+Trades ecrits dans trades_XOM_best.csv

@@ -32,6 +32,7 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 13 | Momentum cross-sectionnel | `Swing_trading/momentum_cross_sectional/` | Mêmes 20 tickers cross-asset | Daily (swing, rebalancement mensuel) | Rejeté | p=0.286 (config sélectionnée en IS), p=0.035 (config non retenue, échoue quand même à 0.0125) |
 | 14 | Overnight drift filtré par régime de tendance (Kumo Ichimoku) | `Swing_trading/overnight_drift_regime_filtered/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée) | Rejeté (le filtre n'apporte rien face à l'edge non filtré) | p=0.003 (SPY/QQQ, mais leur meilleure config est "sans filtre" — n'appuie pas l'hypothèse testée) |
 | 15 | Overnight drift sur ETF-paniers hors indices actions larges | `Swing_trading/overnight_drift_baskets/` | Secteurs SPDR (XLE, XLF, XLK, XLV, XLY, XLP), matières premières (GLD, SLV, USO), obligataire (TLT, IEF), international (EFA, EEM) — 13 ETF-paniers | Daily (swing, entrée overnight non filtrée) | Rejeté (12/13 Sharpe IS négatif ; seul GLD positif échoue le seuil Bonferroni) | p=0.013 (GLD, meilleur cas, seuil corrigé du sous-groupe = 0.00385) |
+| 16 | Overnight drift filtré par effet turn-of-month | `Swing_trading/turn_of_month/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée au calendrier) | Rejeté (config IS `tom_only` s'effondre en OOS sur les 4 indices, placebo p=0.90-0.97) | p=0.904-0.967 (4 indices primaires, tous pires que le hasard) |
 
 ## Rationale des transitions
 
@@ -250,6 +251,55 @@ bornes de séance). Réutilise donc telles quelles les données de
 `Swing_trading/ichimoku_daily/data_*/` pour les 20 instruments (hypothèse
 principale sur SPY/QQQ/IWM/DIA, cartographie secondaire sur le reste).
 
+**#16 → #17** : Rejeté sans ambiguïté — sur les 4 indices primaires
+(SPY/QQQ/IWM/DIA), la config `tom_only` est retenue en in-sample avec un
+Sharpe positif mais s'effondre en OOS (Sharpe -0.81 à -1.19, signe opposé) et
+échoue le test placebo de façon extrême (p=0.90-0.97, pire que le hasard) —
+signature de sur-ajustement la plus nette observée dans ce projet. Aucun des
+16 instruments de la cartographie exploratoire secondaire ne passe même le
+seuil non corrigé de 0.05. Sur SPY, les configs `unfiltered`/`non_tom_only`
+gardent un Sharpe OOS fortement positif (1.24/1.88) pendant que `tom_only`
+s'effondre : l'edge overnight (#10) est confirmé toujours présent, mais
+explicitement pas concentré dans la fenêtre turn-of-month.
+
+**Bilan des 4 tentatives d'extension de l'edge overnight (#11, #14, #15,
+#16)** : actions individuelles, filtre de tendance, autres classes d'actifs
+en panier, filtre calendaire turn-of-month — **toutes rejetées**. Chacune
+réduit soit le périmètre d'actifs, soit le nombre de trades in-sample
+(#14 : ~régime restreint : #16 : ~254 trades contre ~1750 pour la version non
+filtrée), et à chaque fois la config retenue en IS ne survit pas à l'OOS/
+placebo. Enseignement consolidé (Rule #3/#4) : l'edge overnight sur
+SPY/QQQ/IWM/DIA semble être une propriété **globale et inconditionnelle** de
+ces 4 instruments sur la période testée — tenter de le sous-diviser plus
+finement (par régime, par calendrier, par classe d'actif) détruit la
+puissance statistique sans jamais isoler un sous-ensemble qui le surpasse.
+Continuer à chercher un filtre qui améliore #10 reviendrait à retester la
+même piste une 5e fois (contraire à Rule #3) — cette question est donc close
+pour ce projet : `overnight_drift` original (#10), sans filtre, reste
+la seule forme validée de cet edge.
+
+Application de Rule #3 pour #17 : plutôt qu'un nouveau filtre du même edge,
+tester un **mécanisme structurel différent, sans classement ni tendance de
+prix** (cohérent avec l'enseignement transversal : les signaux basés sur le
+niveau/rang des prix — Ichimoku #12, momentum #13 — ont échoué, alors que les
+biais structurels/calendaires sans indicateur ont été la seule piste
+prometteuse). Piste retenue : **retournement à très court terme (short-term
+reversal)** après un mouvement journalier extrême — anomalie documentée
+séparément de l'overnight drift et du momentum (mécanisme de survente/survente
+liée à la fourniture de liquidité après un choc, pas à une tendance ni à un
+classement relatif), testée sur les 20 instruments du panier existant, en
+utilisant le **rendement intraday complet** (pas seulement la jambe
+overnight) pour conserver un nombre de trades élevé (~2500 par instrument sur
+l'historique complet) et éviter le piège du petit échantillon qui a fait
+échouer #14 et #16. Auto-critique à surveiller dès la conception (Rule #4) :
+le retournement à court terme est proche, dans son mécanisme économique
+(survente liée à un choc récent), du mean-reversion déjà exclu de la classe
+"patterns intraday purs" rejetée en bloc (#2 VWAP reversion) — mais ce
+rejet portait sur des données 5 minutes intraday, pas sur un retournement
+journalier lendemain d'un choc, mécanisme distinct (liquidité institutionnelle
+vs microstructure intraday) qui mérite un test propre avant d'être écarté par
+analogie.
+
 ## Évolutions de la méthodologie elle-même
 
 **2026-09-25 — correction de la portée de la correction multiple-testing**
@@ -343,3 +393,22 @@ hétérogènes, y compris #13 en cours.
   être testée empiriquement avant d'être actée comme correction — elle peut
   elle-même se révéler fausse, et c'est un résultat valide en soi, pas un
   échec du processus.
+- **Un deuxième biais calendaire indépendant (turn-of-month) ne se superpose
+  pas à l'edge overnight déjà validé** (#16) : sur les 4 indices primaires
+  (SPY/QQQ/IWM/DIA), la config `tom_only` est sélectionnée en in-sample avec
+  un Sharpe positif (jusqu'à t=2.47 pour IWM) mais s'effondre en OOS (signe
+  opposé) avec un test placebo qui échoue de façon extrême (p=0.90-0.97, la
+  direction réelle faisant moins bien que le hasard sur ~108 trades OOS) — la
+  signature la plus nette de sur-ajustement observée dans ce projet à ce
+  jour, sur un sous-échantillon in-sample de seulement ~254 trades (contre
+  ~1750 pour la config non filtrée). Point méthodologique à retenir : plus un
+  filtre réduit le nombre de trades in-sample, plus le risque de capter du
+  bruit dans la sélection de grille augmente mécaniquement — un Sharpe IS
+  positif avec un t-stat modeste (< 2.5) sur quelques centaines
+  d'observations doit être traité avec une suspicion renforcée, pas comme un
+  signal fort. Par ailleurs, sur SPY, les configs non filtrées par TOM
+  (`unfiltered` et `non_tom_only`) affichent un Sharpe OOS nettement positif
+  (1.24 et 1.88) pendant que la config TOM s'effondre (-0.93) : l'edge
+  overnight (#10) est donc confirmé toujours présent dans cette fenêtre de
+  données, mais explicitement pas concentré dans la fenêtre turn-of-month —
+  preuve directe contre l'hypothèse testée, pas une simple absence de preuve.
