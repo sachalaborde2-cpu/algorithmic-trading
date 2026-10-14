@@ -35,6 +35,7 @@ laissé à mon appréciation ; le code est poussé sur GitHub
 | 16 | Overnight drift filtré par effet turn-of-month | `Swing_trading/turn_of_month/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — hypothèse principale ; 16 tickers cross-asset en cartographie exploratoire secondaire | Daily (swing, entrée overnight conditionnée au calendrier) | Rejeté (config IS `tom_only` s'effondre en OOS sur les 4 indices, placebo p=0.90-0.97) | p=0.904-0.967 (4 indices primaires, tous pires que le hasard) |
 | 17 | Effet pré-jour-férié (jambe intraday, pas filtre overnight) | `Swing_trading/pre_holiday_effect/` | 20 tickers cross-asset (4 indices primaires + 16 cartographie secondaire) | Daily (swing, edge intraday open→close) | Rejeté (Sharpe IS/WF trop faibles sur le groupe primaire ; seul XLP < 0.05 mais Sharpe IS négatif et échoue Bonferroni du grid search) | p=0.020 (XLP, Sharpe IS négatif — rejeté malgré la p-value) |
 | 18 | Sélection cross-sectionnelle de l'instrument recevant l'edge overnight | `Swing_trading/overnight_selection_cross_sectional/` | Indices/ETF larges (SPY, QQQ, IWM, DIA) — seul sous-groupe où #10 est validé, pas de cartographie secondaire | Daily (swing, sélection nocturne de l'instrument) | Rejeté (config gagnante IS échoue le placebo de sélection ; amélioration IS entièrement portée par le régime Kumo, pas par le classement relatif) | p=0.183 (config gagnante, hors-échantillon) |
+| 19 | Arbitrage ETF jumeaux (adaptation particulier de l'arbitrage ETF/panier, proposé par l'utilisateur) | `Swing_trading/etf_twin_arbitrage/` | 11 paires de jumeaux stricts (26 ETF : S&P 500, Nasdaq-100, Russell 2000, S&P 400/600, or, argent) + 5 paires quasi-jumelles exploratoires | Daily (swing, neutre au marché) | Rejeté (Sharpe négatif IS/OOS/WF ; >90 % de l'écart disparu à l'ouverture suivante ; même sans coût Sharpe 0.42 non significatif) | p=0.27 (portefeuille, OOS) |
 
 ## Rationale des transitions
 
@@ -440,6 +441,83 @@ une source de données non encore exploitée dans ce projet), ou bien
 changer de panier plutôt que de rejouer tendance/momentum sur SPY/QQQ/IWM/DIA
 une quatrième fois.
 
+**Choix de #19 (2026-10-14) — piste proposée par l'utilisateur :
+arbitrage ETF / panier (prime-décote à la valeur liquidative)**. Passage
+au filtre critique avant codage (Rule #4, y compris sur une proposition de
+l'utilisateur) : dans sa forme d'origine, la stratégie n'est pas accessible
+à un particulier — seuls les Authorized Participants créent/rachètent des
+parts (blocs de ~50 000 parts), les écarts sur les ETF liquides font 1-2 pb
+et sont arbitrés en millisecondes par du HFT, vendre à découvert un panier
+de 100-500 actions coûte des centaines de $ de commissions par jambe, et la
+convergence n'est pas garantie (NAV périmée des ETF internationaux, décotes
+persistantes des ETF obligataires en mars 2020). **Adaptation testable
+retenue** : remplacer le panier par un second ETF répliquant exactement le
+même indice/métal (SPY vs IVV vs VOO, GLD vs IAU...) — chaque ETF est
+rappelé vers la même NAV par son propre arbitrage, donc leur écart doit
+revenir à zéro ; les deux jambes se tradent chez IB en 2 ordres. C'est
+aussi une réponse à l'enseignement de #18 : mécanisme de nature
+différente (structurel/microstructure, pas tendance/momentum) et panier
+différent. Ce n'est pas le pairs trading statistique abandonné en #9 : la
+convergence y est imposée par un mécanisme institutionnel, pas supposée
+d'après une corrélation historique.
+
+**Protocole pré-enregistré (avant tout résultat)** — dossier
+`Swing_trading/etf_twin_arbitrage/` :
+- Univers : groupe A, 11 paires de jumeaux stricts (SPY/IVV, SPY/VOO,
+  IVV/VOO, SPY/SPYM, QQQ/QQQM, IWM/VTWO, MDY/IJH, IJR/SPSM, GLD/IAU,
+  GLD/GLDM, SLV/SIVR) ; groupe B, 5 paires de quasi-jumeaux (indices
+  différents mais quasi identiques : VTI/ITOT, VTI/SCHB, AGG/BND,
+  IEFA/VEA, IEMG/VWO), cartographie exploratoire hors verdict.
+- Écart : `s = ln(A ajusté dividendes) - ln(B ajusté)` à la clôture ;
+  valeur d'équilibre = moyenne de s sur les 20 clôtures précédentes
+  (strictement passées) ; déviation `d` en points de base.
+- Entrée : si |d| > k pb à la clôture de J, à l'ouverture de J+1 on vend
+  l'ETF cher et on achète l'ETF bon marché, 100 000 $ par jambe (neutre en
+  dollars). Sortie à l'ouverture suivant la première clôture où d a
+  repassé zéro, ou au plus tard après 10 jours.
+- Grille : k ∈ {3, 6, 12} pb (3 configs), choisie sur le Sharpe IS du
+  portefeuille équipondéré du groupe A.
+- Coûts : commission IB 0.005 $/action (min 1 $) par jambe et par
+  exécution, slippage 1 tick par exécution (sensibilité 0-3), frais
+  d'emprunt de la jambe vendeuse 0.5 %/an.
+- Verdict principal : portefeuille du groupe A — IS/OOS 70/30,
+  walk-forward 12/3 mois, placebo direction aléatoire (5 000 tirages, OOS),
+  seuil Bonferroni du grid search 0.05/3 ≈ 0.0167. Cartographie par paire
+  du groupe A : seuil 0.05/(11×3) ≈ 0.0015.
+- Diagnostic spécifique : part de la déviation mesurée à la clôture J
+  encore présente à l'ouverture J+1 (si elle a disparu, l'écart n'est pas
+  capturable par un particulier, quel que soit le P&L affiché).
+
+**#19 → #20** : Rejeté sans ambiguïté. Les écarts entre jumeaux stricts
+liquides sont minuscules (médiane 1-1,5 pb sur SPY/IVV/VOO/QQQM) et plus
+de 90 % de l'écart mesuré à la clôture a disparu à l'ouverture suivante ;
+là où les écarts sont plus larges (SLV/SIVR, IJR/SPSM, SPY/SPYM), les ETF
+coûtent 20-80 $ l'unité et un tick y pèse 1.5-7 pb par exécution. Le
+portefeuille du groupe A a un Sharpe négatif pour les 3 configs en IS, OOS
+et walk-forward (k=12 retenu : -3.12 / -2.17 / -2.83), placebo p=0.27 ;
+même sans aucun coût, Sharpe 0.42 (t=1.32, non significatif) et 66 % du
+gain brut vient de février-avril 2020. Diagnostic décisif : entrer au
+cours de clôture même où l'écart est mesuré (borne haute non tradable)
+rapporterait 17,5 pb bruts/trade contre 2 pb à l'ouverture suivante —
+le mécanisme de création/rachat fonctionne, mais il referme l'écart
+avant qu'un trader en barres journalières puisse agir. L'objection
+pré-codage (accessible aux seuls Authorized Participants/HFT) est
+confirmée empiriquement, y compris dans la version adaptée.
+
+Auto-critique (Rule #1) : deux erreurs de mise en œuvre détectées avant de
+figer le verdict, sans effet sur celui-ci mais à ne pas reproduire. (1) Le
+placebo comparait `simulations >= réel` sans tolérance : quand la
+simulation "tous signes identiques au réel" reproduit exactement le réel,
+l'arrondi flottant la comptait comme inférieure — avec 2 trades OOS
+(MDY/IJH), la p-value affichée tombait à 0.000 au lieu de ~0.25, et la
+paire ressortait à tort "OUI". (2) La colonne "passe" de la cartographie
+n'appliquait pas le critère n°1 de `METHODOLOGIE.md` (Sharpe IS > 0).
+Corrections dans le code, et ajout dans `METHODOLOGIE.md` section 7 d'une
+règle générale : une p-value placebo n'est pas interprétable sous ~10
+trades (plus petite p-value atteignable ≈ 2⁻ⁿ). Pas d'impact rétroactif :
+les placebos des stratégies précédentes portaient sur des centaines de
+trades ou de nuits.
+
 ## Évolutions de la méthodologie elle-même
 
 **2026-09-25 — clarification de la correction multiple-testing d'un grid
@@ -487,8 +565,8 @@ hétérogènes, y compris #13 en cours.
 
 ## Enseignements transversaux (mis à jour à chaque stratégie)
 
-- Sur ce projet, **11 stratégies testées, 1 seule validée** (overnight drift
-  sur indices/ETF) — taux de réussite ~9 %, cohérent avec le principe de
+- Sur ce projet, **19 stratégies testées, 1 seule validée** (overnight drift
+  sur indices/ETF) — taux de réussite ~5 %, cohérent avec le principe de
   METHODOLOGIE.md : le protocole est conçu pour rejeter, pas pour confirmer.
 - Les tentatives de patterns de prix intrajournaliers purs (ORB, pullback,
   gap, squeeze, volume breakout, VWAP reversion, saisonnalité) ont **toutes**
@@ -620,3 +698,14 @@ hétérogènes, y compris #13 en cours.
   validé, sans information propre au mécanisme testé). Conséquence pour
   #19 : ne pas recombiner tendance/momentum avec ce panier précis sous une
   4ᵉ forme sans un enseignement nouveau qui changerait cette conclusion.
+- **Un écart de prix "garanti" de converger est, par construction, arbitré
+  par les acteurs les plus rapides et les moins chers** (#19, arbitrage ETF
+  jumeaux) : plus la convergence est certaine (mécanisme institutionnel),
+  plus vite elle est capturée par d'autres. Pour un particulier en barres
+  journalières, l'edge plausible est du côté des **biais structurels lents
+  que les arbitragistes n'ont pas intérêt ou pas la capacité de faire
+  disparaître** (ex. l'overnight drift #10, porté par des flux de fond),
+  pas des inefficiences de prix rapides. Avant de tester une idée
+  d'arbitrage, mesurer d'abord la demi-vie de l'écart (diagnostic
+  "reste à l'ouverture" de #19) : si elle est inférieure à l'horizon
+  d'exécution, inutile d'aller plus loin.

@@ -200,6 +200,17 @@ distribution du hasard.
   le hasard sont statistiquement indiscernables : la stratégie ne fait ni
   mieux ni pire qu'un pari sans information directionnelle.
 
+**Deux précautions de mise en œuvre (ajoutées le 2026-10-14, après #19)** :
+- **Pas d'interprétation sous ~10 trades.** Avec n trades, le placebo ne
+  peut produire que 2ⁿ résultats distincts : la plus petite p-value
+  atteignable est d'environ 2⁻ⁿ (0.25 avec 2 trades). Une p-value basse sur
+  un échantillon minuscule est un artefact, pas une preuve.
+- **Comparer avec une tolérance.** Le tirage où tous les signes aléatoires
+  coïncident avec le réel reproduit exactement le résultat réel ; une
+  comparaison stricte en virgule flottante peut le compter à tort comme
+  inférieur et faire tomber la p-value à 0 (cas réel rencontré sur
+  MDY/IJH, 2 trades : p affichée 0.000, vraie valeur ~0.25).
+
 ## Critère de décision global
 
 Une stratégie n'est considérée comme ayant un edge potentiellement réel que
